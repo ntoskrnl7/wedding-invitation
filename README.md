@@ -1,4 +1,6 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Wedding Invitation App
+
+모바일 웨딩 청첩장입니다.
 
 ## Getting Started
 
