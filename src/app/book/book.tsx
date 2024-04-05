@@ -34,7 +34,7 @@ const Page = React.forwardRef<HTMLDivElement, Props>((props, ref) => {
 });
 Page.displayName = 'Page';
 
-export default () => {
+export default function Book() {
   const [width, height] = [300, 400]
   const [pageWidth, setPageWidth] = React.useState(width);
   const [pageHeight, setPageHeight] = React.useState(height);
