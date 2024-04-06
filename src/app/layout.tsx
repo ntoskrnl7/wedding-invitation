@@ -20,6 +20,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko">
+      <head>
+        <meta name="mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <link rel="manifest" href="./manifest.json"></link>
+      </head>
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <body className={inter.className}>

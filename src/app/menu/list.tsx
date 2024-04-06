@@ -57,7 +57,7 @@ export default function MenuPage() {
                         }}
                     >
                         <HowToReg />
-                        <Typography variant="h5">- RSUP -</Typography>
+                        <Typography variant="h5">- RSVP -</Typography>
                         <Typography variant="subtitle2">참석 여부</Typography>
                     </ListItemText>
                 </ListItemButton>
