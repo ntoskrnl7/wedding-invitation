@@ -43,7 +43,7 @@ export default function Book() {
 
   React.useEffect(() => {
     const onOrientationChange = () => window.location.reload();
-    // window.addEventListener('resize', onOrientationChange);
+    window.addEventListener('resize', onOrientationChange);
     window.addEventListener('orientationchange', onOrientationChange);
 
     const isPortrait = window.screen.orientation.type === 'portrait-primary';
@@ -65,13 +65,10 @@ export default function Book() {
     setPageWidth(pageWidth);
     setPageHeight(pageHeight);
 
-    document.body.style.height = (document.documentElement.clientHeight + 100) + 'px';
-    setTimeout(scrollTo, 1000, 0, 100);
-
     console.log(`isPortrait: ${isPortrait}, pageWidth : ${[pageWidth, window.innerWidth]}, pageHeight: ${[pageHeight, window.innerHeight]}`);
 
     return () => {
-      // window.removeEventListener('resize', onOrientationChange)
+      window.removeEventListener('resize', onOrientationChange)
       window.removeEventListener('orientationchange', onOrientationChange)
     };
   }, [width, height]);
