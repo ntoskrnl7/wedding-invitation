@@ -42,7 +42,7 @@ export default function Book() {
   const [usePortrait, setUsePortrait] = React.useState(true);
 
   React.useEffect(() => {
-    const onOrientationChange = () => window.location.reload();
+    const onOrientationChange = () => {}; // window.location.reload();
     window.addEventListener('resize', onOrientationChange);
     window.addEventListener('orientationchange', onOrientationChange);
 
