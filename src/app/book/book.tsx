@@ -42,8 +42,8 @@ export default function Book() {
   const [usePortrait, setUsePortrait] = React.useState(true);
 
   React.useEffect(() => {
-    const onOrientationChange = () => {}; // window.location.reload();
-    window.addEventListener('resize', onOrientationChange);
+    const onOrientationChange = () => window.location.reload();
+    // window.addEventListener('resize', onOrientationChange);
     window.addEventListener('orientationchange', onOrientationChange);
 
     const isPortrait = window.screen.orientation.type === 'portrait-primary';
@@ -71,7 +71,7 @@ export default function Book() {
     console.log(`isPortrait: ${isPortrait}, pageWidth : ${[pageWidth, window.innerWidth]}, pageHeight: ${[pageHeight, window.innerHeight]}`);
 
     return () => {
-      window.removeEventListener('resize', onOrientationChange)
+      // window.removeEventListener('resize', onOrientationChange)
       window.removeEventListener('orientationchange', onOrientationChange)
     };
   }, [width, height]);
