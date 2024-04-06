@@ -23,11 +23,12 @@ export default function RootLayout({
       <head>
         <meta name="mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
         <link rel="manifest" href="./manifest.json"></link>
       </head>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <body className={inter.className}>
+        <body style={{ height: 'auto', minHeight: '100vh' }} className={inter.className}>
           <MenuBar />
           {children}
         </body>
