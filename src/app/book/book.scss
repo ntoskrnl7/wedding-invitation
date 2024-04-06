@@ -14,9 +14,21 @@
 }
 
 body {
+  min-height: 540px;
+}
+
+body[orient="portrait"] {
+  min-height: 540px;
+}
+
+body[orient="landscape"] {
+  min-height: 400px;
+}
+
+body {
   margin: 0;
   padding: 0;
-  overflow-x: hidden;
+  // overflow: hidden;
 }
 
 .fixed-bottom {
