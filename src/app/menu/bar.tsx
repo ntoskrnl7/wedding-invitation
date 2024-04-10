@@ -1,19 +1,21 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, ReactNode } from 'react';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import Drawer from '@mui/material/Drawer';
 import MenuIcon from '@mui/icons-material/Menu';
-import { useRouter } from 'next/navigation';
 import MenuList from './list';
 
-export default function MenuBar() {
-    const router = useRouter();
+import { useGlobalState } from './state';
+import { GlobalStateProvider } from './state';
+import { Box } from '@mui/material';
 
+export default function MenuBar() {
     const [isDrawerOpen, setDrawerOpen] = useState<boolean>(false);
+    const { globalState, setGlobalState } = useGlobalState();
 
     const handleDrawerOpen = () => {
         setDrawerOpen(true);
@@ -32,14 +34,16 @@ export default function MenuBar() {
                     }`
                 }
             </style>
-            <AppBar position="fixed" style={{ backgroundColor: 'transparent', boxShadow: 'none' }}>
+            <AppBar className='MenuBar' style={{ backgroundColor: 'transparent', boxShadow: 'none' }}>
                 <Toolbar>
-                    <Typography variant="h6" noWrap sx={{ flexGrow: 1 }} component="div">
+                    <Typography variant="h6" noWrap component="div">
+                        <GlobalStateProvider>
+                            {globalState.title}
+                        </GlobalStateProvider>
                     </Typography>
+                    <Box flexGrow={1} />
                     <IconButton
                         edge="end"
-                        color="inherit"
-                        aria-label="menu"
                         onClick={handleDrawerOpen}
                     >
                         <MenuIcon />
