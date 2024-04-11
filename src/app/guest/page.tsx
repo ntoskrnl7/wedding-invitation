@@ -1,10 +1,8 @@
 'use client';
 
-import Book from './book';
-
-import { useMenuState } from '../menu/state';
-import PhotoLibraryIcon from '@mui/icons-material/PhotoLibrary';
 import { Typography } from '@mui/material';
+import { useMenuState } from '../menu/state';
+import CommentIcon from '@mui/icons-material/Comment';
 
 const ThisMenuState = {
   title:
@@ -16,10 +14,10 @@ const ThisMenuState = {
         justifyContent: 'center'
       }}
     >
-      <PhotoLibraryIcon sx={{ marginRight: 1 }} />
-      앨범
+      <CommentIcon sx={{ marginRight: 1 }} />
+      방명록
     </Typography>,
-  opacity: 0
+  opacity: 1
 };
 
 export default function Page() {
@@ -28,8 +26,8 @@ export default function Page() {
     setMenuState(() => ThisMenuState);
   }
   return (
-    <main style={{ display: 'grid', placeItems: 'center', height: '100vh' }}>
-      <Book />
-    </main >
+    <>
+      <iframe style={{ border: 0, height: '100vh', width: '100vw' }} src='https://joey.team/block?block_id=ZKSCq2LqiYzSCpDiA5NM&id=2WKGeXeWJ6XfZ7XijM2azA5FZrj2' />
+    </>
   );
 }

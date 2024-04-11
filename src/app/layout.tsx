@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
+import { ReactNode } from "react";
 import { Inter } from "next/font/google";
 
 import theme from './theme';
 import CssBaseline from '@mui/material/CssBaseline';
 import { ThemeProvider } from '@mui/material/styles';
-import MenuBar from './menu/bar';
+
+import Menu from './menu';
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -16,7 +18,7 @@ export const metadata: Metadata = {
 export default function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode;
+  children: ReactNode;
 }>) {
   return (
     <html lang="ko">
@@ -29,8 +31,9 @@ export default function RootLayout({
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <body className={inter.className}>
-          <MenuBar />
-          {children}
+          <Menu >
+            {children}
+          </Menu>
         </body>
       </ThemeProvider>
     </html >

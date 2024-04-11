@@ -41,8 +41,11 @@ export default function Book() {
   const [isPortrait, setIsPortrait] = React.useState(false);
   const [usePortrait, setUsePortrait] = React.useState(true);
 
+  const [bookKey, setBookKey] = React.useState(0);
+
   React.useEffect(() => {
-    const onOrientationChange = () => window.location.reload();
+    const onOrientationChange = () => setBookKey(prevKey => prevKey + 1);
+
     window.addEventListener('resize', onOrientationChange);
     window.addEventListener('orientationchange', onOrientationChange);
 
@@ -71,10 +74,12 @@ export default function Book() {
       window.removeEventListener('resize', onOrientationChange)
       window.removeEventListener('orientationchange', onOrientationChange)
     };
-  }, [width, height]);
+  }, [width, height, bookKey]);
 
   return (
     <HTMLFlipBook
+      key={bookKey}
+
       size={'fixed'}
 
       width={pageWidth}
