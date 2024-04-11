@@ -9,56 +9,55 @@ import Drawer from '@mui/material/Drawer';
 import MenuIcon from '@mui/icons-material/Menu';
 import MenuList from './list';
 
-import { useGlobalState } from './state';
-import { GlobalStateProvider } from './state';
+import { useMenuState } from './state';
+import { MenuStateProvider } from './state';
 import { Box } from '@mui/material';
 
 export default function MenuBar() {
-    const [isDrawerOpen, setDrawerOpen] = useState<boolean>(false);
-    const { globalState, setGlobalState } = useGlobalState();
+  const [isDrawerOpen, setDrawerOpen] = useState<boolean>(false);
+  const { menuState, setMenuState } = useMenuState();
 
-    const handleDrawerOpen = () => {
-        setDrawerOpen(true);
-    };
+  const handleDrawerOpen = () => {
+    setDrawerOpen(true);
+  };
 
-    const handleDrawerClose = (e: any) => {
-        setDrawerOpen(false);
-    };
+  const handleDrawerClose = (e: any) => {
+    setDrawerOpen(false);
+  };
 
-    return (
-        <div>
-            <style>
-                {`
+  return (
+    <div>
+      <style>
+        {`
                     .MuiPaper-root {
                         background-color:transparent
                     }`
-                }
-            </style>
-            <AppBar className='MenuBar' style={{ backgroundColor: 'transparent', boxShadow: 'none' }}>
-                <Toolbar>
-                    <Typography variant="h6" noWrap component="div">
-                        <GlobalStateProvider>
-                            {globalState.title}
-                        </GlobalStateProvider>
-                    </Typography>
-                    <Box flexGrow={1} />
-                    <IconButton
-                        edge="end"
-                        onClick={handleDrawerOpen}
-                    >
-                        <MenuIcon />
-                    </IconButton>
-                </Toolbar>
-            </AppBar>
+        }
+      </style>
+      <AppBar className='MenuBar' style={{ pointerEvents: 'none', backgroundColor: `rgba(255,255,255,${menuState.opacity})`, boxShadow: 'none' }}>
+        <Toolbar>
+          <Typography variant="h6" noWrap component="div" style={{ color: 'black', textShadow: '1px 1px 20x black' }}>
+            {menuState.title}
+          </Typography>
+          <Box flexGrow={1} />
+          <IconButton
+            style={{ pointerEvents: 'all' }}
+            edge="end"
+            onClick={handleDrawerOpen}
+          >
+            <MenuIcon />
+          </IconButton>
+        </Toolbar>
+      </AppBar>
 
-            <Drawer
-                anchor="top"
-                open={isDrawerOpen}
-                onClick={handleDrawerClose}
-                onClose={handleDrawerClose}
-            >
-                <MenuList />
-            </Drawer>
-        </div>
-    );
+      <Drawer
+        anchor="top"
+        open={isDrawerOpen}
+        onClick={handleDrawerClose}
+        onClose={handleDrawerClose}
+      >
+        <MenuList />
+      </Drawer>
+    </div>
+  );
 }

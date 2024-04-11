@@ -31,8 +31,9 @@ export default function RootLayout({
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <body className={inter.className}>
-          <Menu />
-          {children}
+          <Menu >
+            {children}
+          </Menu>
         </body>
       </ThemeProvider>
     </html >

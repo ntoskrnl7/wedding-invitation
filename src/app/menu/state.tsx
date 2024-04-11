@@ -2,38 +2,38 @@
 
 import React, { createContext, ReactNode, useContext, useState } from 'react';
 
-interface GlobalState {
-    title: React.JSX.Element;
+interface MenuState {
+  opacity: number;
+  title: React.JSX.Element;
 }
 
-interface GlobalStateContextType {
-    globalState: GlobalState;
-    setGlobalState: React.Dispatch<React.SetStateAction<GlobalState>>;
+interface MenuStateContextType {
+  menuState: MenuState;
+  setMenuState: React.Dispatch<React.SetStateAction<MenuState>>;
 }
 
-const initialState: GlobalState = { title: <></> };
+const initialState: MenuState = { title: <></>, opacity: 0.8 };
 
-const GlobalStateContext = createContext<GlobalStateContextType | undefined>(undefined);
+const MenuStateContext = createContext<MenuStateContextType | undefined>(undefined);
 
-interface GlobalStateProviderProps {
-    children: ReactNode;
+interface MenuStateProviderProps {
+  children: ReactNode;
 }
 
-export const GlobalStateProvider: React.FC<GlobalStateProviderProps> = ({ children }) => {
-    const [globalState, setGlobalState] = useState<GlobalState>(initialState);
+export const MenuStateProvider: React.FC<MenuStateProviderProps> = ({ children }) => {
+  const [menuState, setMenuState] = useState<MenuState>(initialState);
 
-    return (
-        <GlobalStateContext.Provider value={{ globalState, setGlobalState }}>
-            {children}
-        </GlobalStateContext.Provider>
-    );
+  return (
+    <MenuStateContext.Provider value={{ menuState, setMenuState }}>
+      {children}
+    </MenuStateContext.Provider>
+  );
 };
 
-// 전역 상태를 사용하기 위한 커스텀 훅
-export const useGlobalState = () => {
-    const context = useContext(GlobalStateContext);
-    if (context === undefined) {
-        throw new Error('useGlobalState must be used within a GlobalStateProvider');
-    }
-    return context;
+export const useMenuState = () => {
+  const context = useContext(MenuStateContext);
+  if (context === undefined) {
+    throw new Error('useMenuState must be used within a MenuStateProvider');
+  }
+  return context;
 };

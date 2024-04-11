@@ -1,16 +1,8 @@
 @import url("https://fonts.googleapis.com/css?family=Sree+Krushnadevaraya&display=swap");
 @import url("https://fonts.googleapis.com/css?family=Catamaran&display=swap");
 
-@media (max-aspect-ratio: 1/1) {
-  .warnning-message {
-    display: block !important;
-  }
-}
-
-@media (min-aspect-ratio: 1/1) {
-  .warnning-message {
-    display: none !important;
-  }
+.warnning-message {
+  display: none !important;
 }
 
 body {

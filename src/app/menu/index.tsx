@@ -1,10 +1,16 @@
+import { ReactNode } from "react";
 import MenuBar from "./bar";
-import { GlobalStateProvider } from "./state";
+import { MenuStateProvider } from "./state";
 
-export default function Menu() {
-    return (
-        <GlobalStateProvider>
-            <MenuBar />
-        </GlobalStateProvider>
-    );
+interface MenuProps {
+  children: ReactNode;
+}
+
+export default function Menu(props: MenuProps) {
+  return (
+    <MenuStateProvider>
+      <MenuBar />
+      {props.children}
+    </MenuStateProvider>
+  );
 };
