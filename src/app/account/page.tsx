@@ -64,10 +64,10 @@ export default function Page() {
         '@media (orientation: landscape)': { width: '40%' } // 가로 모드에서 섹션의 너비를 40%로 조정
       }}>
         <Typography variant="h4" component="h2" gutterBottom>🤵 신랑</Typography>
+        <Typography variant="subtitle2" sx={{ marginTop: 2, fontWeight: 'bold' }}>계좌 번호</Typography>
+        <Typography variant="body2" sx={{ marginBottom: 3 }}>국민은행 94659583645 (이중광)</Typography>
         <KakaoPayButton url={'https://link.kakaopay.com/_/5pRLzY_'}></KakaoPayButton>
         <NaverPayButton></NaverPayButton>
-        <Typography variant="subtitle2" sx={{ marginTop: 2, fontWeight: 'bold' }}>계좌 번호</Typography>
-        <Typography variant="body2">국민은행 94659583645 (이중광)</Typography>
       </Box>
 
       {/* 신부 섹션 */}
@@ -77,10 +77,10 @@ export default function Page() {
         '@media (orientation: landscape)': { width: '40%' } // 가로 모드에서 섹션의 너비를 40%로 조정
       }}>
         <Typography variant="h4" component="h2" gutterBottom>👰 신부</Typography>
+        <Typography variant="subtitle2" sx={{ marginTop: 2, fontWeight: 'bold' }}>계좌 번호</Typography>
+        <Typography variant="body2" sx={{ marginBottom: 3 }}>국민은행 592202-01-727975 (박하은)</Typography>
         <KakaoPayButton url='https://link.kakaopay.com/_/____'></KakaoPayButton>
         <NaverPayButton></NaverPayButton>
-        <Typography variant="subtitle2" sx={{ marginTop: 2, fontWeight: 'bold' }}>계좌 번호</Typography>
-        <Typography variant="body2">국민은행 592202-01-727975 (박하은)</Typography>
       </Box>
     </Container>
   );

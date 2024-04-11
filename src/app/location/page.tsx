@@ -78,7 +78,7 @@ export default function Page() {
   };
 
   const showDestinationInfo = (map: naver.maps.Map) => {
-    const infowindow = new naver.maps.InfoWindow({ content: '<div style="padding:20px; text-align:center;">' + '여기입니다😊<br />👰🏻🧡🤵🏻' + '</div>' });
+    const infowindow = new naver.maps.InfoWindow({ content: '<div style="padding:20px; text-align:center;">' + '여기로 오세요😊<br />👰🏻🧡🤵🏻' + '</div>' });
     infowindow.open(map, new naver.maps.LatLng(lat, lng));
   }
 
