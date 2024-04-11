@@ -55,18 +55,27 @@ export default function Page() {
   };
 
   const handleNaverMapOpen = () => {
-    window.open(`nmap://map?lat=${lat}&lng=${lng}&appname=he-jk.wedding.invitation.app`, '_blank');
+    if (typeof window !== "undefined") {
+      window.open(`nmap://map?lat=${lat}&lng=${lng}&appname=he-jk.wedding.invitation.app`, '_blank');
+    }
   };
 
   const handleKakaoMapOpen = () => {
-    window.open(`kakaomap://look?p=${lat},${lng}`, '_blank');
+    if (typeof window !== "undefined") {
+      window.open(`kakaomap://look?p=${lat},${lng}`, '_blank');
+    }
   };
 
   const handleGoogleMapsAppOpen = () => {
-    window.open(`https://www.google.com/maps/search/?api=1&query=${lat},${lng}`, '_blank');
+    if (typeof window !== "undefined") {
+      window.open(`https://www.google.com/maps/search/?api=1&query=${lat},${lng}`, '_blank');
+    }
   };
 
   const AppleMapsButton = () => {
+    if (typeof window === "undefined") {
+      return null;
+    }
     if (! /Mac|iPod|iPhone|iPad/.test(window.navigator.userAgent)) {
       return null;
     }
