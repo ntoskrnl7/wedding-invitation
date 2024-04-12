@@ -34,12 +34,6 @@ export default function Page() {
 
     setTimeout(() => {
       setOpen(false);
-
-      window.scrollTo({
-        top: 100,
-        left: 0,
-        behavior: "smooth",
-      });
     }, 3000);
   });
 
