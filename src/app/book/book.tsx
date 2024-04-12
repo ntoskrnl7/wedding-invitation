@@ -28,7 +28,7 @@ const Page = React.forwardRef<HTMLDivElement, Props>((props, ref) => {
         `}
       </style>
       {props.children}
-      {props.image ? <div className='page-footer' style={{ position: 'fixed', bottom: 0, fontSize: '12PX', margin: '10px', color: 'white', textShadow: '1px 1px 2px black' }}>{props.number} / <span className='page-total'>-</span></div> : ''}
+      {props.image ? <div className='page-footer' style={{ fontSize: '12px', margin: '10px', color: 'white', textShadow: '1px 1px 2px black' }}>{props.number} / <span className='page-total'>-</span></div> : ''}
     </div>
   );
 });
