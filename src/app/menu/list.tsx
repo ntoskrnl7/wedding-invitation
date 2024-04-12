@@ -34,7 +34,14 @@ export default function MenuPage() {
   });
 
   return (
-    <Box style={{ display: 'grid', alignItems: 'center', justifyItems: 'center', color: 'white', textShadow: '1px 1px 2px rgba(40,40,40, 0.5)', backgroundColor: 'rgba(0,0,0,0.5)', height: '100%' }}>
+    <Box style={{ display: 'grid', alignItems: 'center', justifyItems: 'center', color: 'white', textShadow: '1px 1px 2px rgba(40,40,40, 0.5)', backgroundColor: 'rgba(0,0,0,0.5)' }}>
+      <style>
+        {`
+          .MuiDrawer-paper {
+              background-color:transparent
+          }`
+        }
+      </style>
       <List ref={list} className="box">
         <AppBar style={{ backgroundColor: 'transparent', boxShadow: 'none' }}>
           <Toolbar>
