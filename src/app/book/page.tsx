@@ -6,7 +6,7 @@ import Backdrop from '@mui/material/Backdrop';
 
 import { useMenuState } from '../menu/state';
 import PhotoLibraryIcon from '@mui/icons-material/PhotoLibrary';
-import { Typography } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 import { useEffect, useState } from 'react';
 
 const ThisMenuState = {
@@ -37,10 +37,15 @@ export default function Page() {
     }, 3000);
   });
 
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState((typeof window === "undefined") || window.screen.orientation.type === 'portrait-primary');
 
   return (
-    <main style={{ display: 'grid', placeItems: 'center', height: '100vh' }}>
+    <Box
+      style={{ display: 'grid', placeItems: 'center' }}
+      sx={{
+        '@media (orientation: portrait)': { height: '100vh' }
+      }}
+    >
       <Backdrop
         sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
         open={open}
@@ -49,6 +54,6 @@ export default function Page() {
         <Typography>가로 화면으로 돌려서 보시는것을 권장합니다.</Typography>
       </Backdrop>
       <Book />
-    </main >
+    </Box >
   );
 }
