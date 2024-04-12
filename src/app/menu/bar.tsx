@@ -29,7 +29,7 @@ export default function MenuBar() {
     <div>
       <AppBar className='MenuBar' style={{ pointerEvents: 'none', backgroundColor: `rgba(255,255,255,${menuState.opacity})`, boxShadow: 'none' }}>
         <Toolbar>
-          <Typography variant="h6" style={{ marginTop: 10, color: 'black', textShadow: '1px 1px 20x black' }}>
+          <Typography variant="h6" style={{ color: 'black', textShadow: '1px 1px 20x black' }}>
             {menuState.title}
           </Typography>
           <Box flexGrow={1} />
