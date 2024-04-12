@@ -1,7 +1,8 @@
 'use client';
 
-import React from 'react';
+import { useState, useEffect } from 'react';
 import { Button, Box, Slider, Typography } from '@mui/material';
+
 import MyLocationIcon from '@mui/icons-material/MyLocation';
 import PlaceIcon from '@mui/icons-material/Place';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
@@ -15,31 +16,44 @@ import { useMenuState } from '../menu/state';
 
 const ThisMenuState = {
   title:
-    <Typography
-      variant='h6'
-      sx={{
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center'
-      }}
-    >
-      <MyLocationIcon sx={{ marginRight: 1 }} />
-      오시는길
-    </Typography>,
+    <Box>
+      <Typography
+        variant='h6'
+        sx={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'left',
+          marginBottom: -1,
+        }}
+      >
+        <MyLocationIcon sx={{ marginRight: 1 }} />
+        오시는길
+      </Typography>
+      <Typography variant='body2' sx={{ fontSize: '12px', marginTop: 1, marginLeft: 2, textShadow: '1px 1px 2px rgb(255,255,255)' }}>
+        서울특별시 중구 퇴계로 115 명동 밀리오레 호텔 PH층
+      </Typography>
+    </Box>,
   opacity: 0.8
 };
 
 export default function Page() {
   const { menuState, setMenuState } = useMenuState();
-  if (ThisMenuState !== menuState) {
-    setMenuState(() => ThisMenuState);
-  }
+  useEffect(() => {
+    if (ThisMenuState !== menuState) {
+      setMenuState(() => ThisMenuState);
+
+      setTimeout(() => {
+        setIsExpanded(false);
+      }, 1000);
+    }
+  });
 
   const lat = 37.5610621;
   const lng = 126.9845390;
+  const destName = '온즈드롬';
 
-  const [map, setMap] = React.useState<naver.maps.Map | null>(null);
-  const [zoom, setZoom] = React.useState(16);
+  const [map, setMap] = useState<naver.maps.Map | null>(null);
+  const [zoom, setZoom] = useState(16);
 
   const handleZoomChange = (event: any, newValue: any) => {
     setZoom(newValue);
@@ -48,7 +62,7 @@ export default function Page() {
     }
   };
 
-  const [isExpanded, setIsExpanded] = React.useState(true);
+  const [isExpanded, setIsExpanded] = useState(true);
 
   const handleToggleExpand = () => {
     setIsExpanded(!isExpanded);
@@ -56,19 +70,25 @@ export default function Page() {
 
   const handleNaverMapOpen = () => {
     if (typeof window !== "undefined") {
-      window.open(`nmap://map?lat=${lat}&lng=${lng}&appname=he-jk.wedding.invitation.app`, '_blank');
+      window.open('https://naver.me/FwnAQmOf', '_blank');
     }
   };
 
   const handleKakaoMapOpen = () => {
     if (typeof window !== "undefined") {
-      window.open(`kakaomap://look?p=${lat},${lng}`, '_blank');
+      window.open('https://kko.to/Mk-bvDBBNQ', '_blank');
     }
   };
 
   const handleGoogleMapsAppOpen = () => {
     if (typeof window !== "undefined") {
-      window.open(`https://www.google.com/maps/search/?api=1&query=${lat},${lng}`, '_blank');
+      window.open('https://maps.app.goo.gl/oTUyZD7qLM4F4cby6', '_blank');
+    }
+  };
+
+  const handleTMapAppOpen = () => {
+    if (typeof window !== "undefined") {
+      window.open(`tmap://route?goalx=${lat}&goaly=${lng}&goalname=${destName}`, '_blank');
     }
   };
 
@@ -80,8 +100,8 @@ export default function Page() {
       return null;
     }
     return (
-      <IconButton onClick={() => window.open(`http://maps.apple.com/?q=${lat},${lng}`, '_blank')}>
-        <Image src={'/location/apple.png'} width='24' height='24' alt='naver' />
+      <IconButton onClick={() => window.open('https://maps.apple.com/?address=%EB%8C%80%ED%95%9C%EB%AF%BC%EA%B5%AD%20%EC%84%9C%EC%9A%B8%ED%8A%B9%EB%B3%84%EC%8B%9C%20%EC%A4%91%EA%B5%AC%20%EC%B6%A9%EB%AC%B4%EB%A1%9C1%EA%B0%80%2024-1,%2004536&auid=14074372663880552616&ll=37.561047,126.984427&lsp=9902&q=%EC%98%A8%EC%A6%88%EB%93%9C%EB%A1%AC&t=m', '_blank')}>
+        <Image src={'/location/apple.png'} width='24' height='24' alt='apple' />
       </IconButton>
     );
   };
@@ -115,7 +135,7 @@ export default function Page() {
     }
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     const script = document.createElement('script');
     script.src = 'https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=jg0pwdf3vo';
     script.async = true;
@@ -135,6 +155,8 @@ export default function Page() {
     return () => { document.head.removeChild(script) };
   }, []);
 
+  const [open, setOpen] = useState(true);
+
   return (
     <Box
       sx={{
@@ -144,12 +166,11 @@ export default function Page() {
       }}
     >
       <Box id="map" style={{ width: '100%', height: '100%' }}></Box>
-
       <Box
         id="utils"
         sx={{
           position: 'absolute',
-          top: 80,
+          top: 85,
           left: 20,
           zIndex: 1000,
           display: 'flex',
@@ -163,7 +184,7 @@ export default function Page() {
           onClick={() => moveToDestination()}
           startIcon={<PlaceIcon />}
         >
-          웨딩홀
+          <Typography variant='caption'>웨딩홀</Typography>
         </Button>
         <Button
           variant="contained"
@@ -171,7 +192,7 @@ export default function Page() {
           onClick={moveToCurrentLocation}
           startIcon={<MyLocationIcon />}
         >
-          현재 위치
+          <Typography variant='caption'>현재 위치</Typography>
         </Button>
       </Box>
 
@@ -206,11 +227,11 @@ export default function Page() {
           zIndex: 1000,
           boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
           maxHeight: isExpanded ? '100%' : '60px',
-          overflowY: 'auto',
+          overflowY: 'scroll',
           transition: 'max-height 0.3s ease',
         }}
+        onClick={handleToggleExpand}
       >
-
         <Box sx={{ marginBottom: 2 }}>
           <Typography variant="h6" gutterBottom sx={{ fontWeight: 'bold', marginBottom: '1px' }}>
             🗺️ 길 안내
@@ -220,18 +241,19 @@ export default function Page() {
           <Typography variant="subtitle1" gutterBottom sx={{ fontWeight: 'bold', marginBottom: '1px' }}>
             📱 지도 앱으로 열기
           </Typography>
-          <Typography variant='body2'>
-            <IconButton onClick={handleNaverMapOpen}>
-              <Image src={'/location/naver.webp'} width='24' height='24' alt='naver' />
-            </IconButton>
-            <IconButton onClick={handleKakaoMapOpen}>
-              <Image src={'/location/kakao.webp'} width='24' height='24' alt='kakao' />
-            </IconButton>
-            <IconButton onClick={handleGoogleMapsAppOpen}>
-              <Image src={'/location/google.webp'} width='24' height='24' alt='google' />
-            </IconButton>
-            <AppleMapsButton />
-          </Typography>
+          <IconButton onClick={handleNaverMapOpen}>
+            <Image src={'/location/naver.webp'} width='24' height='24' alt='naver' />
+          </IconButton>
+          <IconButton onClick={handleKakaoMapOpen}>
+            <Image src={'/location/kakao.webp'} width='24' height='24' alt='kakao' />
+          </IconButton>
+          <IconButton onClick={handleGoogleMapsAppOpen}>
+            <Image src={'/location/google.webp'} width='24' height='24' alt='google' />
+          </IconButton>
+          <IconButton onClick={handleTMapAppOpen}>
+            <Image src={'/location/tmap.svg'} width='24' height='24' alt='google' />
+          </IconButton>
+          <AppleMapsButton />
         </Box>
         <Box id="subway" sx={{ marginBottom: 2 }}>
           <Typography variant="subtitle1" gutterBottom sx={{ fontWeight: 'bold', marginBottom: '1px' }}>

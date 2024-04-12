@@ -3,14 +3,18 @@
 import ConstructionIcon from '@mui/icons-material/Construction';
 import { Typography } from '@mui/material';
 import { useMenuState } from './menu/state';
+import { useEffect } from 'react';
 
 const ThisMenuState = { title: <><span></span></>, opacity: 0.0 };
 
 export default function Page() {
   const { menuState, setMenuState } = useMenuState();
-  if (ThisMenuState !== menuState) {
-    setMenuState(() => ThisMenuState);
-  }
+  useEffect(() => {
+    if (ThisMenuState !== menuState) {
+      setMenuState(() => ThisMenuState);
+    }
+  });
+
   return (
     <div style={{ paddingTop: '30vh', width: '100%', height: '100%', display: 'grid', alignItems: 'center', justifyItems: 'center' }}>
       <ConstructionIcon color='warning' style={{ fontSize: '100px' }} />

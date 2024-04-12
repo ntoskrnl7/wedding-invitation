@@ -2,9 +2,12 @@
 
 import Book from './book';
 
+import Backdrop from '@mui/material/Backdrop';
+
 import { useMenuState } from '../menu/state';
 import PhotoLibraryIcon from '@mui/icons-material/PhotoLibrary';
 import { Typography } from '@mui/material';
+import { useEffect, useState } from 'react';
 
 const ThisMenuState = {
   title:
@@ -24,11 +27,33 @@ const ThisMenuState = {
 
 export default function Page() {
   const { menuState, setMenuState } = useMenuState();
-  if (ThisMenuState !== menuState) {
-    setMenuState(() => ThisMenuState);
-  }
+  useEffect(() => {
+    if (ThisMenuState !== menuState) {
+      setMenuState(() => ThisMenuState);
+    }
+
+    setTimeout(() => {
+      setOpen(false);
+
+      window.scrollTo({
+        top: 100,
+        left: 0,
+        behavior: "smooth",
+      });
+    }, 3000);
+  });
+
+  const [open, setOpen] = useState(true);
+
   return (
     <main style={{ display: 'grid', placeItems: 'center', height: '100vh' }}>
+      <Backdrop
+        sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+        open={open}
+        onClick={() => setOpen(!open)}
+      >
+        <Typography>가로 화면으로 돌려서 보시는것을 권장합니다.</Typography>
+      </Backdrop>
       <Book />
     </main >
   );
