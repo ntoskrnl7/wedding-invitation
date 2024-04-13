@@ -106,9 +106,8 @@ export default function Page() {
 
         {/* 신랑 섹션 */}
         <Box sx={{
-          width: '80%', // 세로 모드에서 섹션의 너비를 조정
           textAlign: 'center',
-          '@media (orientation: landscape)': { width: '40%' } // 가로 모드에서 섹션의 너비를 40%로 조정
+          '@media (orientation: landscape)': { width: '40%' }
         }}>
           <Typography variant="h4" component="h2" gutterBottom>🤵🏻 신랑</Typography>
           <Typography variant="subtitle2" sx={{ marginTop: 2, fontWeight: 'bold' }}>계좌 번호</Typography>
@@ -125,9 +124,8 @@ export default function Page() {
 
         {/* 신부 섹션 */}
         <Box sx={{
-          width: '80%', // 세로 모드에서 섹션의 너비를 조정
           textAlign: 'center',
-          '@media (orientation: landscape)': { width: '40%' } // 가로 모드에서 섹션의 너비를 40%로 조정
+          '@media (orientation: landscape)': { width: '40%' }
         }}>
           <Typography variant="h4" component="h2" gutterBottom>👰🏻 신부</Typography>
           <Typography variant="subtitle2" sx={{ marginTop: 2, fontWeight: 'bold' }}>계좌 번호</Typography>
@@ -140,7 +138,7 @@ export default function Page() {
           </Typography>
           <KakaoPayButton url='https://link.kakaopay.com/_/4qDXKCw'></KakaoPayButton>
         </Box>
-      </Container>
-    </Box>
+      </Container >
+    </Box >
   );
 }
