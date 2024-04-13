@@ -29,14 +29,11 @@ const ThisMenuState: MenuState = {
 export default function Page() {
   const { menuState, setMenuState } = useMenuState();
   useEffect(() => {
-    if (ThisMenuState !== menuState) {
-      setMenuState(() => ThisMenuState);
-    }
-
+    setMenuState(() => ThisMenuState);
     setTimeout(() => {
       setOpen(false);
     }, 3000);
-  });
+  }, []);
 
   const [open, setOpen] = useState((typeof window === "undefined") || window.screen.orientation.type === 'portrait-primary');
 

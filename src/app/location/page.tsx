@@ -33,14 +33,11 @@ const ThisMenuState = {
 export default function Page() {
   const { menuState, setMenuState } = useMenuState();
   useEffect(() => {
-    if (ThisMenuState !== menuState) {
-      setMenuState(() => ThisMenuState);
-
-      setTimeout(() => {
-        setIsExpanded(false);
-      }, 1000);
-    }
-  });
+    setMenuState(() => ThisMenuState);
+    setTimeout(() => {
+      setIsExpanded(false);
+    }, 1000);
+  }, []);
 
   const lat = 37.5610621;
   const lng = 126.9845390;
@@ -148,7 +145,6 @@ export default function Page() {
       setMap(map);
       showDestinationInfo(map);
     };
-
     return () => { document.head.removeChild(script) };
   }, []);
 
@@ -217,11 +213,11 @@ export default function Page() {
           right: 5,
           width: 'calc(100vw - 10px)',
           backgroundColor: 'rgba(255, 255, 255, 0.8)',
-          padding: 2,
+          padding: 1.5,
           borderRadius: '10px',
           zIndex: 1000,
           boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
-          maxHeight: isExpanded ? 'calc(100vh - 75px)' : '55px',
+          maxHeight: isExpanded ? 'calc(100vh - 75px)' : '82px',
           overflowY: 'scroll',
           transition: 'max-height 1.5s ease',
         }}
@@ -231,7 +227,7 @@ export default function Page() {
           <Typography variant="h6" gutterBottom sx={{ fontWeight: 'bold', marginBottom: '1px' }}>
             🗺️ 길 안내
           </Typography>
-          <Typography variant='body2' sx={{ fontSize: '12px', marginTop: 1, marginLeft: 1, textShadow: '1px 1px 2px rgb(255,255,255)' }}>
+          <Typography variant='body2' sx={{ fontSize: '12px', marginTop: 0, marginLeft: 1, textShadow: '1px 1px 2px rgb(255,255,255)' }}>
             서울특별시 중구 퇴계로 115 명동 밀리오레 호텔 PH층
           </Typography>
         </Box>
@@ -296,6 +292,8 @@ export default function Page() {
             position: 'fixed',
             bottom: 5,
             right: 5,
+            padding: 0.2,
+            paddingRight: 1,
             borderRadius: '10px',
             zIndex: 1001,
           }}>

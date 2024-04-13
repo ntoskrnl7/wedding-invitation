@@ -24,10 +24,8 @@ const ThisMenuState = {
 export default function Page() {
   const { menuState, setMenuState } = useMenuState();
   useEffect(() => {
-    if (ThisMenuState !== menuState) {
-      setMenuState(() => ThisMenuState);
-    }
-  });
+    setMenuState(() => ThisMenuState);
+  }, []);
   return (
     <Box>
       <div style={{ position: 'fixed', top: 0, backgroundColor: 'white', height: 60, width: '100vw' }}></div>
