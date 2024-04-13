@@ -49,9 +49,10 @@ export default function Page() {
       <Backdrop
         sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
         open={open}
-        onClick={() => setOpen(!open)}
+        transitionDuration={{ exit: 1000 }}
+        onClick={() => setOpen(false)}
       >
-        <Typography>가로 화면으로 돌려서 보시는것을 권장합니다.</Typography>
+        <Typography margin={1} textAlign={'center'}>가로 화면으로 돌려서 보시는것을 권장합니다.</Typography>
       </Backdrop>
       <Book />
     </Box >

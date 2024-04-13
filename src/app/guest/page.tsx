@@ -1,6 +1,6 @@
 'use client';
 
-import { Typography } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 import { useMenuState } from '../menu/state';
 import CommentIcon from '@mui/icons-material/Comment';
 import { useEffect } from 'react';
@@ -29,8 +29,9 @@ export default function Page() {
     }
   });
   return (
-    <>
-      <iframe style={{ border: 0, height: '100vh', width: '100vw' }} src='https://joey.team/block?block_id=ZKSCq2LqiYzSCpDiA5NM&id=2WKGeXeWJ6XfZ7XijM2azA5FZrj2' />
-    </>
+    <Box>
+      <div style={{ position: 'fixed', top: 0, backgroundColor: 'white', height: 60, width: '100vw' }}></div>
+      <iframe style={{ zIndex: 2000, border: 0, height: '100vh', width: '100vw' }} src='https://joey.team/block?block_id=ZKSCq2LqiYzSCpDiA5NM&id=2WKGeXeWJ6XfZ7XijM2azA5FZrj2' />
+    </Box>
   );
 }

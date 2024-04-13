@@ -95,13 +95,15 @@ export default function Page() {
         </Alert>
       </Snackbar>
 
+      <Typography variant='subtitle1' textAlign={'center'}>참석이 어려우신 분들을 위해<br />계좌번호를 기재하였습니다.<br />너그러운 마음으로 양해 부탁드립니다.</Typography>
+
       {/* 신랑 섹션 */}
       <Box sx={{
         width: '80%', // 세로 모드에서 섹션의 너비를 조정
         textAlign: 'center',
         '@media (orientation: landscape)': { width: '40%' } // 가로 모드에서 섹션의 너비를 40%로 조정
       }}>
-        <Typography variant="h4" component="h2" gutterBottom>🤵 신랑</Typography>
+        <Typography variant="h4" component="h2" gutterBottom>🤵🏻 신랑</Typography>
         <Typography variant="subtitle2" sx={{ marginTop: 2, fontWeight: 'bold' }}>계좌 번호</Typography>
         <Typography variant="body2" sx={{ marginBottom: 3 }}>
           국민은행 94659583645 (이중광)
@@ -120,7 +122,7 @@ export default function Page() {
         textAlign: 'center',
         '@media (orientation: landscape)': { width: '40%' } // 가로 모드에서 섹션의 너비를 40%로 조정
       }}>
-        <Typography variant="h4" component="h2" gutterBottom>👰 신부</Typography>
+        <Typography variant="h4" component="h2" gutterBottom>👰🏻 신부</Typography>
         <Typography variant="subtitle2" sx={{ marginTop: 2, fontWeight: 'bold' }}>계좌 번호</Typography>
         <Typography variant="body2" sx={{ marginBottom: 3 }}>국민은행 592202-01-727975 (박하은)
           <CopyAccountButton
