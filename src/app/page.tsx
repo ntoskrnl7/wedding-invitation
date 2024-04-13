@@ -10,10 +10,8 @@ const ThisMenuState = { title: <><span></span></>, opacity: 0.0 };
 export default function Page() {
   const { menuState, setMenuState } = useMenuState();
   useEffect(() => {
-    if (ThisMenuState !== menuState) {
-      setMenuState(() => ThisMenuState);
-    }
-  });
+    setMenuState(() => ThisMenuState);
+  }, []);
 
   return (
     <div style={{ paddingTop: '30vh', width: '100%', height: '100%', display: 'grid', alignItems: 'center', justifyItems: 'center' }}>

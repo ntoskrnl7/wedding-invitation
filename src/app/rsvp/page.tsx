@@ -24,10 +24,8 @@ const ThisMenuState = {
 export default function Page() {
   const { menuState, setMenuState } = useMenuState();
   useEffect(() => {
-    if (ThisMenuState !== menuState) {
-      setMenuState(() => ThisMenuState);
-    }
-  })
+    setMenuState(() => ThisMenuState);
+  }, [])
   return (
     <iframe style={{ marginTop: 60, border: 0, height: '100vh', width: '100vw' }} src='https://joey.team/block/?id=2WKGeXeWJ6XfZ7XijM2azA5FZrj2&block_id=UdfwEPBuwGt3GbXhWmFt' />
   );

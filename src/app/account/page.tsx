@@ -53,10 +53,8 @@ const CopyAccountButton = (props: { account: string, onSuccess?: () => void | un
 export default function Page() {
   const { menuState, setMenuState } = useMenuState();
   useEffect(() => {
-    if (ThisMenuState !== menuState) {
-      setMenuState(() => ThisMenuState);
-    }
-  });
+    setMenuState(() => ThisMenuState);
+  }, []);
 
   const [open, setOpen] = useState(false);
   const handleClose = (event: React.SyntheticEvent | Event, reason?: string) => {
