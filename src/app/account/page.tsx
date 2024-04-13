@@ -77,69 +77,70 @@ export default function Page() {
   const [result, setResult] = useState<{ severity: AlertColor, message?: React.JSX.Element | undefined }>({ severity: 'success' });
 
   return (
-    <Container maxWidth="lg" sx={{
-      display: 'flex',
-      flexDirection: 'column', // 세로 배치
-      justifyContent: 'center', // 세로 중앙 정렬
-      alignItems: 'center', // 항목들을 가로 중앙에 정렬
-      minHeight: 'calc(100vh - 30px)', // 컨테이너의 최소 높이를 화면 높이와 동일하게 설정 (메뉴바 높이를 제외해야함)
-      gap: 14, // 세로 모드에서 섹션 사이의 간격
-      mt: 4,
-      '@media (orientation: landscape)': {
-        flexDirection: 'row', // 가로 모드에서 행 방향으로 항목 배치
-        justifyContent: 'space-around', // 가로 모드에서 항목 사이의 간격을 조정
-        gap: 2, // 가로 모드에서 섹션 사이의 간격을 조정
-      }
-    }}>
-      <Snackbar open={open} autoHideDuration={1000} onClose={handleClose}>
-        <Alert
-          onClose={handleClose}
-          severity={result.severity}
-          variant="filled"
-          sx={{ width: '100%' }}
-        >
-          {result.message}
-        </Alert>
-      </Snackbar>
-
+    <Box style={{ marginTop: 80 }}>
       <Typography variant='subtitle1' textAlign={'center'}>참석이 어려우신 분들을 위해<br />계좌번호를 기재하였습니다.<br />너그러운 마음으로 양해 부탁드립니다.</Typography>
-
-      {/* 신랑 섹션 */}
-      <Box sx={{
-        width: '80%', // 세로 모드에서 섹션의 너비를 조정
-        textAlign: 'center',
-        '@media (orientation: landscape)': { width: '40%' } // 가로 모드에서 섹션의 너비를 40%로 조정
+      <Container maxWidth="lg" sx={{
+        display: 'flex',
+        flexDirection: 'column', // 세로 배치
+        justifyContent: 'center', // 세로 중앙 정렬
+        alignItems: 'center', // 항목들을 가로 중앙에 정렬
+        minHeight: 'calc(100vh - 300px)', // 컨테이너의 최소 높이를 화면 높이와 동일하게 설정 (메뉴바 높이, 설명글 높이를 제외해야함)
+        gap: 10, // 세로 모드에서 섹션 사이의 간격
+        mt: 4,
+        '@media (orientation: landscape)': {
+          flexDirection: 'row', // 가로 모드에서 행 방향으로 항목 배치
+          justifyContent: 'space-around', // 가로 모드에서 항목 사이의 간격을 조정
+          gap: 2, // 가로 모드에서 섹션 사이의 간격을 조정
+        }
       }}>
-        <Typography variant="h4" component="h2" gutterBottom>🤵🏻 신랑</Typography>
-        <Typography variant="subtitle2" sx={{ marginTop: 2, fontWeight: 'bold' }}>계좌 번호</Typography>
-        <Typography variant="body2" sx={{ marginBottom: 3 }}>
-          국민은행 94659583645 (이중광)
-          <CopyAccountButton
-            account='94659583645'
-            onSuccess={onSuccess}
-            onError={onError}
-          />
-        </Typography>
-        <KakaoPayButton url='https://link.kakaopay.com/_/5pRLzY_'></KakaoPayButton>
-      </Box>
+        <Snackbar open={open} autoHideDuration={1000} onClose={handleClose}>
+          <Alert
+            onClose={handleClose}
+            severity={result.severity}
+            variant="filled"
+            sx={{ width: '100%' }}
+          >
+            {result.message}
+          </Alert>
+        </Snackbar>
 
-      {/* 신부 섹션 */}
-      <Box sx={{
-        width: '80%', // 세로 모드에서 섹션의 너비를 조정
-        textAlign: 'center',
-        '@media (orientation: landscape)': { width: '40%' } // 가로 모드에서 섹션의 너비를 40%로 조정
-      }}>
-        <Typography variant="h4" component="h2" gutterBottom>👰🏻 신부</Typography>
-        <Typography variant="subtitle2" sx={{ marginTop: 2, fontWeight: 'bold' }}>계좌 번호</Typography>
-        <Typography variant="body2" sx={{ marginBottom: 3 }}>국민은행 592202-01-727975 (박하은)
-          <CopyAccountButton
-            account='592202-01-727975'
-            onSuccess={onSuccess}
-            onError={onError}
-          />
-        </Typography>
-        <KakaoPayButton url='https://link.kakaopay.com/_/4qDXKCw'></KakaoPayButton>
-      </Box>
-    </Container>
+        {/* 신랑 섹션 */}
+        <Box sx={{
+          width: '80%', // 세로 모드에서 섹션의 너비를 조정
+          textAlign: 'center',
+          '@media (orientation: landscape)': { width: '40%' } // 가로 모드에서 섹션의 너비를 40%로 조정
+        }}>
+          <Typography variant="h4" component="h2" gutterBottom>🤵🏻 신랑</Typography>
+          <Typography variant="subtitle2" sx={{ marginTop: 2, fontWeight: 'bold' }}>계좌 번호</Typography>
+          <Typography variant="body2" sx={{ marginBottom: 3 }}>
+            국민은행 94659583645 (이중광)
+            <CopyAccountButton
+              account='94659583645'
+              onSuccess={onSuccess}
+              onError={onError}
+            />
+          </Typography>
+          <KakaoPayButton url='https://link.kakaopay.com/_/5pRLzY_'></KakaoPayButton>
+        </Box>
+
+        {/* 신부 섹션 */}
+        <Box sx={{
+          width: '80%', // 세로 모드에서 섹션의 너비를 조정
+          textAlign: 'center',
+          '@media (orientation: landscape)': { width: '40%' } // 가로 모드에서 섹션의 너비를 40%로 조정
+        }}>
+          <Typography variant="h4" component="h2" gutterBottom>👰🏻 신부</Typography>
+          <Typography variant="subtitle2" sx={{ marginTop: 2, fontWeight: 'bold' }}>계좌 번호</Typography>
+          <Typography variant="body2" sx={{ marginBottom: 3 }}>국민은행 592202-01-727975 (박하은)
+            <CopyAccountButton
+              account='592202-01-727975'
+              onSuccess={onSuccess}
+              onError={onError}
+            />
+          </Typography>
+          <KakaoPayButton url='https://link.kakaopay.com/_/4qDXKCw'></KakaoPayButton>
+        </Box>
+      </Container>
+    </Box>
   );
 }
