@@ -4,12 +4,12 @@ import Book from './book';
 
 import Backdrop from '@mui/material/Backdrop';
 
-import { useMenuState } from '../menu/state';
+import { MenuState, useMenuState } from '../menu/state';
 import PhotoLibraryIcon from '@mui/icons-material/PhotoLibrary';
 import { Box, Typography } from '@mui/material';
 import { useEffect, useState } from 'react';
 
-const ThisMenuState = {
+const ThisMenuState: MenuState = {
   title:
     <Typography
       variant='h6'
@@ -22,7 +22,8 @@ const ThisMenuState = {
       <PhotoLibraryIcon sx={{ marginRight: 1 }} />
       앨범
     </Typography>,
-  opacity: 0
+  opacity: 0,
+  song: 'Ed Sheeran - One Life'
 };
 
 export default function Page() {

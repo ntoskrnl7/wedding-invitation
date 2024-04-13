@@ -2,9 +2,12 @@
 
 import React, { createContext, ReactNode, useContext, useState } from 'react';
 
-interface MenuState {
+import songs, { Song } from '../songs'
+
+export interface MenuState {
   opacity: number;
   title: React.JSX.Element;
+  song?: Song | undefined;
 }
 
 interface MenuStateContextType {

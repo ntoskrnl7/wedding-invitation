@@ -2,11 +2,10 @@
 
 import PaymentIcon from '@mui/icons-material/Payment';
 import { useMenuState } from '../menu/state';
-import { Container, Typography, Box, IconButton, Alert, Snackbar } from '@mui/material';
+import { Container, Typography, Box, IconButton, Alert, Snackbar, AlertColor } from '@mui/material';
 import Image from 'next/image';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
-import React from 'react';
 
 const ThisMenuState = {
   title:
@@ -59,7 +58,7 @@ export default function Page() {
     }
   });
 
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
   const handleClose = (event: React.SyntheticEvent | Event, reason?: string) => {
     if (reason === 'clickaway') {
       return;
@@ -67,7 +66,17 @@ export default function Page() {
     setOpen(false);
   };
 
-  const [result, setResult] = React.useState<{ severity: 'success' | 'error', message?: string | undefined }>({ severity: 'success' });
+  const onSuccess = () => {
+    setResult({ severity: 'success', message: <>계좌 번호가 복사되었습니다.</> });
+    setOpen(true);
+  };
+
+  const onError = (error: any) => {
+    setResult({ severity: 'error', message: <>계좌 번호 복사가 실패하였습니다.</> });
+    setOpen(true);
+  };
+
+  const [result, setResult] = useState<{ severity: AlertColor, message?: React.JSX.Element | undefined }>({ severity: 'success' });
 
   return (
     <Container maxWidth="lg" sx={{
@@ -91,7 +100,7 @@ export default function Page() {
           variant="filled"
           sx={{ width: '100%' }}
         >
-          {result.severity === 'success' ? '계좌 번호가 복사되었습니다.' : '계좌 번호 복사가 실패하였습니다.'}
+          {result.message}
         </Alert>
       </Snackbar>
 
@@ -109,8 +118,8 @@ export default function Page() {
           국민은행 94659583645 (이중광)
           <CopyAccountButton
             account='94659583645'
-            onSuccess={() => { setResult({ severity: 'success' }); setOpen(true); }}
-            onError={(error) => { setResult({ severity: 'error' }); setOpen(true); }}
+            onSuccess={onSuccess}
+            onError={onError}
           />
         </Typography>
         <KakaoPayButton url='https://link.kakaopay.com/_/5pRLzY_'></KakaoPayButton>
@@ -127,8 +136,8 @@ export default function Page() {
         <Typography variant="body2" sx={{ marginBottom: 3 }}>국민은행 592202-01-727975 (박하은)
           <CopyAccountButton
             account='592202-01-727975'
-            onSuccess={() => { setResult({ severity: 'success' }); setOpen(true); }}
-            onError={(error) => { setResult({ severity: 'error' }); setOpen(true); }}
+            onSuccess={onSuccess}
+            onError={onError}
           />
         </Typography>
         <KakaoPayButton url='https://link.kakaopay.com/_/4qDXKCw'></KakaoPayButton>
