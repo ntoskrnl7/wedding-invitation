@@ -3,7 +3,7 @@
 import React from 'react';
 import { useRouter } from 'next/navigation';
 import Typography from '@mui/material/Typography';
-import { List, ListItemText, ListItemButton, ListItem, IconButton, AppBar, Toolbar, Box } from '@mui/material';
+import { List, ListItemText, ListItemButton, IconButton, AppBar, Toolbar, Box } from '@mui/material';
 import { Home, ArrowBack, Comment, EventAvailable, HowToReg, Menu, MyLocation, Payment, PhotoLibrary } from '@mui/icons-material';
 
 import './menu.scss';
