@@ -113,12 +113,17 @@ export default function MenuBar() {
           <audio
             src={'/bgm/' + songs[currentSongIndex] + '.mp3'}
             ref={audioRef}
-            onEnded={playNextSong}
             onPlay={
               () => {
                 setIsPlaying(true);
                 setResult({ severity: 'info', message: <>{songs[currentSongIndex]}</> });
                 setOpen(true);
+              }
+            }
+            onEnded={
+              () => {
+                playNextSong();
+                setIsPlaying(true);
               }
             }
             onPause={() => setIsPlaying(false)}
@@ -135,7 +140,7 @@ export default function MenuBar() {
           </IconButton>
 
           <IconButton
-            style={{ pointerEvents: 'all' }}
+            style={{ marginLeft: 12, pointerEvents: 'all' }}
             edge='end'
             onClick={handleDrawerOpen}
           >
