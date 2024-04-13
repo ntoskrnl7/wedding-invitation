@@ -16,23 +16,17 @@ import { useMenuState } from '../menu/state';
 
 const ThisMenuState = {
   title:
-    <Box>
-      <Typography
-        variant='h6'
-        sx={{
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'left',
-          marginBottom: -1,
-        }}
-      >
-        <MyLocationIcon sx={{ marginRight: 1 }} />
-        오시는길
-      </Typography>
-      <Typography variant='body2' sx={{ fontSize: '12px', marginTop: 1, marginLeft: 2, textShadow: '1px 1px 2px rgb(255,255,255)' }}>
-        서울특별시 중구 퇴계로 115 명동 밀리오레 호텔 PH층
-      </Typography>
-    </Box>,
+    <Typography
+      variant='h6'
+      sx={{
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center'
+      }}
+    >
+      <MyLocationIcon sx={{ marginRight: 1 }} />
+      오시는길
+    </Typography>,
   opacity: 0.8
 };
 
@@ -93,14 +87,17 @@ export default function Page() {
   };
 
   const AppleMapsButton = () => {
-    if (typeof window === "undefined") {
-      return null;
-    }
-    if (! /Mac|iPod|iPhone|iPad/.test(window.navigator.userAgent)) {
+    if ((typeof window === "undefined") || ! /Mac|iPod|iPhone|iPad/.test(window.navigator.userAgent)) {
       return null;
     }
     return (
-      <IconButton onClick={() => window.open('https://maps.apple.com/?address=%EB%8C%80%ED%95%9C%EB%AF%BC%EA%B5%AD%20%EC%84%9C%EC%9A%B8%ED%8A%B9%EB%B3%84%EC%8B%9C%20%EC%A4%91%EA%B5%AC%20%EC%B6%A9%EB%AC%B4%EB%A1%9C1%EA%B0%80%2024-1,%2004536&auid=14074372663880552616&ll=37.561047,126.984427&lsp=9902&q=%EC%98%A8%EC%A6%88%EB%93%9C%EB%A1%AC&t=m', '_blank')}>
+      <IconButton onClick={
+        () => {
+          if (typeof window !== "undefined") {
+            window.open('https://maps.apple.com/?address=%EB%8C%80%ED%95%9C%EB%AF%BC%EA%B5%AD%20%EC%84%9C%EC%9A%B8%ED%8A%B9%EB%B3%84%EC%8B%9C%20%EC%A4%91%EA%B5%AC%20%EC%B6%A9%EB%AC%B4%EB%A1%9C1%EA%B0%80%2024-1,%2004536&auid=14074372663880552616&ll=37.561047,126.984427&lsp=9902&q=%EC%98%A8%EC%A6%88%EB%93%9C%EB%A1%AC&t=m', '_blank');
+          }
+        }}
+      >
         <Image src={'/location/apple.png'} width='24' height='24' alt='apple' />
       </IconButton>
     );
@@ -154,8 +151,6 @@ export default function Page() {
 
     return () => { document.head.removeChild(script) };
   }, []);
-
-  const [open, setOpen] = useState(true);
 
   return (
     <Box
@@ -221,20 +216,23 @@ export default function Page() {
           bottom: 5,
           right: 5,
           width: 'calc(100vw - 10px)',
-          backgroundColor: 'rgba(255, 255, 255, 0.7)',
+          backgroundColor: 'rgba(255, 255, 255, 0.8)',
           padding: 2,
           borderRadius: '10px',
           zIndex: 1000,
           boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
-          maxHeight: isExpanded ? '100%' : '60px',
+          maxHeight: isExpanded ? 'calc(100vh - 75px)' : '55px',
           overflowY: 'scroll',
-          transition: 'max-height 0.3s ease',
+          transition: 'max-height 1.5s ease',
         }}
         onClick={handleToggleExpand}
       >
         <Box sx={{ marginBottom: 2 }}>
           <Typography variant="h6" gutterBottom sx={{ fontWeight: 'bold', marginBottom: '1px' }}>
             🗺️ 길 안내
+          </Typography>
+          <Typography variant='body2' sx={{ fontSize: '12px', marginTop: 1, marginLeft: 1, textShadow: '1px 1px 2px rgb(255,255,255)' }}>
+            서울특별시 중구 퇴계로 115 명동 밀리오레 호텔 PH층
           </Typography>
         </Box>
         <Box sx={{ marginBottom: 2 }}>
