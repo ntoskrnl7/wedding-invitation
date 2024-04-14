@@ -11,7 +11,7 @@ import MenuList from './list';
 
 import { useMenuState } from './state';
 import { Alert, AlertColor, Box, Snackbar } from '@mui/material';
-import { MusicNote, MusicOff } from '@mui/icons-material';
+import { ArrowBackIosNew, ArrowForwardIos, MusicNote, MusicOff } from '@mui/icons-material';
 
 import songs from '../songs';
 
@@ -129,15 +129,24 @@ export default function MenuBar() {
             onPause={() => setIsPlaying(false)}
           />
 
-          <IconButton
-            style={{ pointerEvents: 'all' }}
-            edge='end'
-            onClick={togglePlayPause}
-            onTouchStart={handleTouchStart}
-            onTouchEnd={handleTouchEnd}
-          >
-            {isPlaying ? <MusicOff></MusicOff> : <MusicNote></MusicNote>}
-          </IconButton>
+          <Box sx={{ display: 'flex', justifyContent: 'flex-end', pointerEvents: 'all' }}>
+            <IconButton style={{ padding: 0 }} onClick={playPreviousSong}>
+              <ArrowBackIosNew style={{ fontSize: '8px' }} />
+            </IconButton>
+
+            <IconButton
+              style={{ padding: 0 }}
+              onClick={togglePlayPause}
+              onTouchStart={handleTouchStart}
+              onTouchEnd={handleTouchEnd}
+            >
+              {isPlaying ? <MusicOff /> : <MusicNote />}
+            </IconButton>
+
+            <IconButton style={{ padding: 0 }} onClick={playNextSong}>
+              <ArrowForwardIos style={{ fontSize: '8px' }} />
+            </IconButton>
+          </Box>
 
           <IconButton
             style={{ marginLeft: 12, pointerEvents: 'all' }}
