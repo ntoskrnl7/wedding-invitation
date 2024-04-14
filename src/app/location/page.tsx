@@ -1,8 +1,9 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Button, Box, Slider, Typography } from '@mui/material';
+import { Button, Box, Slider, Typography, Dialog, DialogTitle, DialogContent } from '@mui/material';
 
+import CloseIcon from '@mui/icons-material/Close';
 import MyLocationIcon from '@mui/icons-material/MyLocation';
 import PlaceIcon from '@mui/icons-material/Place';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
@@ -51,6 +52,15 @@ export default function Page() {
     if (map) {
       map.setZoom(newValue);
     }
+  };
+
+  const [open, setOpen] = useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+  const handleClose = () => {
+    setOpen(false);
   };
 
   const [isExpanded, setIsExpanded] = useState(true);
@@ -223,9 +233,40 @@ export default function Page() {
         }}
         onClick={handleToggleExpand}
       >
+        <Dialog
+          fullWidth
+          onClose={handleClose}
+          open={open}
+        >
+          <DialogTitle sx={{ m: 0, p: 2 }}>
+            🗺️ 약도
+          </DialogTitle>
+          <IconButton
+            aria-label="close"
+            onClick={handleClose}
+            sx={{
+              position: 'absolute',
+              right: 8,
+              top: 8,
+              color: (theme) => theme.palette.grey[500],
+            }}
+          >
+            <CloseIcon />
+          </IconButton>
+          <DialogContent dividers sx={{ backgroundColor: 'gray', width: '100%', height: 'auto' }}>
+            <Image
+              src='/location/rotuemap.svg'
+              width={600}
+              height={600}
+              style={{ width: '100%', height: 'auto' }}
+              alt=''
+            />
+          </DialogContent>
+        </Dialog>
+
         <Box sx={{ marginBottom: 2 }}>
           <Typography variant="h6" gutterBottom sx={{ fontWeight: 'bold', marginBottom: '1px' }}>
-            🗺️ 길 안내
+            🗺️ 길 안내 <Button onClick={() => { setOpen(true) }}>약도 보기</Button>
           </Typography>
           <Typography variant='body2' sx={{ fontSize: '12px', marginTop: 0, marginLeft: 1, textShadow: '1px 1px 2px rgb(255,255,255)' }}>
             서울특별시 중구 퇴계로 115 명동 밀리오레 호텔 PH층
