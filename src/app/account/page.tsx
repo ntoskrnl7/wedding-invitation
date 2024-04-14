@@ -77,9 +77,16 @@ export default function Page() {
   const [result, setResult] = useState<{ severity: AlertColor, message?: React.JSX.Element | undefined }>({ severity: 'success' });
 
   return (
-    <Box style={{ marginTop: 80 }}>
-      <Typography variant='subtitle1' textAlign={'center'}>참석이 어려우신 분들을 위해<br />계좌번호를 기재하였습니다.<br />너그러운 마음으로 양해 부탁드립니다.</Typography>
-      <Container maxWidth="lg" sx={{
+    <Box style={{
+      marginTop: 80,
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'center',
+      alignItems: 'center',
+      height: 'calc(100vh - 80px)',
+    }}>
+      <Typography variant='subtitle1' textAlign={'center'}>참석이 어려우신 분들을 위해<br />계좌번호를 기재하였습니다.<br />너그러운 마음으로 양해 부탁드립니다.</Typography >
+      <Container maxWidth="lg" style={{ marginTop: '8vh' }} sx={{
         display: 'flex',
         flexDirection: 'column', // 세로 배치
         justifyContent: 'center', // 세로 중앙 정렬
@@ -111,10 +118,10 @@ export default function Page() {
         }}>
           <Typography variant="h4" component="h2" gutterBottom>🤵🏻 신랑</Typography>
           <Typography variant="subtitle2" sx={{ marginTop: 2, fontWeight: 'bold' }}>계좌 번호</Typography>
-          <Typography variant="body2" sx={{ marginBottom: 3 }}>
-            국민은행 94659583645 (이중광)
+          <Typography variant="body2">
+            국민은행 471002-04-024875 (이중광)
             <CopyAccountButton
-              account='94659583645'
+              account='471002-04-024875'
               onSuccess={onSuccess}
               onError={onError}
             />
@@ -129,7 +136,7 @@ export default function Page() {
         }}>
           <Typography variant="h4" component="h2" gutterBottom>👰🏻 신부</Typography>
           <Typography variant="subtitle2" sx={{ marginTop: 2, fontWeight: 'bold' }}>계좌 번호</Typography>
-          <Typography variant="body2" sx={{ marginBottom: 3 }}>국민은행 592202-01-727975 (박하은)
+          <Typography variant="body2">국민은행 592202-01-727975 (박하은)
             <CopyAccountButton
               account='592202-01-727975'
               onSuccess={onSuccess}
