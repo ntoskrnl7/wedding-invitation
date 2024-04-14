@@ -2,7 +2,7 @@
 
 import React, { createContext, ReactNode, useContext, useState } from 'react';
 
-import songs, { Song } from '../songs'
+import { Song } from '../songs'
 
 export interface MenuState {
   opacity: number;

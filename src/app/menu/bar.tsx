@@ -1,5 +1,7 @@
 'use client';
 
+import { alpha } from '@mui/material/styles';
+
 import { useState, useRef, useEffect } from 'react';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
@@ -14,6 +16,7 @@ import { Alert, AlertColor, Box, Snackbar } from '@mui/material';
 import { ArrowBackIosNew, ArrowForwardIos, MusicNote, MusicOff } from '@mui/icons-material';
 
 import songs from '../songs';
+import theme from '../theme';
 
 export default function MenuBar() {
   const [isDrawerOpen, setDrawerOpen] = useState<boolean>(false);
@@ -60,7 +63,7 @@ export default function MenuBar() {
     if (isPlaying) {
       audioRef.current?.play().catch(error => {
         console.error(error);
-        setResult({ severity: 'error', message: <Typography>브라우저 정책으로 재생이 실패하였습니다.<br /><MusicNote />를 누르셔서 재생하시기 바랍니다.</Typography> });
+        setResult({ severity: 'error', message: <Typography variant='body2'>보안 정책으로 재생이 실패하였습니다.<br /><MusicNote />를 누르셔서 재생하시기 바랍니다.</Typography> });
         setOpen(true);
         setIsPlaying(false);
       })
@@ -92,9 +95,9 @@ export default function MenuBar() {
 
   return (
     <div>
-      <AppBar className='MenuBar' style={{ pointerEvents: 'all', opacity: menuState.opacity, boxShadow: 'none' }}>
+      <AppBar className='MenuBar' style={{ pointerEvents: 'none', backgroundColor: alpha(theme.palette.primary.main, menuState.opacity), boxShadow: 'none' }}>
         <Toolbar>
-          <Typography variant='h6' style={{ marginTop: 10, color: 'black', textShadow: '1px 1px 20x black' }}>
+          <Typography variant='h6' style={{ marginTop: 10, color: theme.palette.primary.contrastText, textShadow: '1px 1px 20x black' }}>
             {menuState.title}
           </Typography>
           <Box flexGrow={1} />
