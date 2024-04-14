@@ -11,7 +11,10 @@ const theme = createTheme({
       '200': 'rgb(207, 194, 178)',
       '300': 'rgb(197, 184, 167)',
       '400': 'rgb(123, 106, 88)',
-      contrastText: 'rgb(123, 106, 88)'
+      contrastText: 'rgb(123, 106, 88)',
+    },
+    secondary: {
+      main: 'rgb(41, 73, 146)',
     }
   },
 });
