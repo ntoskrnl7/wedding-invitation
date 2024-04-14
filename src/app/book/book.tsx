@@ -1,8 +1,10 @@
 'use client';
 
 import dynamic from 'next/dynamic';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './book.scss'
+
+import { MenuState, useMenuState } from '../menu/state';
 
 const HTMLFlipBook = dynamic(() => import('react-pageflip'), { ssr: false });
 
@@ -36,14 +38,15 @@ Page.displayName = 'Page';
 
 export default function Book() {
   const [width, height] = [300, 400]
-  const [pageWidth, setPageWidth] = React.useState(width);
-  const [pageHeight, setPageHeight] = React.useState(height);
-  const [isPortrait, setIsPortrait] = React.useState(false);
-  const [usePortrait, setUsePortrait] = React.useState(true);
+  const [pageWidth, setPageWidth] = useState(width);
+  const [pageHeight, setPageHeight] = useState(height);
+  const [isPortrait, setIsPortrait] = useState(false);
+  const [usePortrait, setUsePortrait] = useState(true);
 
-  const [bookKey, setBookKey] = React.useState(0);
+  const [bookKey, setBookKey] = useState(0);
+  const { menuState, setMenuState } = useMenuState();
 
-  React.useEffect(() => {
+  useEffect(() => {
     const onOrientationChange = () => setBookKey(prevKey => prevKey + 1);
 
     window.addEventListener('resize', onOrientationChange);

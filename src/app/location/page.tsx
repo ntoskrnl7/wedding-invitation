@@ -14,6 +14,7 @@ import Image from 'next/image';
 import IconButton from '@mui/material/IconButton';
 
 import { useMenuState } from '../menu/state';
+import theme from '../theme';
 
 const ThisMenuState = {
   title:
@@ -329,6 +330,7 @@ export default function Page() {
           onClick={handleToggleExpand}
           endIcon={isExpanded ? <ExpandMoreIcon /> : <ExpandLessIcon />}
           sx={{
+            color: 'black',
             position: 'fixed',
             bottom: 5,
             right: 5,

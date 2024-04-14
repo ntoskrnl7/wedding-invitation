@@ -22,8 +22,7 @@ const ThisMenuState: MenuState = {
       <PhotoLibraryIcon sx={{ marginRight: 1 }} />
       앨범
     </Typography>,
-  opacity: 0,
-  song: 'Ed Sheeran - One Life'
+  opacity: 0.8
 };
 
 export default function Page() {

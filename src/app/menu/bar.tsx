@@ -92,7 +92,7 @@ export default function MenuBar() {
 
   return (
     <div>
-      <AppBar className='MenuBar' style={{ pointerEvents: 'all', backgroundColor: `rgba(255,255,255,${menuState.opacity})`, boxShadow: 'none' }}>
+      <AppBar className='MenuBar' style={{ pointerEvents: 'all', opacity: menuState.opacity, boxShadow: 'none' }}>
         <Toolbar>
           <Typography variant='h6' style={{ marginTop: 10, color: 'black', textShadow: '1px 1px 20x black' }}>
             {menuState.title}
@@ -166,6 +166,6 @@ export default function MenuBar() {
       >
         <MenuList />
       </Drawer>
-    </div>
+    </div >
   );
 }
