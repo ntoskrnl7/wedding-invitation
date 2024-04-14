@@ -130,7 +130,7 @@ export default function MenuBar() {
           />
 
           <Box sx={{ display: 'flex', justifyContent: 'flex-end', pointerEvents: 'all' }}>
-            <IconButton style={{ padding: 0 }} onClick={playPreviousSong}>
+            <IconButton onClick={playPreviousSong}>
               <ArrowBackIosNew style={{ fontSize: '8px' }} />
             </IconButton>
 
@@ -143,7 +143,7 @@ export default function MenuBar() {
               {isPlaying ? <MusicOff /> : <MusicNote />}
             </IconButton>
 
-            <IconButton style={{ padding: 0 }} onClick={playNextSong}>
+            <IconButton onClick={playNextSong}>
               <ArrowForwardIos style={{ fontSize: '8px' }} />
             </IconButton>
           </Box>
