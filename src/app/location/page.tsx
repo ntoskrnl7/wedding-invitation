@@ -181,7 +181,7 @@ export default function Page() {
         }}
       >
         <Button
-          color='info'
+          color='secondary'
           variant="contained"
           sx={{ justifyContent: 'flex-start' }}
           onClick={() => moveToDestination()}
@@ -190,7 +190,7 @@ export default function Page() {
           <Typography variant='caption'>웨딩홀</Typography>
         </Button>
         <Button
-          color='info'
+          color='secondary'
           variant="contained"
           sx={{ justifyContent: 'flex-start' }}
           onClick={moveToCurrentLocation}
