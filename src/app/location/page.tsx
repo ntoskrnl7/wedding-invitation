@@ -181,6 +181,7 @@ export default function Page() {
         }}
       >
         <Button
+          color='info'
           variant="contained"
           sx={{ justifyContent: 'flex-start' }}
           onClick={() => moveToDestination()}
@@ -189,6 +190,7 @@ export default function Page() {
           <Typography variant='caption'>웨딩홀</Typography>
         </Button>
         <Button
+          color='info'
           variant="contained"
           sx={{ justifyContent: 'flex-start' }}
           onClick={moveToCurrentLocation}
@@ -266,7 +268,12 @@ export default function Page() {
 
         <Box sx={{ marginBottom: 2 }}>
           <Typography variant="h6" gutterBottom sx={{ fontWeight: 'bold', marginBottom: '1px' }}>
-            🗺️ 길 안내 <Button onClick={() => { setOpen(true) }}>약도 보기</Button>
+            🗺️ 길 안내
+            <Button
+              sx={{
+                color: theme.palette.primary.contrastText,
+              }}
+              onClick={() => { setOpen(true) }}>약도 보기</Button>
           </Typography>
           <Typography variant='body2' sx={{ fontSize: '12px', marginTop: 0, marginLeft: 1, textShadow: '1px 1px 2px rgb(255,255,255)' }}>
             서울특별시 중구 퇴계로 115 명동 밀리오레 호텔 PH층
