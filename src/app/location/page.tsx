@@ -239,7 +239,7 @@ export default function Page() {
           open={open}
         >
           <DialogTitle sx={{ m: 0, p: 2 }}>
-            약도
+            🗺️ 약도
           </DialogTitle>
           <IconButton
             aria-label="close"
