@@ -5,7 +5,7 @@ import { Typography } from '@mui/material';
 import { useMenuState } from './menu/state';
 import { useEffect } from 'react';
 
-const ThisMenuState = { title: <><span></span></>, opacity: 0.0 };
+const ThisMenuState = { title: <><span></span></>, opacity: 0.8 };
 
 export default function Page() {
   const { menuState, setMenuState } = useMenuState();

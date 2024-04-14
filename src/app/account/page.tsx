@@ -20,7 +20,7 @@ const ThisMenuState = {
       <PaymentIcon sx={{ marginRight: 1 }} />
       마음 전하기
     </Typography>,
-  opacity: 0
+  opacity: 0.8
 };
 
 const KakaoPayButton = (props: { url: string }) => {
