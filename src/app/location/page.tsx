@@ -330,7 +330,7 @@ export default function Page() {
           onClick={handleToggleExpand}
           endIcon={isExpanded ? <ExpandMoreIcon /> : <ExpandLessIcon />}
           sx={{
-            color: 'black',
+            color: theme.palette.primary.contrastText,
             position: 'fixed',
             bottom: 5,
             right: 5,

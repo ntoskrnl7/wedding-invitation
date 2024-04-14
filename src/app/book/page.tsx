@@ -22,7 +22,7 @@ const ThisMenuState: MenuState = {
       <PhotoLibraryIcon sx={{ marginRight: 1 }} />
       앨범
     </Typography>,
-  opacity: 0.8
+  opacity: 0
 };
 
 export default function Page() {
