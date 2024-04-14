@@ -227,18 +227,17 @@ export default function Page() {
           borderRadius: '10px',
           zIndex: 1000,
           boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
-          maxHeight: isExpanded ? 'calc(100vh - 75px)' : '82px',
+          maxHeight: isExpanded ? 'calc(100vh - 75px)' : '90px',
           overflowY: 'scroll',
           transition: 'max-height 1.5s ease',
         }}
         onClick={handleToggleExpand}
       >
         <Dialog
-          fullWidth
           onClose={handleClose}
           open={open}
         >
-          <DialogTitle sx={{ m: 0, p: 2 }}>
+          <DialogTitle sx={{ m: 0, p: 1 }}>
             🗺️ 약도
           </DialogTitle>
           <IconButton
@@ -246,14 +245,14 @@ export default function Page() {
             onClick={handleClose}
             sx={{
               position: 'absolute',
-              right: 8,
-              top: 8,
+              right: 2,
+              top: 2,
               color: (theme) => theme.palette.grey[500],
             }}
           >
             <CloseIcon />
           </IconButton>
-          <DialogContent dividers sx={{ backgroundColor: 'gray', width: '100%', height: 'auto' }}>
+          <DialogContent dividers sx={{ backgroundColor: 'rgb(218, 208, 196)' }}>
             <Image
               src='/location/rotuemap.svg'
               width={600}
