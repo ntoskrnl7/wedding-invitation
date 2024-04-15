@@ -5,9 +5,14 @@ import Book from './book';
 import Backdrop from '@mui/material/Backdrop';
 
 import { MenuState, useMenuState } from '../menu/state';
+
 import PhotoLibraryIcon from '@mui/icons-material/PhotoLibrary';
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import DoubleArrowIcon from '@mui/icons-material/DoubleArrow';
+
 import { Box, Typography } from '@mui/material';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 const ThisMenuState: MenuState = {
   title:
@@ -55,6 +60,26 @@ export default function Page() {
 
   const [open, setOpen] = useState((typeof window === "undefined") || window.screen.orientation.type === 'portrait-primary');
 
+  const stopPointRef = useRef<HTMLElement>(null);
+  useEffect(() => {
+    const handleScroll = () => {
+      const stopPoint = stopPointRef.current;
+      if (stopPoint) {
+        const stopPosition = stopPoint.getBoundingClientRect().top + window.scrollY;
+        if (window.scrollY != stopPosition) {
+          window.scrollTo({
+            top: stopPosition,
+            behavior: 'smooth'
+          });
+        }
+      }
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
   return (
     <Box
       style={{ display: 'grid', placeItems: 'center' }}
@@ -70,7 +95,23 @@ export default function Page() {
       >
         <Typography margin={1} textAlign={'center'}>가로 화면으로 돌려서 보시는것을 권장합니다.</Typography>
       </Backdrop>
+
+      <Box onClick={() => {
+        const stopPoint = stopPointRef.current;
+        if (stopPoint) {
+          window.scrollTo({
+            top: stopPoint.getBoundingClientRect().top,
+            behavior: 'smooth'
+          });
+        }
+      }} style={{ display: 'grid', placeItems: 'center' }} sx={{ height: '100vh' }}>
+        <Typography><DoubleArrowIcon style={{ transform: 'rotate(270deg)' }} /></Typography>
+      </Box>
+
+      <Box ref={stopPointRef} />
+
       <Book />
+
     </Box >
   );
 }
