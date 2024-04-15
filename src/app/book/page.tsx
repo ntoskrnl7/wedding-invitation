@@ -60,6 +60,26 @@ export default function Page() {
 
   const [open, setOpen] = useState((typeof window === "undefined") || window.screen.orientation.type === 'portrait-primary');
 
+  const stopPointRef = useRef<HTMLElement>(null);
+  useEffect(() => {
+    const handleScroll = () => {
+      const stopPoint = stopPointRef.current;
+      if (stopPoint) {
+        const stopPosition = stopPoint.getBoundingClientRect().top + window.scrollY;
+        if (window.scrollY != stopPosition) {
+          window.scrollTo({
+            top: stopPosition,
+            behavior: 'auto'
+          });
+        }
+      }
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
   return (
     <Box
       style={{ display: 'grid', placeItems: 'center' }}
@@ -75,6 +95,25 @@ export default function Page() {
       >
         <Typography margin={1} textAlign={'center'}>가로 화면으로 돌려서 보시는것을 권장합니다.</Typography>
       </Backdrop>
+
+      <Box
+        sx={{
+          '@media (orientation: portrait)': { display: 'none !important' },
+          height: '100vh'
+        }}
+        onClick={() => {
+          const stopPoint = stopPointRef.current;
+          if (stopPoint) {
+            window.scrollTo({
+              top: stopPoint.getBoundingClientRect().top,
+              behavior: 'auto'
+            });
+          }
+        }} style={{ display: 'grid', placeItems: 'center' }}>
+        화면을 당겨보세요 <Typography><DoubleArrowIcon style={{ transform: 'rotate(90deg)' }} /></Typography>
+      </Box>
+
+      <Box ref={stopPointRef} />
 
       <Book />
 
