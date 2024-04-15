@@ -60,8 +60,6 @@ export default function Page() {
 
   const [open, setOpen] = useState((typeof window === "undefined") || window.screen.orientation.type === 'portrait-primary');
 
-  const stopPointRef = useRef<HTMLElement>(null);
-
   return (
     <Box
       style={{ display: 'grid', placeItems: 'center' }}
@@ -77,20 +75,6 @@ export default function Page() {
       >
         <Typography margin={1} textAlign={'center'}>가로 화면으로 돌려서 보시는것을 권장합니다.</Typography>
       </Backdrop>
-
-      <Box onClick={() => {
-        const stopPoint = stopPointRef.current;
-        if (stopPoint) {
-          window.scrollTo({
-            top: stopPoint.getBoundingClientRect().top,
-            behavior: 'auto'
-          });
-        }
-      }} style={{ display: 'grid', placeItems: 'center' }} sx={{ height: '100vh' }}>
-        <Typography><DoubleArrowIcon style={{ transform: 'rotate(270deg)' }} /></Typography>
-      </Box>
-
-      <Box ref={stopPointRef} />
 
       <Book />
 
