@@ -39,7 +39,7 @@ export default function Page() {
     setTimeout(() => {
       setIsExpanded(false);
     }, 1000);
-  }, []);
+  }, [setMenuState]);
 
   const lat = 37.5610621;
   const lng = 126.9845390;
