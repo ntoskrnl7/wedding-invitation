@@ -32,7 +32,26 @@ export default function Page() {
     setTimeout(() => {
       setOpen(false);
     }, 3000);
-  }, []);
+  }, [setMenuState])
+
+  // 가로 화면일때는 메뉴바가 보이지 않도록 처리합니다.
+  useEffect(() => {
+    const onOrientationChange = () => {
+      setMenuState(prevState => ({
+        ...prevState,
+        opacity: window.screen.orientation.type === 'portrait-primary' ? 0.8 : 0
+      }));
+    };
+
+    window.addEventListener('resize', onOrientationChange);
+    window.addEventListener('orientationchange', onOrientationChange);
+    onOrientationChange();
+
+    return () => {
+      window.removeEventListener('resize', onOrientationChange)
+      window.removeEventListener('orientationchange', onOrientationChange)
+    };
+  }, [setMenuState]);
 
   const [open, setOpen] = useState((typeof window === "undefined") || window.screen.orientation.type === 'portrait-primary');
 

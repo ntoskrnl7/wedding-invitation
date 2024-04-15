@@ -11,7 +11,7 @@ export default function Page() {
   const { menuState, setMenuState } = useMenuState();
   useEffect(() => {
     setMenuState(() => ThisMenuState);
-  }, []);
+  }, [setMenuState]);
 
   return (
     <div style={{ paddingTop: '30vh', width: '100%', height: '100%', display: 'grid', alignItems: 'center', justifyItems: 'center' }}>

@@ -68,7 +68,7 @@ export default function MenuBar() {
         setIsPlaying(false);
       })
     }
-  }, [currentSongIndex]);
+  }, [currentSongIndex, isPlaying]);
 
   const [open, setOpen] = useState(false);
   const handleClose = (event: React.SyntheticEvent | Event, reason?: string) => {
@@ -94,12 +94,13 @@ export default function MenuBar() {
   };
 
   return (
-    <div>
+    <>
       <AppBar className='MenuBar' style={{ pointerEvents: 'none', backgroundColor: alpha(theme.palette.primary.main, menuState.opacity), boxShadow: 'none' }}>
         <Toolbar>
           <Typography variant='h6' style={{ color: theme.palette.primary.contrastText, textShadow: '1px 1px 20x black' }}>
             {menuState.title}
           </Typography>
+
           <Box flexGrow={1} />
 
           <Snackbar style={{ opacity: 0.5 }} open={open} autoHideDuration={3000} onClose={handleClose}>
@@ -169,6 +170,6 @@ export default function MenuBar() {
       >
         <MenuList />
       </Drawer>
-    </div >
+    </ >
   );
 }

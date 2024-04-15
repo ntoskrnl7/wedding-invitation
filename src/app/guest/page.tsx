@@ -25,7 +25,7 @@ export default function Page() {
   const { menuState, setMenuState } = useMenuState();
   useEffect(() => {
     setMenuState(() => ThisMenuState);
-  }, []);
+  }, [setMenuState]);
   return (
     <Box>
       <div style={{ position: 'fixed', top: 0, backgroundColor: 'white', height: 60, width: '100vw' }}></div>

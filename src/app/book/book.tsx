@@ -44,7 +44,6 @@ export default function Book() {
   const [usePortrait, setUsePortrait] = useState(true);
 
   const [bookKey, setBookKey] = useState(0);
-  const { menuState, setMenuState } = useMenuState();
 
   useEffect(() => {
     const onOrientationChange = () => setBookKey(prevKey => prevKey + 1);

@@ -25,7 +25,7 @@ export default function Page() {
   const { menuState, setMenuState } = useMenuState();
   useEffect(() => {
     setMenuState(() => ThisMenuState);
-  }, [])
+  }, [setMenuState])
   return (
     <iframe style={{ marginTop: 60, border: 0, height: 'calc(100vh - 60px)', width: '100vw' }} src='https://joey.team/block/?id=2WKGeXeWJ6XfZ7XijM2azA5FZrj2&block_id=UdfwEPBuwGt3GbXhWmFt' />
   );

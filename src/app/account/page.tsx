@@ -54,7 +54,7 @@ export default function Page() {
   const { menuState, setMenuState } = useMenuState();
   useEffect(() => {
     setMenuState(() => ThisMenuState);
-  }, []);
+  }, [setMenuState]);
 
   const [open, setOpen] = useState(false);
   const handleClose = (event: React.SyntheticEvent | Event, reason?: string) => {
