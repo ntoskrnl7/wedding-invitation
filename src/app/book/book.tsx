@@ -23,7 +23,7 @@ const Page = React.forwardRef<HTMLDivElement, Props>((props, ref) => {
         {`
           .page-${props.number} {
             background-color: white;
-            ${props.image ? `background-image: url('./${props.image}.jpg') !important;` : ''}
+            ${props.image ? `background-image: url('/picture/${props.image}.jpg') !important;` : ''}
             ${props.image ? `background-size: ${props.number === props.image ? 'cover' : '200%'};` : ''}
             ${props.image ? `background-position: ${props.number === props.image ? 'center' : props.number === props.image.split('-')[0] ? 'left center' : 'right center'};` : ''}
           }
