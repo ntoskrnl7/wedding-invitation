@@ -61,20 +61,6 @@ export default function Page() {
   const [open, setOpen] = useState((typeof window === "undefined") || window.screen.orientation.type === 'portrait-primary');
 
   const stopPointRef = useRef<HTMLElement>(null);
-  useEffect(() => {
-    const stopPoint = stopPointRef.current;
-    if (stopPoint) {
-      const stopPosition = stopPoint.getBoundingClientRect().top + window.scrollY;
-      if (window.scrollY != stopPosition) {
-        setTimeout(() => {
-          window.scrollTo({
-            top: stopPosition,
-            behavior: 'smooth'
-          });
-        }, 1000);
-      }
-    }
-  }, []);
 
   return (
     <Box
@@ -97,7 +83,7 @@ export default function Page() {
         if (stopPoint) {
           window.scrollTo({
             top: stopPoint.getBoundingClientRect().top,
-            behavior: 'smooth'
+            behavior: 'auto'
           });
         }
       }} style={{ display: 'grid', placeItems: 'center' }} sx={{ height: '100vh' }}>
