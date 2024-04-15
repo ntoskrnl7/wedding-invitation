@@ -7,8 +7,6 @@ import Backdrop from '@mui/material/Backdrop';
 import { MenuState, useMenuState } from '../menu/state';
 
 import PhotoLibraryIcon from '@mui/icons-material/PhotoLibrary';
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import DoubleArrowIcon from '@mui/icons-material/DoubleArrow';
 
 import { Box, Typography } from '@mui/material';
@@ -139,7 +137,12 @@ export default function Page() {
 
       <Book />
 
-      <Box sx={{ height: '10vh' }}></Box>
+      <Box
+        sx={{
+          '@media (orientation: portrait)': { display: 'none !important' },
+          height: '50vh'
+        }}
+      />
 
     </Box >
   );
