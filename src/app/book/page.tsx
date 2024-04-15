@@ -69,7 +69,7 @@ export default function Page() {
         if (window.scrollY != stopPosition) {
           window.scrollTo({
             top: stopPosition,
-            behavior: 'auto'
+            behavior: 'smooth'
           });
         }
       }
@@ -106,7 +106,7 @@ export default function Page() {
           if (stopPoint) {
             window.scrollTo({
               top: stopPoint.getBoundingClientRect().top,
-              behavior: 'auto'
+              behavior: 'smooth'
             });
           }
         }} style={{ display: 'grid', placeItems: 'center' }}>
