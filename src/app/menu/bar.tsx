@@ -97,7 +97,7 @@ export default function MenuBar() {
     <>
       <AppBar className='MenuBar' style={{ pointerEvents: 'none', backgroundColor: alpha(theme.palette.primary.main, menuState.opacity), boxShadow: 'none' }}>
         <Toolbar>
-          <Typography variant='h6' style={{ color: theme.palette.primary.contrastText, textShadow: '1px 1px 20x black' }}>
+          <Typography variant='h6' style={{ textShadow: '1px 1px 20x black' }}>
             {menuState.title}
           </Typography>
 
