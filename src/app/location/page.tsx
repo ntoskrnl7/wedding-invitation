@@ -269,11 +269,7 @@ export default function Page() {
         <Box sx={{ marginBottom: 2 }}>
           <Typography variant="h6" gutterBottom sx={{ fontWeight: 'bold', marginBottom: '1px' }}>
             🗺️ 길 안내
-            <Button
-              sx={{
-                color: theme.palette.primary.contrastText,
-              }}
-              onClick={() => { setOpen(true) }}>약도 보기</Button>
+            <Button color='info' onClick={() => { setOpen(true) }}>약도 보기</Button>
           </Typography>
           <Typography variant='body2' sx={{ fontSize: '12px', marginTop: 0, marginLeft: 1, textShadow: '1px 1px 2px rgb(255,255,255)' }}>
             서울특별시 중구 퇴계로 115 명동 밀리오레 호텔 PH층
@@ -334,10 +330,10 @@ export default function Page() {
         </Box>
 
         <Button
+          color='info'
           onClick={handleToggleExpand}
           endIcon={isExpanded ? <ExpandMoreIcon /> : <ExpandLessIcon />}
           sx={{
-            color: theme.palette.primary.contrastText,
             position: 'fixed',
             bottom: 5,
             right: 5,
