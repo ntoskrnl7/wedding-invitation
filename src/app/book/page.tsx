@@ -62,22 +62,18 @@ export default function Page() {
 
   const stopPointRef = useRef<HTMLElement>(null);
   useEffect(() => {
-    const handleScroll = () => {
-      const stopPoint = stopPointRef.current;
-      if (stopPoint) {
-        const stopPosition = stopPoint.getBoundingClientRect().top + window.scrollY;
-        if (window.scrollY != stopPosition) {
+    const stopPoint = stopPointRef.current;
+    if (stopPoint) {
+      const stopPosition = stopPoint.getBoundingClientRect().top + window.scrollY;
+      if (window.scrollY != stopPosition) {
+        setTimeout(() => {
           window.scrollTo({
             top: stopPosition,
             behavior: 'smooth'
           });
-        }
+        }, 1000);
       }
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
+    }
   }, []);
 
   return (
