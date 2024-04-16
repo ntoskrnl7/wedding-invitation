@@ -63,10 +63,12 @@ export default function Page() {
     if (stopPoint) {
       const stopPosition = stopPoint.getBoundingClientRect().top + window.scrollY;
       if (window.scrollY > stopPosition) {
-        window.scrollTo({
-          top: stopPosition,
-          behavior: 'auto'
-        });
+        setTimeout(() => {
+          window.scrollTo({
+            top: stopPosition,
+            behavior: 'auto'
+          });
+        }, 100);
       }
     }
   };
@@ -118,7 +120,7 @@ export default function Page() {
       <Box
         sx={{
           '@media (orientation: portrait)': { display: 'none !important' },
-          height: '50vh'
+          height: '100vh'
         }}
       />
     </Box >
