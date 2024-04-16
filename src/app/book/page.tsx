@@ -71,16 +71,13 @@ export default function Page() {
     }, 3000);
   }, [setMenuState])
 
-
   // 가로 화면일때는 메뉴바가 보이지 않도록 처리합니다.
   useEffect(() => {
     const onOrientationChange = () => {
-
       window.scrollTo({
         top: 0,
         behavior: 'auto'
       });
-
       setMenuState(prevState => ({
         ...prevState,
         opacity: window.screen.orientation.type === 'portrait-primary' ? 0.8 : 0
@@ -103,38 +100,41 @@ export default function Page() {
 
   useEffect(() => {
     function smoothScrollTo(options: Omit<ScrollToOptions, 'behavior'> & { duration: number }) {
-      let handles: number[] = [];
+      const startPositionY = window.scrollY;
+      const startPositionX = window.scrollX;
+      let startTime: number | null = null;
 
-      if (options.top) {
-        const top = options.top;
+      const animation = (currentTime: number) => {
+        if (startTime === null) startTime = currentTime;
+        const timeElapsed = currentTime - startTime;
 
-        const targetPosition = options.top;
-        const startPosition = window.scrollY;
-        const distance = targetPosition - startPosition;
-        let startTime: number | null = null;
-
-        const animation = (currentTime: number) => {
-          if (startTime === null) startTime = currentTime;
-          const timeElapsed = currentTime - startTime;
-          const next = easeInOutQuad(timeElapsed, startPosition, distance, options.duration);
-          window.scrollTo(0, next);
-          if (timeElapsed < options.duration) handles.push(requestAnimationFrame(animation));
-        };
-
-        const easeInOutQuad = (t: number, b: number, c: number, d: number) => {
-          t /= d / 2;
-          if (t < 1) return c / 2 * t * t + b;
-          t--;
-          return -c / 2 * (t * (t - 2) - 1) + b;
+        if (options.top !== undefined) {
+          const distanceY = options.top - startPositionY;
+          const nextY = easeInOutQuad(timeElapsed, startPositionY, distanceY, options.duration);
+          window.scrollTo({ top: nextY, behavior: 'auto' });
         }
 
-        handles.push(requestAnimationFrame(animation));
+        if (options.left !== undefined) {
+          const distanceX = options.left - startPositionX;
+          const nextX = easeInOutQuad(timeElapsed, startPositionX, distanceX, options.duration);
+          window.scrollTo({ left: nextX, behavior: 'auto' });
+        }
+        if (timeElapsed < options.duration) requestAnimationFrame(animation);
       }
+
+      const easeInOutQuad = (t: number, b: number, c: number, d: number) => {
+        t /= d / 2;
+        if (t < 1) return c / 2 * t * t + b;
+        t--;
+        return -c / 2 * (t * (t - 2) - 1) + b;
+      }
+
+      requestAnimationFrame(animation);
     }
 
     let lastScrollY = 0;
 
-    const handleScroll = (ev: Event) => {
+    const handleScroll = () => {
       const stopPoint = stopPointRef.current;
       if (stopPoint) {
         const stopPosition = stopPoint.getBoundingClientRect().top + window.scrollY;
@@ -146,8 +146,11 @@ export default function Page() {
             behavior: 'auto'
           });
 
-          // 아직 안내 메시지가 보이면서 스크롤이 내려가는 상황이라면, 스크롤을 책 상단으로 내리도록합니다.
-        } else if (window.scrollY > lastScrollY) {
+          /**
+           * 아직 안내 메시지가 보이면서(스크롤이 책 상단 위에 있는 경우) 스크롤이 내려가는 상황이라면,
+           * 스크롤을 책 상단으로 내리도록 합니다.
+           */
+        } else if (/* window.scrollY < stopPosition && */ window.scrollY > lastScrollY) {
           smoothScrollTo({
             top: stopPosition,
             duration: 50
@@ -187,13 +190,13 @@ export default function Page() {
             <br />
             <Typography textAlign={'center'}>앨범을 보시려면 화면을 내려주세요 😁</Typography>
           </Box>
-          <Typography sx={{marginBottom: 2}}><HeartbeatsArrowIcon style={{ transform: 'rotate(90deg)' }} /></Typography>
+          <Typography sx={{ marginBottom: 2 }}><HeartbeatsArrowIcon style={{ transform: 'rotate(90deg)' }} /></Typography>
         </Box>
 
-        <Box ref={stopPointRef} />
       </Box>
 
       <Box style={{ display: 'grid', placeItems: 'center', height: '100vh', overflowX: 'hidden' }}>
+        <Box ref={stopPointRef} />
         <Book />
       </Box>
 

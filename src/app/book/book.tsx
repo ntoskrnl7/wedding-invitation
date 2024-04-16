@@ -4,8 +4,6 @@ import dynamic from 'next/dynamic';
 import React, { useEffect, useState } from 'react';
 import './book.scss'
 
-import { MenuState, useMenuState } from '../menu/state';
-
 const HTMLFlipBook = dynamic(() => import('react-pageflip'), { ssr: false });
 
 interface Props {
