@@ -29,7 +29,7 @@ export default function Page() {
   return (
     <Box>
       <div style={{ position: 'fixed', top: 0, backgroundColor: 'white', height: 60, width: '100vw' }}></div>
-      <iframe style={{ marginTop: 10, zIndex: 2000, border: 0, height: '100vh', width: '100vw' }} src='https://joey.team/block?block_id=ZKSCq2LqiYzSCpDiA5NM&id=2WKGeXeWJ6XfZ7XijM2azA5FZrj2' />
+      <iframe title='guest' style={{ marginTop: 10, zIndex: 2000, border: 0, height: '100vh', width: '100vw' }} src='https://joey.team/block?block_id=ZKSCq2LqiYzSCpDiA5NM&id=2WKGeXeWJ6XfZ7XijM2azA5FZrj2' />
     </Box>
   );
 }
