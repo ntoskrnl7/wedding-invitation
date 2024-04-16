@@ -115,7 +115,7 @@ export default function MenuBar() {
           </Snackbar>
 
           <audio
-            src={'http://ntoskrnl7.dothome.co.kr/bgm/' + songs[currentSongIndex] + '.mp3'}
+            src={'/api/proxy/bgm/' + songs[currentSongIndex] + '.mp3'}
             ref={audioRef}
             onPlay={
               () => {

@@ -98,7 +98,7 @@ export default function Page() {
     let lastScrollY = 0;
     let isProgrammaticScroll = false;
 
-    const handleScroll = (ev: Event) => {
+    const handleScroll = () => {
       const stopPoint = stopPointRef.current;
       if (stopPoint) {
         const stopPosition = stopPoint.getBoundingClientRect().top + window.scrollY;
