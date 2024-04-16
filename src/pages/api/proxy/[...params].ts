@@ -1,5 +1,12 @@
-import type { NextApiRequest, NextApiResponse } from 'next';
+
+import type { NextApiRequest, NextApiResponse, PageConfig } from 'next';
 import fetch from 'node-fetch';
+
+export const config: PageConfig = {
+    api: {
+        responseLimit: false,
+    },
+}
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     // URL 경로에서 모든 파라미터를 배열로 받기
@@ -28,7 +35,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             res.status(200).send(text);
         } else {
             // 기타 컨텐츠 타입 처리, 예: binary data
-            const buffer = await response.buffer();
+            const buffer = Buffer.from(await response.arrayBuffer());
             res.setHeader('Content-Type', contentType || 'application/octet-stream');
             res.status(200).send(buffer);
         }
