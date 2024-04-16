@@ -75,7 +75,6 @@ export default function Page() {
       if (window.scrollY >= lastScrollY) {
         lastScrollY = window.scrollY;
       } else {
-        console.log(`${window.scrollY}, ${lastScrollY}`)
         isProgrammaticScroll = true;
 
         if (timer) {
