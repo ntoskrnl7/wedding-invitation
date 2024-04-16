@@ -58,7 +58,16 @@ export default function Page() {
 
   const [open, setOpen] = useState((typeof window === "undefined") || window.screen.orientation.type === 'portrait-primary');
 
+  let lastScrollY = 0;
   const handleScroll = () => {
+
+    // 스크롤을 내렸으면 다시는 올리지 못하도록 처리합니다.
+    if (window.scrollY > lastScrollY) {
+      lastScrollY = window.scrollY;
+    } else {
+      window.scrollTo(0, lastScrollY);
+    }
+
     const stopPoint = stopPointRef.current;
     if (stopPoint) {
       const stopPosition = stopPoint.getBoundingClientRect().top + window.scrollY;
