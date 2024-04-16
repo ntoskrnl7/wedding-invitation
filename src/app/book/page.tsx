@@ -9,12 +9,12 @@ import { MenuState, useMenuState } from '../menu/state';
 import PhotoLibraryIcon from '@mui/icons-material/PhotoLibrary';
 import DoubleArrowIcon from '@mui/icons-material/DoubleArrow';
 
-import { Box, Typography } from '@mui/material';
+import { Box, Typography, duration } from '@mui/material';
 import { useEffect, useRef, useState } from 'react';
 
 import { styled } from '@mui/system';
 
-const HartbeatArrowIcon = styled(DoubleArrowIcon)({
+const HeartbeatsArrowIcon = styled(DoubleArrowIcon)({
   transform: 'rotate(90deg)',
   animation: 'heartbeat 1.5s infinite',
   '@keyframes heartbeat': {
@@ -95,10 +95,41 @@ export default function Page() {
   const stopPointRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
-    let lastScrollY = 0;
-    let isProgrammaticScroll = false;
 
-    const handleScroll = () => {
+    function smoothScrollTo(options: Omit<ScrollToOptions, 'behavior'> & { duration: number }) {
+
+      let handles: number[] = [];
+
+      if (options.top) {
+        const top = options.top;
+
+        const targetPosition = options.top;
+        const startPosition = window.scrollY;
+        const distance = targetPosition - startPosition;
+        let startTime: number | null = null;
+
+        const animation = (currentTime: number) => {
+          if (startTime === null) startTime = currentTime;
+          const timeElapsed = currentTime - startTime;
+          const next = easeInOutQuad(timeElapsed, startPosition, distance, options.duration);
+          window.scrollTo(0, next);
+          if (timeElapsed < options.duration) handles.push(requestAnimationFrame(animation));
+        };
+
+        const easeInOutQuad = (t: number, b: number, c: number, d: number) => {
+          t /= d / 2;
+          if (t < 1) return c / 2 * t * t + b;
+          t--;
+          return -c / 2 * (t * (t - 2) - 1) + b;
+        }
+
+        handles.push(requestAnimationFrame(animation));
+      }
+    }
+
+    let lastScrollY = 0;
+
+    const handleScroll = (ev: Event) => {
       const stopPoint = stopPointRef.current;
       if (stopPoint) {
         const stopPosition = stopPoint.getBoundingClientRect().top + window.scrollY;
@@ -112,14 +143,9 @@ export default function Page() {
 
           // 아직 안내 메시지가 보이면서 스크롤이 내려가는 상황이라면, 스크롤을 책 상단으로 내리도록합니다.
         } else if (window.scrollY > lastScrollY) {
-          if (isProgrammaticScroll) {
-            isProgrammaticScroll = false;
-            return;
-          }
-          isProgrammaticScroll = true;
-          window.scrollTo({
+          smoothScrollTo({
             top: stopPosition,
-            behavior: 'smooth'
+            duration: 50
           });
         }
         lastScrollY = window.scrollY;
@@ -156,7 +182,7 @@ export default function Page() {
             <br />
             <Typography textAlign={'center'}>앨범을 보시려면 화면을 내려주세요 😁</Typography>
           </Box>
-          <Typography><HartbeatArrowIcon style={{ transform: 'rotate(90deg)' }} /></Typography>
+          <Typography><HeartbeatsArrowIcon style={{ transform: 'rotate(90deg)' }} /></Typography>
         </Box>
 
         <Box ref={stopPointRef} />
