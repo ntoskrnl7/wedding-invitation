@@ -59,18 +59,36 @@ export default function Page() {
   const [open, setOpen] = useState((typeof window === "undefined") || window.screen.orientation.type === 'portrait-primary');
 
   let lastScrollY = 0;
-  const handleScroll = () => {
-
-    // 스크롤을 내렸으면 다시는 올리지 못하도록 처리합니다.
-    if (window.scrollY > lastScrollY) {
-      lastScrollY = window.scrollY;
-    } else {
-      window.scrollTo(0, lastScrollY);
-    }
-
+  let isProgrammaticScroll = false;
+  let timer: string | number | NodeJS.Timeout | undefined = undefined;
+  const handleScroll = (ev: Event) => {
     const stopPoint = stopPointRef.current;
     if (stopPoint) {
       const stopPosition = stopPoint.getBoundingClientRect().top + window.scrollY;
+
+      if (isProgrammaticScroll) {
+        isProgrammaticScroll = false;
+        return;
+      }
+
+      // 스크롤을 내렸으면 다시는 올리지 못하도록 처리합니다.
+      if (window.scrollY >= lastScrollY) {
+        lastScrollY = window.scrollY;
+      } else {
+        isProgrammaticScroll = true;
+
+        if (timer) {
+          clearTimeout(timer);
+          timer = undefined;
+        }
+        timer = setTimeout(() => {
+          window.scrollTo({
+            top: stopPosition,
+            behavior: 'auto'
+          });
+        }, 100);
+      }
+
 
       // 스크롤이 책 상단 아래로 내려가려고 한다면, 책 상단에 스크롤이 오도록 처리합니다.
       if (window.scrollY > stopPosition) {
