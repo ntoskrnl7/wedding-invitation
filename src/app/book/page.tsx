@@ -62,13 +62,13 @@ export default function Page() {
     const stopPoint = stopPointRef.current;
     if (stopPoint) {
       const stopPosition = stopPoint.getBoundingClientRect().top + window.scrollY;
+
+      // 스크롤이 책 상단 아래로 내려가려고 한다면, 책 상단에 스크롤이 오도록 처리합니다.
       if (window.scrollY > stopPosition) {
-        setTimeout(() => {
-          window.scrollTo({
-            top: stopPosition,
-            behavior: 'auto'
-          });
-        }, 100);
+        window.scrollTo({
+          top: stopPosition,
+          behavior: 'auto'
+        });
       }
     }
   };
