@@ -154,7 +154,7 @@ export default function Page() {
           <Box>
             <Typography variant='h6' textAlign={'center'}>Our story</Typography>
             <br />
-            <Typography textAlign={'center'} sx={{ wordBreak: 'break-all' }}>앨범을 보시려면 화면을 내려주세요 😁</Typography>
+            <Typography textAlign={'center'}>앨범을 보시려면 화면을 내려주세요 😁</Typography>
           </Box>
           <Typography><HartbeatArrowIcon style={{ transform: 'rotate(90deg)' }} /></Typography>
         </Box>
@@ -162,7 +162,7 @@ export default function Page() {
         <Box ref={stopPointRef} />
       </Box>
 
-      <Box style={{ display: 'grid', placeItems: 'center', height: '100vh' }}>
+      <Box style={{ display: 'grid', placeItems: 'center', height: '100vh', overflowX: 'hidden' }}>
         <Book />
       </Box>
 

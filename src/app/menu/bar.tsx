@@ -62,8 +62,7 @@ export default function MenuBar() {
   useEffect(() => {
     if (isPlaying) {
       audioRef.current?.play().catch(error => {
-        console.error(error);
-        setResult({ severity: 'error', message: <Typography variant='body2'>보안 정책으로 재생이 실패하였습니다.<br /><MusicNote />를 누르셔서 재생하시기 바랍니다.</Typography> });
+        setResult({ severity: 'info', message: <Typography variant='body2'><MusicNote />를 눌러서 재생하시기 바랍니다.</Typography> });
         setOpen(true);
         setIsPlaying(false);
       })
