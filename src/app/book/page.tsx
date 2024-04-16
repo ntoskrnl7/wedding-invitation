@@ -12,6 +12,40 @@ import DoubleArrowIcon from '@mui/icons-material/DoubleArrow';
 import { Box, Typography } from '@mui/material';
 import { useEffect, useRef, useState } from 'react';
 
+import { styled } from '@mui/system';
+
+const HartbeatArrowIcon = styled(DoubleArrowIcon)({
+  transform: 'rotate(90deg)',
+  animation: 'heartbeat 1.5s infinite',
+  '@keyframes heartbeat': {
+    '0%': {
+      transform: 'rotate(90deg) scale(1)',
+      opacity: 0.5
+    },
+    '14%': {
+      transform: 'rotate(90deg) scale(1.3)',
+      opacity: 1
+    },
+    '28%': {
+      transform: 'rotate(90deg) scale(1)',
+      opacity: 0.5
+    },
+    '42%': {
+      transform: 'rotate(90deg) scale(1.3)',
+      opacity: 1
+    },
+    '70%': {
+      transform: 'rotate(90deg) scale(1)',
+      opacity: 0.5
+    },
+    '100%': {
+      transform: 'rotate(90deg) scale(1)',
+      opacity: 0.5
+    }
+  }
+});
+
+
 const ThisMenuState: MenuState = {
   title:
     <Typography
@@ -58,63 +92,82 @@ export default function Page() {
 
   const [open, setOpen] = useState((typeof window === "undefined") || window.screen.orientation.type === 'portrait-primary');
 
-  let lastScrollY = 0;
-  let isProgrammaticScroll = false;
-  let timer: string | number | NodeJS.Timeout | undefined = undefined;
-  const handleScroll = (ev: Event) => {
+  function smoothScrollTo(targetPosition: number, duration: number) {
+    const startPosition = window.pageYOffset;
+    const distance = targetPosition - startPosition;
+    let startTime: number | null = null;
+
+    function animation(currentTime: number) {
+      if (startTime === null) startTime = currentTime;
+      const timeElapsed = currentTime - startTime;
+      const next = easeInOutQuad(timeElapsed, startPosition, distance, duration);
+      window.scrollTo(0, next);
+      if (timeElapsed < duration) requestAnimationFrame(animation);
+    }
+
+    function easeInOutQuad(t: number, b: number, c: number, d: number) {
+      t /= d / 2;
+      if (t < 1) return c / 2 * t * t + b;
+      t--;
+      return -c / 2 * (t * (t - 2) - 1) + b;
+    }
+
+    requestAnimationFrame(animation);
+  }
+
+  const handleScroll = () => {
     const stopPoint = stopPointRef.current;
     if (stopPoint) {
       const stopPosition = stopPoint.getBoundingClientRect().top + window.scrollY;
-
-      if (isProgrammaticScroll) {
-        isProgrammaticScroll = false;
-        return;
-      }
-
-      // 스크롤을 내렸으면 다시는 올리지 못하도록 처리합니다.
-      if (window.scrollY >= lastScrollY) {
-        lastScrollY = window.scrollY;
-      } else {
-        isProgrammaticScroll = true;
-
-        if (timer) {
-          clearTimeout(timer);
-          timer = undefined;
-        }
-        timer = setTimeout(() => {
-          window.scrollTo({
-            top: stopPosition,
-            behavior: 'auto'
-          });
-        }, 100);
-      }
-
-
-      // 스크롤이 책 상단 아래로 내려가려고 한다면, 책 상단에 스크롤이 오도록 처리합니다.
-      if (window.scrollY > stopPosition) {
-        window.scrollTo({
-          top: stopPosition,
-          behavior: 'auto'
-        });
+      if (window.scrollY !== stopPosition) {
+        window.removeEventListener('scroll', handleScroll);
+        smoothScrollTo(stopPosition, 500);
       }
     }
   };
 
   const stopPointRef = useRef<HTMLElement>(null);
+
   useEffect(() => {
-    window.addEventListener('scroll', handleScroll);
+    let lastScrollY = 0;
+    let isProgrammaticScroll = false;
+
+    const handleScroll = (ev: Event) => {
+      const stopPoint = stopPointRef.current;
+      if (stopPoint) {
+        const stopPosition = stopPoint.getBoundingClientRect().top + window.scrollY;
+
+        // 스크롤이 책 상단 아래로 내려가려고 한다면, 책 상단에 스크롤이 오도록 처리합니다.
+        if (window.scrollY > stopPosition) {
+          window.scrollTo({
+            top: stopPosition,
+            behavior: 'auto'
+          });
+
+          // 아직 안내 메시지가 보이면서 스크롤이 내려가는 상황이라면, 스크롤을 책 상단으로 내리도록합니다.
+        } else if (window.scrollY > lastScrollY) {
+          if (isProgrammaticScroll) {
+            isProgrammaticScroll = false;
+          }
+          isProgrammaticScroll = true;
+          smoothScrollTo(stopPosition, 50);
+          window.scrollTo({
+            top: stopPosition,
+            behavior: 'auto'
+          });
+        }
+        lastScrollY = window.scrollY;
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
   }, []);
 
   return (
-    <Box
-      style={{ display: 'grid', placeItems: 'center' }}
-      sx={{
-        '@media (orientation: portrait)': { height: '100vh' }
-      }}
-    >
+    <Box>
       <Backdrop
         sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
         open={open}
@@ -124,32 +177,29 @@ export default function Page() {
         <Typography margin={1} textAlign={'center'}>가로 화면으로 돌려서 보시는것을 권장합니다.</Typography>
       </Backdrop>
 
-      <Box
-        sx={{
-          '@media (orientation: portrait)': { display: 'none !important' },
-          height: '50vh'
-        }}
-        style={{ display: 'grid', placeItems: 'center' }}
-      >
-        화면을 당겨보세요
-        <Typography><DoubleArrowIcon style={{ transform: 'rotate(90deg)' }} />
-        </Typography>
+      <Box >
+        <Box
+          sx={{
+            marginTop: '10vh',
+            height: '100vh'
+          }}
+          style={{ display: 'grid', placeItems: 'center' }}
+        >
+          <Box>
+            <Typography variant='h6' textAlign={'center'}>Our story</Typography>
+            <br />
+            <Typography textAlign={'center'} sx={{ wordBreak: 'break-all' }}>앨범을 보시려면 화면을 내려주세요 😁</Typography>
+          </Box>
+          <Typography><HartbeatArrowIcon style={{ transform: 'rotate(90deg)' }} /></Typography>
+        </Box>
+
+        <Box ref={stopPointRef} />
       </Box>
 
-      <Box
-        sx={{
-          '@media (orientation: portrait)': { display: 'none !important' },
-        }}
-        ref={stopPointRef} />
+      <Box style={{ display: 'grid', placeItems: 'center', height: '100vh' }}>
+        <Book />
+      </Box>
 
-      <Book />
-
-      <Box
-        sx={{
-          '@media (orientation: portrait)': { display: 'none !important' },
-          height: '100vh'
-        }}
-      />
     </Box >
   );
 }
