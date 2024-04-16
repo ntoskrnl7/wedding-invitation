@@ -92,40 +92,6 @@ export default function Page() {
 
   const [open, setOpen] = useState((typeof window === "undefined") || window.screen.orientation.type === 'portrait-primary');
 
-  function smoothScrollTo(targetPosition: number, duration: number) {
-    const startPosition = window.pageYOffset;
-    const distance = targetPosition - startPosition;
-    let startTime: number | null = null;
-
-    function animation(currentTime: number) {
-      if (startTime === null) startTime = currentTime;
-      const timeElapsed = currentTime - startTime;
-      const next = easeInOutQuad(timeElapsed, startPosition, distance, duration);
-      window.scrollTo(0, next);
-      if (timeElapsed < duration) requestAnimationFrame(animation);
-    }
-
-    function easeInOutQuad(t: number, b: number, c: number, d: number) {
-      t /= d / 2;
-      if (t < 1) return c / 2 * t * t + b;
-      t--;
-      return -c / 2 * (t * (t - 2) - 1) + b;
-    }
-
-    requestAnimationFrame(animation);
-  }
-
-  const handleScroll = () => {
-    const stopPoint = stopPointRef.current;
-    if (stopPoint) {
-      const stopPosition = stopPoint.getBoundingClientRect().top + window.scrollY;
-      if (window.scrollY !== stopPosition) {
-        window.removeEventListener('scroll', handleScroll);
-        smoothScrollTo(stopPosition, 500);
-      }
-    }
-  };
-
   const stopPointRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -148,12 +114,12 @@ export default function Page() {
         } else if (window.scrollY > lastScrollY) {
           if (isProgrammaticScroll) {
             isProgrammaticScroll = false;
+            return;
           }
           isProgrammaticScroll = true;
-          smoothScrollTo(stopPosition, 50);
           window.scrollTo({
             top: stopPosition,
-            behavior: 'auto'
+            behavior: 'smooth'
           });
         }
         lastScrollY = window.scrollY;
