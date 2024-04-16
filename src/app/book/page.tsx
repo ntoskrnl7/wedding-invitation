@@ -151,10 +151,6 @@ export default function Page() {
           }
           isProgrammaticScroll = true;
           smoothScrollTo(stopPosition, 50);
-          window.scrollTo({
-            top: stopPosition,
-            behavior: 'auto'
-          });
         }
         lastScrollY = window.scrollY;
       }
