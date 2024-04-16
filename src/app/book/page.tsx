@@ -148,6 +148,7 @@ export default function Page() {
         } else if (window.scrollY > lastScrollY) {
           if (isProgrammaticScroll) {
             isProgrammaticScroll = false;
+            return;
           }
           isProgrammaticScroll = true;
           smoothScrollTo(stopPosition, 50);
