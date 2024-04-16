@@ -71,9 +71,16 @@ export default function Page() {
     }, 3000);
   }, [setMenuState])
 
+
   // 가로 화면일때는 메뉴바가 보이지 않도록 처리합니다.
   useEffect(() => {
     const onOrientationChange = () => {
+
+      window.scrollTo({
+        top: 0,
+        behavior: 'auto'
+      });
+
       setMenuState(prevState => ({
         ...prevState,
         opacity: window.screen.orientation.type === 'portrait-primary' ? 0.8 : 0
@@ -95,9 +102,7 @@ export default function Page() {
   const stopPointRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
-
     function smoothScrollTo(options: Omit<ScrollToOptions, 'behavior'> & { duration: number }) {
-
       let handles: number[] = [];
 
       if (options.top) {
@@ -182,7 +187,7 @@ export default function Page() {
             <br />
             <Typography textAlign={'center'}>앨범을 보시려면 화면을 내려주세요 😁</Typography>
           </Box>
-          <Typography><HeartbeatsArrowIcon style={{ transform: 'rotate(90deg)' }} /></Typography>
+          <Typography sx={{marginBottom: 2}}><HeartbeatsArrowIcon style={{ transform: 'rotate(90deg)' }} /></Typography>
         </Box>
 
         <Box ref={stopPointRef} />
