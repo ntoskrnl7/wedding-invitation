@@ -1,25 +1,82 @@
 'use client';
 
-import { createTheme } from '@mui/material/styles';
+import palette from './palette.module.scss'
 
-const theme = createTheme({
+import { createTheme, ThemeOptions } from '@mui/material/styles';
+
+export const themeOptions: ThemeOptions = {
   palette: {
-    text: {
-      primary: 'rgb(123, 106, 88)',
-    },
     primary: {
-      main: 'rgb(241, 237, 225)',
-      '50': 'rgb(241, 237, 225)',
-      '100': 'rgb(218, 208, 196)',
-      '200': 'rgb(207, 194, 178)',
-      '300': 'rgb(197, 184, 167)',
-      '400': 'rgb(123, 106, 88)',
-      contrastText: 'rgb(123, 106, 88)',
+      main: palette['primary-color-main'],
+      '50': '#eee7da',
+      '100': '#cfc2b2',
+      '200': '#ab9a86',
+      '300': '#87745b',
+      '400': '#6e583c',
+      '500': '#543e1d',
+      '600': '#4b3618',
+      '700': '#3e2b11',
+      '800': '#321f05',
+      '900': '#261200',
+      contrastText: '#7b6a58',
     },
     secondary: {
-      main: 'rgb(41, 73, 146)',
-    }
+      
+      main: '#294892',
+      '50': '#e4f2fb',
+      '100': '#bfdef7',
+      '200': '#98caf2',
+      '300': '#73b5ec',
+      '400': '#5aa5e8',
+      '500': '#4896e4',
+      '600': '#4288d7',
+      '700': '#3a77c4',
+      '800': '#3466b2',
+      '900': '#294892',
+      contrastText: '#e4f2fb'
+    },
+    text: {
+      primary: '#7b6a58',
+      secondary: '#c9af97',
+      disabled: '#312626',
+    },
   },
-});
 
-export default theme;
+  // palette: {
+  //   primary: {
+  //     main: '#cfc2b2',
+  //     '50': '#eee7da',
+  //     '100': '#cfc2b2',
+  //     '200': '#ab9a86',
+  //     '300': '#87745b',
+  //     '400': '#6e583c',
+  //     '500': '#543e1d',
+  //     '600': '#4b3618',
+  //     '700': '#3e2b11',
+  //     '800': '#321f05',
+  //     '900': '#261200',
+  //     contrastText: '#7b6a58',
+  //   },
+  //   secondary: {
+  //     main: '#294892',
+  //     '50': '#e4f2fb',
+  //     '100': '#bfdef7',
+  //     '200': '#98caf2',
+  //     '300': '#73b5ec',
+  //     '400': '#5aa5e8',
+  //     '500': '#4896e4',
+  //     '600': '#4288d7',
+  //     '700': '#3a77c4',
+  //     '800': '#3466b2',
+  //     '900': '#294892',
+  //     contrastText: '#e4f2fb'
+  //   },
+  //   text: {
+  //     primary: '#7b6a58',
+  //     secondary: '#c9af97',
+  //     disabled: '#312626',
+  //   },
+  // },
+};
+
+export default createTheme(themeOptions);

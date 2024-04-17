@@ -1,0 +1,33 @@
+@import "./palette.scss";
+
+:root {
+  --primary-color-main: #{$primary-color-main};
+  --primary-color-50: #{$primary-color-50};
+  --primary-color-100: #{$primary-color-100};
+  --primary-color-200: #{$primary-color-200};
+  --primary-color-300: #{$primary-color-300};
+  --primary-color-400: #{$primary-color-400};
+  --primary-color-500: #{$primary-color-500};
+  --primary-color-600: #{$primary-color-600};
+  --primary-color-700: #{$primary-color-700};
+  --primary-color-800: #{$primary-color-800};
+  --primary-color-900: #{$primary-color-900};
+  --primary-color-contrastText: #{$primary-color-contrastText};
+
+  --secondary-color-main: #{$secondary-color-main};
+  --secondary-color-50: #{$secondary-color-50};
+  --secondary-color-100: #{$secondary-color-100};
+  --secondary-color-200: #{$secondary-color-200};
+  --secondary-color-300: #{$secondary-color-300};
+  --secondary-color-400: #{$secondary-color-400};
+  --secondary-color-500: #{$secondary-color-500};
+  --secondary-color-600: #{$secondary-color-600};
+  --secondary-color-700: #{$secondary-color-700};
+  --secondary-color-800: #{$secondary-color-800};
+  --secondary-color-900: #{$secondary-color-900};
+  --secondary-color-contrastText: #{$secondary-color-contrastText};
+
+  --text-color-primary: #{$text-color-primary};
+  --text-color-secondary: #{$text-color-secondary};
+  --text-color-disabled: #{$text-color-disabled};
+}
