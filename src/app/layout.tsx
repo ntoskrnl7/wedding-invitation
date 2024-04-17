@@ -15,6 +15,8 @@ export const metadata: Metadata = {
   description: "웨딩 초대장",
 };
 
+import './palette.global.scss';
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -25,7 +27,6 @@ export default function RootLayout({
       <head>
         <meta name="mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
         <link rel="manifest" href="./manifest.json" />
       </head>
       <ThemeProvider theme={theme}>

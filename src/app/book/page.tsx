@@ -188,9 +188,9 @@ export default function Page() {
           <Box>
             <Typography variant='h6' textAlign={'center'}>Our story</Typography>
             <br />
-            <Typography textAlign={'center'}>앨범을 보시려면 화면을 내려주세요 😁</Typography>
+            <Typography className='typewriter' textAlign={'center'}>앨범을 보시려면 화면을 내려주세요 😁</Typography>
           </Box>
-          <Typography sx={{ marginBottom: 2 }}><HeartbeatsArrowIcon style={{ transform: 'rotate(90deg)' }} /></Typography>
+          <Typography sx={{ marginBottom: '10vh' }}><HeartbeatsArrowIcon style={{ transform: 'rotate(90deg)' }} /></Typography>
         </Box>
 
       </Box>
