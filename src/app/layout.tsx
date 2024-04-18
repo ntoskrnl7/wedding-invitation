@@ -6,8 +6,6 @@ import theme from './theme';
 import CssBaseline from '@mui/material/CssBaseline';
 import { ThemeProvider } from '@mui/material/styles';
 
-import Menu from './menu';
-
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -16,6 +14,9 @@ export const metadata: Metadata = {
 };
 
 import './palette.global.scss';
+import './global.scss';
+
+import { MenuStateProvider } from "./menu";
 
 export default function RootLayout({
   children,
@@ -32,9 +33,9 @@ export default function RootLayout({
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <body className={inter.className}>
-          <Menu >
+          <MenuStateProvider>
             {children}
-          </Menu>
+          </MenuStateProvider>
         </body>
       </ThemeProvider>
     </html >

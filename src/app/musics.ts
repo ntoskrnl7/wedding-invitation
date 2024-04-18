@@ -1,11 +1,11 @@
 
-const songs = [
+const musics = [
     "Ed Sheeran - One Life",
     "Justin Bieber - Off My Face",
     "Lukas Graham - Love Someone",
     "Ramzi - It's You",
 ] as const;
 
-export type Song = typeof songs[number];
+export type Music = typeof musics[number];
 
-export default songs;
+export default musics;

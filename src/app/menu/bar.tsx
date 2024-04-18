@@ -3,20 +3,19 @@
 import { alpha } from '@mui/material/styles';
 
 import { useState, useRef, useEffect } from 'react';
-import AppBar from '@mui/material/AppBar';
-import Toolbar from '@mui/material/Toolbar';
-import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
-import Drawer from '@mui/material/Drawer';
+import { Box, AppBar, Toolbar, IconButton, Typography, Drawer } from '@mui/material';
+
 import MenuIcon from '@mui/icons-material/Menu';
+import MusicNoteIcon from '@mui/icons-material/MusicNote';
+
 import MenuList from './list';
 
 import { useMenuState } from './state';
-import { Alert, AlertColor, Box, Snackbar } from '@mui/material';
-import { ArrowBackIosNew, ArrowForwardIos, MusicNote, MusicOff } from '@mui/icons-material';
 
-import songs from '../songs';
+import MusicPlayer from './music-player';
+
 import theme from '../theme';
+import { AlertMessage, showAlert } from '../alert-message';
 
 export default function MenuBar() {
   const [isDrawerOpen, setDrawerOpen] = useState<boolean>(false);
@@ -26,75 +25,36 @@ export default function MenuBar() {
     setDrawerOpen(true);
   };
 
-  const handleDrawerClose = (e: any) => {
+  const handleDrawerClose = () => {
     setDrawerOpen(false);
   };
 
-  const [result, setResult] = useState<{ severity: AlertColor, message?: React.JSX.Element | undefined }>({ severity: 'success' });
-
-  const [isPlaying, setIsPlaying] = useState(true);
-  const [currentSongIndex, setCurrentSongIndex] = useState(menuState.song ? songs.indexOf(menuState.song) : 0);
-  const audioRef = useRef<HTMLAudioElement>(null);
-
-  const togglePlayPause = () => {
-    if (isPlaying) {
-      audioRef.current?.pause();
-    } else {
-      audioRef.current?.play();
-    }
-    setIsPlaying(!isPlaying);
-  };
-
-  const playPreviousSong = () => {
-    setCurrentSongIndex(prevIndex => prevIndex > 0 ? prevIndex - 1 : songs.length - 1);
-  };
-
-  const playNextSong = () => {
-    setCurrentSongIndex(prevIndex => (prevIndex + 1) % songs.length);
-  };
-
+  // 메뉴바 크기를 CSS에서 얻을수있도록 --menu-bar-height를 등록 및 갱신합니다.
+  const menuBarRef = useRef<HTMLElement>(null);
   useEffect(() => {
-    if (menuState.song) {
-      setCurrentSongIndex(songs.indexOf(menuState.song));
-    }
-  }, [menuState.song]);
+    const onOrientationChange = () => {
+      const menuBar = menuBarRef.current;
+      if (menuBar) {
+        document.documentElement.style.setProperty('--menu-bar-height', menuBar.clientHeight + 'px');
+      }
+    };
+    window.addEventListener('resize', onOrientationChange);
+    window.addEventListener('orientationchange', onOrientationChange);
 
-  useEffect(() => {
-    if (isPlaying) {
-      audioRef.current?.play().catch(error => {
-        setResult({ severity: 'info', message: <Typography variant='body2'><MusicNote />를 눌러서 재생하시기 바랍니다.</Typography> });
-        setOpen(true);
-        setIsPlaying(false);
-      })
-    }
-  }, [currentSongIndex, isPlaying]);
+    onOrientationChange();
 
-  const [open, setOpen] = useState(false);
-  const handleClose = (event: React.SyntheticEvent | Event, reason?: string) => {
-    if (reason === 'clickaway') {
-      return;
-    }
-    setOpen(false);
-  };
-
-  const touchStartX = useRef(0);
-
-  const handleTouchStart = (event: React.TouchEvent<HTMLButtonElement>) => {
-    touchStartX.current = event.touches[0].clientX;
-  };
-
-  const handleTouchEnd = (event: React.TouchEvent<HTMLButtonElement>) => {
-    const touchEndX = event.changedTouches[0].clientX;
-    if (touchEndX > touchStartX.current + 50) {
-      playNextSong();
-    } else if (touchStartX.current > touchEndX + 50) {
-      playPreviousSong();
-    }
-  };
+    return () => {
+      window.removeEventListener('resize', onOrientationChange)
+      window.removeEventListener('orientationchange', onOrientationChange)
+      document.documentElement.style.removeProperty('--menu-bar-height');
+    };
+  }, []);
 
   return (
     <>
-      <AppBar className='MenuBar' style={{ pointerEvents: 'none', backgroundColor: alpha(theme.palette.primary.main, menuState.opacity), boxShadow: 'none' }}>
+      <AlertMessage />
+
+      <AppBar ref={menuBarRef} className='MenuBar' style={{ pointerEvents: 'none', backgroundColor: alpha(theme.palette.primary.main, menuState.opacity), boxShadow: 'none' }}>
         <Toolbar>
           <Typography variant='h6' style={{ textShadow: '1px 1px 20x black' }}>
             {menuState.title}
@@ -102,62 +62,29 @@ export default function MenuBar() {
 
           <Box flexGrow={1} />
 
-          <Snackbar style={{ opacity: 0.5 }} open={open} autoHideDuration={3000} onClose={handleClose}>
-            <Alert
-              onClose={handleClose}
-              severity={result.severity}
-              variant="filled"
-              sx={{ width: '100%' }}
-            >
-              {result.message}
-            </Alert>
-          </Snackbar>
-
-          <audio
-            src={'/api/proxy/bgm/' + songs[currentSongIndex] + '.mp3'}
-            ref={audioRef}
-            onPlay={
-              () => {
-                setIsPlaying(true);
-                setResult({ severity: 'info', message: <>{songs[currentSongIndex]}</> });
-                setOpen(true);
-              }
-            }
-            onEnded={
-              () => {
-                playNextSong();
-                setIsPlaying(true);
-              }
-            }
-            onPause={() => setIsPlaying(false)}
-          />
-
-          <Box sx={{ display: 'flex', justifyContent: 'flex-end', pointerEvents: 'all' }}>
-            <IconButton onClick={playPreviousSong}>
-              <ArrowBackIosNew style={{ fontSize: '8px' }} />
-            </IconButton>
-
+          <Box sx={{ pointerEvents: 'all' }}>
+            <MusicPlayer
+              onLoadStart={(music) => {
+                showAlert({ severity: 'info', message: <>{music}</> });
+              }}
+              onPlay={(music) => {
+                showAlert({ severity: 'success', message: <>{music} 재생 중</> });
+              }}
+              onPaused={(music) => {
+                showAlert({ severity: 'info', message: <Typography variant='body2'><MusicNoteIcon />를 눌러서 {music}을 재생할 수 있습니다.</Typography> });
+              }}
+              onError={() => {
+                showAlert({ severity: 'info', message: <Typography variant='body2'><MusicNoteIcon />를 눌러서 재생하시기 바랍니다.</Typography> });
+              }}
+            />
             <IconButton
-              style={{ padding: 0 }}
-              onClick={togglePlayPause}
-              onTouchStart={handleTouchStart}
-              onTouchEnd={handleTouchEnd}
+              style={{ marginLeft: 12, pointerEvents: 'all' }}
+              edge='end'
+              onClick={handleDrawerOpen}
             >
-              {isPlaying ? <MusicOff /> : <MusicNote />}
-            </IconButton>
-
-            <IconButton onClick={playNextSong}>
-              <ArrowForwardIos style={{ fontSize: '8px' }} />
+              <MenuIcon />
             </IconButton>
           </Box>
-
-          <IconButton
-            style={{ marginLeft: 12, pointerEvents: 'all' }}
-            edge='end'
-            onClick={handleDrawerOpen}
-          >
-            <MenuIcon />
-          </IconButton>
         </Toolbar>
       </AppBar>
 
@@ -166,9 +93,14 @@ export default function MenuBar() {
         open={isDrawerOpen}
         onClick={handleDrawerClose}
         onClose={handleDrawerClose}
+        PaperProps={{
+          style: {
+            backgroundColor: 'transparent'
+          }
+        }}
       >
         <MenuList />
-      </Drawer>
+      </Drawer >
     </ >
   );
 }
