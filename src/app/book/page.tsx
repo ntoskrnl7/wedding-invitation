@@ -169,7 +169,11 @@ export default function Page() {
   return (
     <Box>
       <Backdrop
-        sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+        sx={{
+          '@media (orientation: landscape)': { display: 'none !important' },
+          color: '#fff',
+          zIndex: (theme) => theme.zIndex.drawer + 1
+        }}
         open={open}
         transitionDuration={{ exit: 1000 }}
         onClick={() => setOpen(false)}
