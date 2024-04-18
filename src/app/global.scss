@@ -1,0 +1,23 @@
+@font-face {
+  font-family: "Kayonest Free Trial";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(/fonts/Kayonest%20Free%20Trial.woff2) format("woff2");
+}
+
+@font-face {
+  font-family: "Garamond";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(/fonts/Garamond.woff2) format("woff2");
+}
+
+.vertical-line {
+  position: absolute;
+  left: "30vw";
+  height: 100%;
+  width: 2px;
+  background-color: black;
+}

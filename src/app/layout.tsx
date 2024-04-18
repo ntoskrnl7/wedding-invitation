@@ -14,6 +14,7 @@ export const metadata: Metadata = {
 };
 
 import './palette.global.scss';
+import './global.scss';
 
 import { MenuStateProvider } from "./menu";
 

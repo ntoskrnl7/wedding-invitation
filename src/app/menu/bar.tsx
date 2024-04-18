@@ -35,7 +35,6 @@ export default function MenuBar() {
     const onOrientationChange = () => {
       const menuBar = menuBarRef.current;
       if (menuBar) {
-        console.log(menuBar.clientHeight + 'px');
         document.documentElement.style.setProperty('--menu-bar-height', menuBar.clientHeight + 'px');
       }
     };
