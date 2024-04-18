@@ -166,9 +166,14 @@ export default function MenuBar() {
         open={isDrawerOpen}
         onClick={handleDrawerClose}
         onClose={handleDrawerClose}
+        PaperProps={{
+          style: {
+            backgroundColor: 'transparent'
+          }
+        }}
       >
         <MenuList />
-      </Drawer>
+      </Drawer >
     </ >
   );
 }
