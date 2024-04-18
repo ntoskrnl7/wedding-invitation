@@ -1,24 +1,23 @@
-'use client';
-
-import React from 'react';
+import { useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import Typography from '@mui/material/Typography';
 import { List, ListItemText, ListItemButton, IconButton, AppBar, Toolbar, Box } from '@mui/material';
-import { Home, ArrowBack, Comment, EventAvailable, HowToReg, Menu, MyLocation, Payment, PhotoLibrary } from '@mui/icons-material';
+import { Home, ArrowBack, Comment, HowToReg, Menu, MyLocation, Payment, PhotoLibrary } from '@mui/icons-material';
 
 import './menu.scss';
 
 export default function MenuPage() {
   const router = useRouter();
 
-  const list = React.useRef<HTMLUListElement>(null);
+  const listRef = useRef<HTMLUListElement>(null);
 
-  React.useEffect(() => {
+  useEffect(() => {
     const onOrientationChange = () => {
-      if (list.current) {
-        if (list.current.clientHeight <= window.innerHeight) {
-          list.current.style.height = window.innerHeight + 'px';
-          const newHeight = list.current.clientHeight;
+      const list = listRef.current;
+      if (list) {
+        if (list.clientHeight <= window.innerHeight) {
+          list.style.height = window.innerHeight + 'px';
+          const newHeight = list.clientHeight;
         }
       }
     };
@@ -35,7 +34,7 @@ export default function MenuPage() {
 
   return (
     <Box style={{ display: 'grid', alignItems: 'center', justifyItems: 'center', color: 'white', textShadow: '1px 1px 2px rgba(40,40,40, 0.5)', backgroundColor: 'rgba(0,0,0,0.5)' }}>
-      <List ref={list} className="box">
+      <List ref={listRef} className="box">
         <AppBar style={{ backgroundColor: 'transparent', boxShadow: 'none' }}>
           <Toolbar>
             <IconButton edge="start" color="inherit" aria-label="back" onClick={() => {

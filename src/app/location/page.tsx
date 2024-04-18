@@ -1,45 +1,27 @@
 'use client';
 
+import { useMenuState } from '../menu/state';
+import { Menu } from '../menu';
+
 import { useState, useEffect } from 'react';
+
+import Image from 'next/image';
+
 import { Button, Box, Slider, Typography, Dialog, DialogTitle, DialogContent } from '@mui/material';
 
+import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import MyLocationIcon from '@mui/icons-material/MyLocation';
 import PlaceIcon from '@mui/icons-material/Place';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ExpandLessIcon from '@mui/icons-material/ExpandLess';
 
-import Image from 'next/image';
-
-import IconButton from '@mui/material/IconButton';
-
-import { useMenuState } from '../menu/state';
-import theme from '../theme';
-
-const ThisMenuState = {
-  title:
-    <Typography
-      variant='h6'
-      sx={{
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center'
-      }}
-    >
-      <MyLocationIcon sx={{ marginRight: 1 }} />
-      오시는길
-    </Typography>,
-  opacity: 0.8
-};
-
 export default function Page() {
-  const { menuState, setMenuState } = useMenuState();
   useEffect(() => {
-    setMenuState(() => ThisMenuState);
     setTimeout(() => {
       setIsExpanded(false);
     }, 1000);
-  }, [setMenuState]);
+  }, []);
 
   const lat = 37.5610621;
   const lng = 126.9845390;
@@ -112,8 +94,8 @@ export default function Page() {
   };
 
   const showDestinationInfo = (map: naver.maps.Map) => {
-    const infowindow = new naver.maps.InfoWindow({ content: '<div style="padding:20px; text-align:center;">' + '여기로 오세요😊<br />👰🏻🧡🤵🏻' + '</div>' });
-    infowindow.open(map, new naver.maps.LatLng(lat, lng));
+    const infoWindow = new naver.maps.InfoWindow({ content: '<div style="padding:20px; text-align:center;">' + '여기로 오세요😊<br />👰🏻🧡🤵🏻' + '</div>' });
+    infoWindow.open(map, new naver.maps.LatLng(lat, lng));
   }
 
   const moveToDestination = () => {
@@ -127,12 +109,12 @@ export default function Page() {
       navigator.geolocation.getCurrentPosition((position) => {
         const location = new naver.maps.LatLng(position.coords.latitude, position.coords.longitude);
         map.setCenter(location);
-        const infowindow = new naver.maps.InfoWindow({ content: '<div style="padding:20px;">' + '지금은 여기 계시네요? 😁' + '</div>' });
-        infowindow.open(map, location);
+        const infoWindow = new naver.maps.InfoWindow({ content: '<div style="padding:20px;">' + '지금은 여기 계시네요? 😁' + '</div>' });
+        infoWindow.open(map, location);
       }, (error) => {
         const center = map.getCenter();
-        const infowindow = new naver.maps.InfoWindow({ content: '<div style="padding:20px;">' + '<h5 style="margin-bottom:5px;color:#f00;">위치 정보 획득 실패</h5>' + "x: " + center.x + "<br />y: " + center.y + '</div>' });
-        infowindow.open(map, center);
+        const infoWindow = new naver.maps.InfoWindow({ content: '<div style="padding:20px;">' + '<h5 style="margin-bottom:5px;color:#f00;">위치 정보 획득 실패</h5>' + "x: " + center.x + "<br />y: " + center.y + '</div>' });
+        infoWindow.open(map, center);
         console.error("Error Code = " + error.code + " - " + error.message);
       });
     } else {
@@ -167,6 +149,20 @@ export default function Page() {
         position: 'relative',
       }}
     >
+      <Menu
+        opacity={0.8}
+        title={<Typography
+          variant='h6'
+          sx={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center'
+          }}
+        >
+          <MyLocationIcon sx={{ marginRight: 1 }} />
+          오시는길
+        </Typography>}
+      />
       <Box id="map" style={{ width: '100%', height: '100%' }}></Box>
       <Box
         id="utils"
@@ -255,13 +251,13 @@ export default function Page() {
           >
             <CloseIcon />
           </IconButton>
-          <DialogContent dividers sx={{ backgroundColor: 'rgb(218, 208, 196)' }}>
+          <DialogContent dividers sx={{ backgroundColor: 'var(--primary-color-main)' }}>
             <Image
               src='/location/rotuemap.svg'
               width={600}
               height={600}
               style={{ width: '100%', height: 'auto' }}
-              alt=''
+              alt='route map'
             />
           </DialogContent>
         </Dialog>

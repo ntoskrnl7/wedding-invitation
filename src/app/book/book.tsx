@@ -1,11 +1,9 @@
-'use client';
-
 import dynamic from 'next/dynamic';
 import Paper from '@mui/material/Paper';
 import React, { useEffect, useState } from 'react';
 import './book.scss'
 
-const HTMLFlipBook = dynamic(() => import('react-pageflip'), { ssr: false });
+import HTMLFlipBook from 'react-pageflip';
 
 interface Props {
   children: React.ReactNode;
@@ -22,7 +20,7 @@ const Page = React.forwardRef<HTMLDivElement, Props>((props, ref) => {
         {`
           .page-${props.number} {
             background-color: white;
-            ${props.image ? `background-image: url('/api/proxy/picture/${props.image}.jpg') !important;` : ''}
+            ${props.image ? `background-image: url('/api/proxy/streaming/picture/${props.image}.jpg') !important;` : ''}
             ${props.image ? `background-size: ${props.number === props.image ? 'cover' : '200%'};` : ''}
             ${props.image ? `background-position: ${props.number === props.image ? 'center' : props.number === props.image.split('-')[0] ? 'left center' : 'right center'};` : ''}
           }
@@ -68,8 +66,6 @@ export default function Book() {
 
     setPageWidth(pageWidth);
     setPageHeight(pageHeight);
-
-    console.log(`isPortrait: ${isPortrait}, pageWidth : ${[pageWidth, window.innerWidth]}, pageHeight: ${[pageHeight, window.innerHeight]}`);
 
     return () => {
       window.removeEventListener('resize', onOrientationChange)

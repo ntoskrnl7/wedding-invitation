@@ -2,12 +2,13 @@
 
 import React, { createContext, ReactNode, useContext, useState } from 'react';
 
-import { Song } from '../songs'
+import { Music } from '../musics'
+import MenuBar from './bar';
 
 export interface MenuState {
   opacity: number;
   title: React.JSX.Element;
-  song?: Song | undefined;
+  music?: Music | undefined;
 }
 
 interface MenuStateContextType {
@@ -25,9 +26,9 @@ interface MenuStateProviderProps {
 
 export const MenuStateProvider: React.FC<MenuStateProviderProps> = ({ children }) => {
   const [menuState, setMenuState] = useState<MenuState>(initialState);
-
   return (
     <MenuStateContext.Provider value={{ menuState, setMenuState }}>
+      <MenuBar />
       {children}
     </MenuStateContext.Provider>
   );
