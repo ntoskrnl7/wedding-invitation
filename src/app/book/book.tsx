@@ -1,6 +1,7 @@
 'use client';
 
 import dynamic from 'next/dynamic';
+import Paper from '@mui/material/Paper';
 import React, { useEffect, useState } from 'react';
 import './book.scss'
 
@@ -16,7 +17,7 @@ interface Props {
 
 const Page = React.forwardRef<HTMLDivElement, Props>((props, ref) => {
   return (
-    <div className={`page page-${props.number} ${props.className ? props.className : ''}`} style={{ color: 'red', backgroundColor: 'blue' }} ref={ref}>
+    <Paper square elevation={3} className={`page page-${props.number} ${props.className ? props.className : ''}`} style={{ color: 'red', backgroundColor: 'blue' }} ref={ref}>
       <style>
         {`
           .page-${props.number} {
@@ -29,7 +30,7 @@ const Page = React.forwardRef<HTMLDivElement, Props>((props, ref) => {
       </style>
       {props.children}
       {props.image ? <div className='page-footer' style={{ fontSize: '12px', margin: '10px', color: 'white', textShadow: '1px 1px 2px black' }}>{props.number} / <span className='page-total'>-</span></div> : ''}
-    </div>
+    </Paper>
   );
 });
 Page.displayName = 'Page';
