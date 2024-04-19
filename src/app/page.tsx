@@ -45,11 +45,9 @@ export default function Page() {
   }, []);
 
   return (
-    <>
+    <Box style={{ height: '100%' }}>
       <Menu title={<></>} opacity={0} />
-      <Box style={{
-        height: '100vh'
-      }}>
+      <Box style={{ height: '100vh' }}>
 
         <Box style={{ ...styles.container, backgroundColor: 'var(--primary-color-50)', }}>
 
@@ -86,6 +84,6 @@ export default function Page() {
           </Box>
         </Box>
       </Box >
-    </>
+    </Box>
   );
 }

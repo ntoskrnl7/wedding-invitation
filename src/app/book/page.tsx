@@ -107,7 +107,7 @@ export default function Page() {
     section: CSSProperties
   } = {
     container: {
-      height: '100%',
+      height: '100vh',
       overflowY: 'scroll' as const,
       scrollSnapType: 'y mandatory' as const,
       scrollBehavior: 'smooth' as const
@@ -119,7 +119,7 @@ export default function Page() {
   };
 
   return (
-    <Box style={{ height: '100vh' }}>
+    <Box style={{ height: '100%' }}>
       <Menu
         opacity={opacity}
         title={<Typography
