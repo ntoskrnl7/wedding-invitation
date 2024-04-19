@@ -1,6 +1,6 @@
 import dynamic from 'next/dynamic';
 import Paper from '@mui/material/Paper';
-import React, { useEffect, useState } from 'react';
+import React, { CSSProperties, useEffect, useState } from 'react';
 import './book.scss'
 
 import HTMLFlipBook from 'react-pageflip';
@@ -33,7 +33,7 @@ const Page = React.forwardRef<HTMLDivElement, Props>((props, ref) => {
 });
 Page.displayName = 'Page';
 
-export default function Book() {
+export default function Book(props: { className?: string, style?: CSSProperties }) {
   const [width, height] = [300, 400]
   const [pageWidth, setPageWidth] = useState(width);
   const [pageHeight, setPageHeight] = useState(height);
@@ -91,8 +91,8 @@ export default function Book() {
       showCover={true}
       mobileScrollSupport={true}
 
-      className={'book'}
-      style={{}}
+      className={props.className ? props.className : ''}
+      style={props.style ? props.style : {}}
 
       startPage={0}
       drawShadow={true}
@@ -118,6 +118,6 @@ export default function Book() {
       <Page number='6' image='6'><span></span></Page>
       <Page number='7' image='7-8'><span></span></Page>
       <Page number='8' image='7-8'><span></span></Page>
-    </HTMLFlipBook>
+    </HTMLFlipBook >
   );
 };

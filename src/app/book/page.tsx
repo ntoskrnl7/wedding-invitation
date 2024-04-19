@@ -54,27 +54,22 @@ export default function Page() {
   }, [])
 
   // 스크롤이 책 상단 아래로 내려가려고 한다면, 책 상단에 스크롤이 오도록 처리합니다.
-  const containerRef = useRef<HTMLElement>(null);
   const stopPointRef = useRef<HTMLElement>(null);
   useEffect(() => {
-    const container = containerRef?.current;
-    if (container) {
-      const handleScroll = (ev: Event) => {
-        const stopPoint = stopPointRef.current;
-        if (stopPoint) {
-          const stopPosition = stopPoint.getBoundingClientRect().top + container.scrollTop;
-          if (container.scrollTop > stopPosition) {
-            container.style.scrollBehavior = 'auto';
-            container.scrollTop = stopPosition;
-            container.style.scrollBehavior = 'smooth';
-          }
+
+    const handleScroll = () => {
+      const stopPoint = stopPointRef.current;
+      if (stopPoint) {
+        const stopPosition = stopPoint.getBoundingClientRect().top + window.document.body.scrollTop;
+        if (window.document.body.scrollTop > stopPosition) {
+          window.document.body.scrollTo({ top: stopPosition, behavior: 'instant' });
         }
-      };
-      container.addEventListener('scroll', handleScroll, { passive: true });
-      return () => {
-        container.removeEventListener('scroll', handleScroll);
-      };
-    }
+      }
+    };
+    window.document.body.addEventListener('scroll', handleScroll, { passive: true });
+    return () => {
+      window.document.body.removeEventListener('scroll', handleScroll);
+    };
   }, []);
 
   // 화면이 회전되거나 사이즈 조정될 때, 수행해야할 것들을 처리합니다.
@@ -83,12 +78,7 @@ export default function Page() {
     const onOrientationChange = () => {
 
       // 첫 화면이 보이도록 합니다.
-      setTimeout(() => {
-        const container = containerRef?.current;
-        if (container) {
-          container.scrollTop = 0;
-        }
-      }, 500);
+      window.document.body.scrollTo({ top: 0, behavior: 'instant' });
 
       // 세로 화면일때는 80% 불투명도로 보이게 하고, 가로 화면일때는 메뉴 바가 보이지 않도록 처리합니다.
       setOpacity(isPortrait() ? 0.8 : 0);
@@ -133,24 +123,26 @@ export default function Page() {
       >
         <Typography margin={1} textAlign={'center'}>가로 화면으로 돌려서 보시는것을 권장합니다.</Typography>
       </Backdrop>
-      <Box ref={containerRef}>
+      <Box className='no-bounce'>
         <section style={{ marginTop: '10vh', display: 'grid', placeItems: 'center' }}>
-          <Box>
+          <Box className='no-bounce'>
             <Typography variant='h6' textAlign={'center'}>Our story</Typography>
             <br />
             <Typography className='typewriter' textAlign={'center'}>앨범을 보시려면 화면을 내려주세요 😁</Typography>
           </Box>
-          <Typography sx={{ marginBottom: '10vh' }}><HeartbeatsArrowIcon style={{ transform: 'rotate(90deg)' }} /></Typography>
+          <Typography className='no-bounce' sx={{ marginBottom: '10vh' }}>
+            <HeartbeatsArrowIcon style={{ transform: 'rotate(90deg)' }} />
+          </Typography>
         </section>
 
         <Box ref={stopPointRef} />
 
         <section style={{ display: 'grid', placeItems: 'center', height: '100vh', overflowX: 'hidden' }} >
-          <Book />
+          <Book className='no-bounce' />
         </section>
 
         <section />
-      </Box >
+      </Box>
     </Box >
   );
 }
