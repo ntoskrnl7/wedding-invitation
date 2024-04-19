@@ -8,7 +8,7 @@ import PhotoLibraryIcon from '@mui/icons-material/PhotoLibrary';
 import DoubleArrowIcon from '@mui/icons-material/DoubleArrow';
 
 import Book from './book';
-import { MenuState, useMenuState } from '../menu/state';
+import { Menu } from '../menu';
 
 const HeartbeatsArrowIcon = styled(DoubleArrowIcon)({
   transform: 'rotate(90deg)',
@@ -41,35 +41,14 @@ const HeartbeatsArrowIcon = styled(DoubleArrowIcon)({
   }
 });
 
-const ThisMenuState: MenuState = {
-  title:
-    <Typography
-      variant='h6'
-      sx={{
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center'
-      }}
-    >
-      <PhotoLibraryIcon sx={{ marginRight: 1 }} />
-      앨범
-    </Typography>,
-  opacity: 0
-};
-
 export default function Page() {
-  const { setMenuState } = useMenuState();
-  useEffect(() => {
-    setMenuState(() => ({ ...ThisMenuState }));
-  }, [setMenuState])
 
   const isPortrait = () => (typeof window === "undefined") || window.screen.orientation.type === 'portrait-primary';
 
   // 가로 화면 권장 안내 화면 관련 기능.
   const [open, setOpen] = useState(isPortrait());
-
-  // 3초 뒤에 안내 화면을 닫도록합니다.
   useEffect(() => {
+    // 3초 뒤에 안내 화면을 닫도록합니다.
     setTimeout(() => setOpen(false), 3000);
   }, [setOpen])
 
@@ -80,12 +59,6 @@ export default function Page() {
         top: 0,
         behavior: 'auto'
       });
-
-      // 세로 화면일때는 80% 불투명도로 보이게 하고, 가로 화면일때는 메뉴 바가 보이지 않도록 처리합니다.
-      setMenuState(prevState => ({
-        ...prevState,
-        opacity: window.screen.orientation.type === 'portrait-primary' ? 0.8 : 0
-      }));
     };
 
     window.addEventListener('resize', onOrientationChange);
@@ -96,10 +69,10 @@ export default function Page() {
       window.removeEventListener('resize', onOrientationChange)
       window.removeEventListener('orientationchange', onOrientationChange)
     };
-  }, [setMenuState]);
+  }, []);
 
+  // 화면을 스크롤할때, 수행해야할 것들을 처리합니다.
   const stopPointRef = useRef<HTMLElement>(null);
-
   useEffect(() => {
     function smoothScrollTo(options: Omit<ScrollToOptions, 'behavior'> & { duration: number }) {
       const startPositionY = window.scrollY;
@@ -170,6 +143,21 @@ export default function Page() {
 
   return (
     <>
+      <Menu
+        opacity={0}
+        title={<Typography
+          variant='h6'
+          sx={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center'
+          }}
+        >
+          <PhotoLibraryIcon sx={{ marginRight: 1 }} />
+          앨범
+        </Typography>
+        }
+      />
       <Backdrop
         sx={{
           '@media (orientation: landscape)': { display: 'none !important' },
