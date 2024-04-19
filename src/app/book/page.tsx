@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { CSSProperties, useEffect, useRef, useState } from 'react';
 
 import { Box, Typography, Backdrop } from '@mui/material';
 import { styled } from '@mui/system';
@@ -47,18 +47,51 @@ export default function Page() {
 
   // 가로 화면 권장 안내 화면 관련 기능.
   const [open, setOpen] = useState(isPortrait());
+
+  // 3초 뒤에 안내 화면을 닫도록합니다.
   useEffect(() => {
-    // 3초 뒤에 안내 화면을 닫도록합니다.
     setTimeout(() => setOpen(false), 3000);
-  }, [setOpen])
+  }, [])
+
+  // 스크롤이 책 상단 아래로 내려가려고 한다면, 책 상단에 스크롤이 오도록 처리합니다.
+  const containerRef = useRef<HTMLElement>(null);
+  const stopPointRef = useRef<HTMLElement>(null);
+  useEffect(() => {
+    const container = containerRef?.current;
+    if (container) {
+      const handleScroll = (ev: Event) => {
+        const stopPoint = stopPointRef.current;
+        if (stopPoint) {
+          const stopPosition = stopPoint.getBoundingClientRect().top + container.scrollTop;
+          if (container.scrollTop > stopPosition) {
+            container.style.scrollBehavior = 'auto';
+            container.scrollTop = stopPosition;
+            container.style.scrollBehavior = 'smooth';
+          }
+        }
+      };
+      container.addEventListener('scroll', handleScroll, { passive: true });
+      return () => {
+        container.removeEventListener('scroll', handleScroll);
+      };
+    }
+  }, []);
 
   // 화면이 회전되거나 사이즈 조정될 때, 수행해야할 것들을 처리합니다.
+  const [opacity, setOpacity] = useState(isPortrait() ? 0.8 : 0);
   useEffect(() => {
     const onOrientationChange = () => {
-      window.scrollTo({
-        top: 0,
-        behavior: 'auto'
-      });
+
+      // 첫 화면이 보이도록 합니다.
+      setTimeout(() => {
+        const container = containerRef?.current;
+        if (container) {
+          container.scrollTop = 0;
+        }
+      }, 500);
+
+      // 세로 화면일때는 80% 불투명도로 보이게 하고, 가로 화면일때는 메뉴 바가 보이지 않도록 처리합니다.
+      setOpacity(isPortrait() ? 0.8 : 0);
     };
 
     window.addEventListener('resize', onOrientationChange);
@@ -71,80 +104,10 @@ export default function Page() {
     };
   }, []);
 
-  // 화면을 스크롤할때, 수행해야할 것들을 처리합니다.
-  const stopPointRef = useRef<HTMLElement>(null);
-  useEffect(() => {
-    function smoothScrollTo(options: Omit<ScrollToOptions, 'behavior'> & { duration: number }) {
-      const startPositionY = window.scrollY;
-      const startPositionX = window.scrollX;
-      let startTime: number | null = null;
-
-      const animation = (currentTime: number) => {
-        if (startTime === null) startTime = currentTime;
-        const timeElapsed = currentTime - startTime;
-
-        if (options.top !== undefined) {
-          const distanceY = options.top - startPositionY;
-          const nextY = easeInOutQuad(timeElapsed, startPositionY, distanceY, options.duration);
-          window.scrollTo({ top: nextY, behavior: 'auto' });
-        }
-
-        if (options.left !== undefined) {
-          const distanceX = options.left - startPositionX;
-          const nextX = easeInOutQuad(timeElapsed, startPositionX, distanceX, options.duration);
-          window.scrollTo({ left: nextX, behavior: 'auto' });
-        }
-        if (timeElapsed < options.duration) requestAnimationFrame(animation);
-      }
-
-      const easeInOutQuad = (t: number, b: number, c: number, d: number) => {
-        t /= d / 2;
-        if (t < 1) return c / 2 * t * t + b;
-        t--;
-        return -c / 2 * (t * (t - 2) - 1) + b;
-      }
-
-      requestAnimationFrame(animation);
-    }
-
-    let lastScrollY = 0;
-
-    const handleScroll = () => {
-      const stopPoint = stopPointRef.current;
-      if (stopPoint) {
-        const stopPosition = stopPoint.getBoundingClientRect().top + window.scrollY;
-
-        // 스크롤이 책 상단 아래로 내려가려고 한다면, 책 상단에 스크롤이 오도록 처리합니다.
-        if (window.scrollY > stopPosition) {
-          window.scrollTo({
-            top: stopPosition,
-            behavior: 'auto'
-          });
-
-          /**
-           * 아직 안내 메시지가 보이면서(스크롤이 책 상단 위에 있는 경우) 스크롤이 내려가는 상황이라면,
-           * 스크롤을 책 상단으로 내리도록 합니다.
-           */
-        } else if (/* window.scrollY < stopPosition && */ window.scrollY > lastScrollY) {
-          smoothScrollTo({
-            top: stopPosition,
-            duration: 50
-          });
-        }
-        lastScrollY = window.scrollY;
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, []);
-
   return (
-    <>
+    <Box style={{ height: '100vh' }}>
       <Menu
-        opacity={0}
+        opacity={opacity}
         title={<Typography
           variant='h6'
           sx={{
@@ -161,7 +124,7 @@ export default function Page() {
       <Backdrop
         sx={{
           '@media (orientation: landscape)': { display: 'none !important' },
-          color: '#fff',
+          color: 'var(--primary-color-50)',
           zIndex: (theme) => theme.zIndex.drawer + 1
         }}
         open={open}
@@ -170,31 +133,24 @@ export default function Page() {
       >
         <Typography margin={1} textAlign={'center'}>가로 화면으로 돌려서 보시는것을 권장합니다.</Typography>
       </Backdrop>
-
-      <Box >
-        <Box
-          sx={{
-            marginTop: '10vh',
-            height: '100vh'
-          }}
-          style={{ display: 'grid', placeItems: 'center' }}
-        >
+      <Box ref={containerRef}>
+        <section style={{ marginTop: '10vh', display: 'grid', placeItems: 'center' }}>
           <Box>
             <Typography variant='h6' textAlign={'center'}>Our story</Typography>
             <br />
             <Typography className='typewriter' textAlign={'center'}>앨범을 보시려면 화면을 내려주세요 😁</Typography>
           </Box>
           <Typography sx={{ marginBottom: '10vh' }}><HeartbeatsArrowIcon style={{ transform: 'rotate(90deg)' }} /></Typography>
-        </Box>
+        </section>
 
-      </Box>
-
-      <Box style={{ display: 'grid', placeItems: 'center', height: '100vh', overflowX: 'hidden' }}>
         <Box ref={stopPointRef} />
-        <Book />
-      </Box>
 
-      <Box style={{ height: '100vh' }} />
-    </ >
+        <section style={{ display: 'grid', placeItems: 'center', height: '100vh', overflowX: 'hidden' }} >
+          <Book />
+        </section>
+
+        <section />
+      </Box >
+    </Box >
   );
 }
