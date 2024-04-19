@@ -60,7 +60,7 @@ const ThisMenuState: MenuState = {
 export default function Page() {
   const { setMenuState } = useMenuState();
   useEffect(() => {
-    setMenuState(() => ThisMenuState);
+    setMenuState(() => ({ ...ThisMenuState }));
   }, [setMenuState])
 
   const isPortrait = () => (typeof window === "undefined") || window.screen.orientation.type === 'portrait-primary';
