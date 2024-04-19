@@ -8,7 +8,7 @@ import PhotoLibraryIcon from '@mui/icons-material/PhotoLibrary';
 import DoubleArrowIcon from '@mui/icons-material/DoubleArrow';
 
 import Book from './book';
-import { Menu } from '../menu';
+import { MenuState, useMenuState } from '../menu/state';
 
 const HeartbeatsArrowIcon = styled(DoubleArrowIcon)({
   transform: 'rotate(90deg)',
@@ -40,7 +40,28 @@ const HeartbeatsArrowIcon = styled(DoubleArrowIcon)({
     }
   }
 });
+
+const ThisMenuState: MenuState = {
+  title:
+    <Typography
+      variant='h6'
+      sx={{
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center'
+      }}
+    >
+      <PhotoLibraryIcon sx={{ marginRight: 1 }} />
+      앨범
+    </Typography>,
+  opacity: 0
+};
+
 export default function Page() {
+  const { setMenuState } = useMenuState();
+  useEffect(() => {
+    setMenuState(() => ThisMenuState);
+  }, [setMenuState])
 
   const isPortrait = () => (typeof window === "undefined") || window.screen.orientation.type === 'portrait-primary';
 
@@ -53,7 +74,6 @@ export default function Page() {
   }, [setOpen])
 
   // 화면이 회전되거나 사이즈 조정될 때, 수행해야할 것들을 처리합니다.
-  const [opacity, setOpacity] = useState(isPortrait() ? 0.8 : 0);
   useEffect(() => {
     const onOrientationChange = () => {
       window.scrollTo({
@@ -62,7 +82,10 @@ export default function Page() {
       });
 
       // 세로 화면일때는 80% 불투명도로 보이게 하고, 가로 화면일때는 메뉴 바가 보이지 않도록 처리합니다.
-      setOpacity(isPortrait() ? 0.8 : 0);
+      setMenuState(prevState => ({
+        ...prevState,
+        opacity: window.screen.orientation.type === 'portrait-primary' ? 0.8 : 0
+      }));
     };
 
     window.addEventListener('resize', onOrientationChange);
@@ -73,7 +96,7 @@ export default function Page() {
       window.removeEventListener('resize', onOrientationChange)
       window.removeEventListener('orientationchange', onOrientationChange)
     };
-  }, [setOpacity]);
+  }, [setMenuState]);
 
   const stopPointRef = useRef<HTMLElement>(null);
 
@@ -147,21 +170,6 @@ export default function Page() {
 
   return (
     <>
-      <Menu
-        opacity={opacity}
-        title={<Typography
-          variant='h6'
-          sx={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center'
-          }}
-        >
-          <PhotoLibraryIcon sx={{ marginRight: 1 }} />
-          앨범
-        </Typography>
-        }
-      />
       <Backdrop
         sx={{
           '@media (orientation: landscape)': { display: 'none !important' },
