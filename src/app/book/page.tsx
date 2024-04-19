@@ -64,9 +64,7 @@ export default function Page() {
         if (stopPoint) {
           const stopPosition = stopPoint.getBoundingClientRect().top + container.scrollTop;
           if (container.scrollTop > stopPosition) {
-            container.style.scrollBehavior = 'auto';
-            container.scrollTop = stopPosition;
-            container.style.scrollBehavior = 'smooth';
+            container.scrollTo({ top: stopPosition, behavior: 'auto' });
           }
         }
       };
@@ -166,13 +164,14 @@ export default function Page() {
           <Typography sx={{ marginBottom: '10vh' }}><HeartbeatsArrowIcon style={{ transform: 'rotate(90deg)' }} /></Typography>
         </Box>
 
-        <Box ref={stopPointRef} />
-
-        <Box style={{ ...styles.section, display: 'grid', placeItems: 'center', height: '100vh', overflowX: 'hidden' }} >
-          <Book />
+        <Box style={{ ...styles.section }}>
+          <Box ref={stopPointRef} />
+          <Box style={{ display: 'grid', placeItems: 'center', height: '100vh', overflowX: 'hidden' }} >
+            <Book />
+          </Box>
+          <Box style={{ height: '100vh' }} />
         </Box>
 
-        <Box style={{ ...styles.section, }} />
       </Box >
     </Box >
   );
