@@ -52,25 +52,6 @@ export default function Page() {
     setTimeout(() => setOpen(false), 3000);
   }, [setOpen])
 
-  // 화면이 회전되거나 사이즈 조정될 때, 수행해야할 것들을 처리합니다.
-  useEffect(() => {
-    const onOrientationChange = () => {
-      window.scrollTo({
-        top: 0,
-        behavior: 'auto'
-      });
-    };
-
-    window.addEventListener('resize', onOrientationChange);
-    window.addEventListener('orientationchange', onOrientationChange);
-    onOrientationChange();
-
-    return () => {
-      window.removeEventListener('resize', onOrientationChange)
-      window.removeEventListener('orientationchange', onOrientationChange)
-    };
-  }, []);
-
   // 화면을 스크롤할때, 수행해야할 것들을 처리합니다.
   const stopPointRef = useRef<HTMLElement>(null);
   useEffect(() => {
