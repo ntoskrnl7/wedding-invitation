@@ -1,18 +1,14 @@
 'use client';
 
-import Book from './book';
+import { useEffect, useRef, useState } from 'react';
 
-import Backdrop from '@mui/material/Backdrop';
-
-import { MenuState, useMenuState } from '../menu/state';
-
+import { Box, Typography, Backdrop } from '@mui/material';
+import { styled } from '@mui/system';
 import PhotoLibraryIcon from '@mui/icons-material/PhotoLibrary';
 import DoubleArrowIcon from '@mui/icons-material/DoubleArrow';
 
-import { Box, Typography, duration } from '@mui/material';
-import { useEffect, useRef, useState } from 'react';
-
-import { styled } from '@mui/system';
+import Book from './book';
+import { Menu } from '../menu';
 
 const HeartbeatsArrowIcon = styled(DoubleArrowIcon)({
   transform: 'rotate(90deg)',
@@ -44,44 +40,29 @@ const HeartbeatsArrowIcon = styled(DoubleArrowIcon)({
     }
   }
 });
-
-
-const ThisMenuState: MenuState = {
-  title:
-    <Typography
-      variant='h6'
-      sx={{
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center'
-      }}
-    >
-      <PhotoLibraryIcon sx={{ marginRight: 1 }} />
-      앨범
-    </Typography>,
-  opacity: 0
-};
-
 export default function Page() {
-  const { menuState, setMenuState } = useMenuState();
-  useEffect(() => {
-    setMenuState(() => ThisMenuState);
-    setTimeout(() => {
-      setOpen(false);
-    }, 3000);
-  }, [setMenuState])
 
-  // 가로 화면일때는 메뉴바가 보이지 않도록 처리합니다.
+  const isPortrait = () => (typeof window === "undefined") || window.screen.orientation.type === 'portrait-primary';
+
+  // 가로 화면 권장 안내 화면 관련 기능.
+  const [open, setOpen] = useState(isPortrait());
+
+  // 3초 뒤에 안내 화면을 닫도록합니다.
+  useEffect(() => {
+    setTimeout(() => setOpen(false), 3000);
+  }, [setOpen])
+
+  // 화면이 회전되거나 사이즈 조정될 때, 수행해야할 것들을 처리합니다.
+  const [opacity, setOpacity] = useState(isPortrait() ? 0.8 : 0);
   useEffect(() => {
     const onOrientationChange = () => {
       window.scrollTo({
         top: 0,
         behavior: 'auto'
       });
-      setMenuState(prevState => ({
-        ...prevState,
-        opacity: window.screen.orientation.type === 'portrait-primary' ? 0.8 : 0
-      }));
+
+      // 세로 화면일때는 80% 불투명도로 보이게 하고, 가로 화면일때는 메뉴 바가 보이지 않도록 처리합니다.
+      setOpacity(isPortrait() ? 0.8 : 0);
     };
 
     window.addEventListener('resize', onOrientationChange);
@@ -92,9 +73,7 @@ export default function Page() {
       window.removeEventListener('resize', onOrientationChange)
       window.removeEventListener('orientationchange', onOrientationChange)
     };
-  }, [setMenuState]);
-
-  const [open, setOpen] = useState((typeof window === "undefined") || window.screen.orientation.type === 'portrait-primary');
+  }, [setOpacity]);
 
   const stopPointRef = useRef<HTMLElement>(null);
 
@@ -167,7 +146,22 @@ export default function Page() {
   }, []);
 
   return (
-    <Box>
+    <>
+      <Menu
+        opacity={opacity}
+        title={<Typography
+          variant='h6'
+          sx={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center'
+          }}
+        >
+          <PhotoLibraryIcon sx={{ marginRight: 1 }} />
+          앨범
+        </Typography>
+        }
+      />
       <Backdrop
         sx={{
           '@media (orientation: landscape)': { display: 'none !important' },
@@ -205,6 +199,6 @@ export default function Page() {
       </Box>
 
       <Box style={{ height: '100vh' }} />
-    </Box >
+    </ >
   );
 }
