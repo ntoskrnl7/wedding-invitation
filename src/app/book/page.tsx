@@ -60,15 +60,15 @@ export default function Page() {
     const handleScroll = () => {
       const stopPoint = stopPointRef.current;
       if (stopPoint) {
-        const stopPosition = stopPoint.getBoundingClientRect().top + window.document.body.scrollTop;
-        if (window.document.body.scrollTop > stopPosition) {
-          window.document.body.scrollTo({ top: stopPosition, behavior: 'instant' });
+        const stopPosition = stopPoint.getBoundingClientRect().top + window.scrollY;
+        if (window.scrollY > stopPosition) {
+          window.scrollTo({ top: stopPosition, behavior: 'instant' });
         }
       }
     };
-    window.document.body.addEventListener('scroll', handleScroll, { passive: true });
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => {
-      window.document.body.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('scroll', handleScroll);
     };
   }, []);
 
@@ -78,7 +78,7 @@ export default function Page() {
     const onOrientationChange = () => {
 
       // 첫 화면이 보이도록 합니다.
-      window.document.body.scrollTo({ top: 0, behavior: 'instant' });
+      window.scrollTo({ top: 0, behavior: 'instant' });
 
       // 세로 화면일때는 80% 불투명도로 보이게 하고, 가로 화면일때는 메뉴 바가 보이지 않도록 처리합니다.
       setOpacity(isPortrait() ? 0.8 : 0);
