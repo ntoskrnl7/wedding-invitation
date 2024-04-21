@@ -4,10 +4,11 @@ import React, { CSSProperties, useEffect, useState } from 'react';
 import './book.scss'
 
 import HTMLFlipBook from 'react-pageflip';
+import { Typography } from '@mui/material';
 
 interface Props {
   children: React.ReactNode;
-  number: string;
+  number?: string;
   image?: string;
   className?: string;
   style?: React.CSSProperties;
@@ -106,18 +107,35 @@ export default function Book(props: { className?: string, style?: CSSProperties 
       showPageCorners={true}
       disableFlipByClick={false}
       onInit={(flipEvent: any) => {
-        window.document.querySelectorAll(".page-total").forEach((el) => { el.innerHTML = (flipEvent.object.getPageCount() - 1).toString(); });
+        window.document.querySelectorAll(".page-total").forEach((el) => { el.innerHTML = (flipEvent.object.getPageCount() - 2).toString(); });
       }}
     >
-      <Page number='0' className={'cover'}><h1>Our Story</h1></Page>
+      <Page number='0' className={'cover'}>
+        <Typography variant='h6' fontFamily={'Kayonest Free Trial'}>Our Story</Typography>
+      </Page>
+      <Page><span></span></Page>
       <Page number='1' image='1'><span></span></Page>
       <Page number='2' image='2'><span></span></Page>
-      <Page number='3' image='3-4'><span></span></Page>
-      <Page number='4' image='3-4'><span></span></Page>
+      <Page number='3' image='3'><span></span></Page>
+      <Page number='4' image='4'><span></span></Page>
       <Page number='5' image='5'><span></span></Page>
-      <Page number='6' image='6'><span></span></Page>
-      <Page number='7' image='7-8'><span></span></Page>
-      <Page number='8' image='7-8'><span></span></Page>
+      <Page number='6' image='6-7'><span></span></Page>
+      <Page number='7' image='6-7'><span></span></Page>
+      <Page number='8' image='8-9'><span></span></Page>
+      <Page number='9' image='8-9'><span></span></Page>
+      <Page number='10' image='10'><span></span></Page>
+      <Page number='11' image='11'><span></span></Page>
+      <Page number='12' image='12'><span></span></Page>
+      <Page number='13' image='13'><span></span></Page>
+      <Page number='14' image='14-15'><span></span></Page>
+      <Page number='15' image='14-15'><span></span></Page>
+      <Page number='16' image='16'><span></span></Page>
+      <Page number='17' image='17'><span></span></Page>
+      <Page number='18' image='18'><span></span></Page>
+      <Page number='19' image='19'><span></span></Page>
+      <Page number='20' image='20'><span></span></Page>
+      <Page number='21' image='21'><span></span></Page>
+      <Page number='22' image='22'><span></span></Page>
     </HTMLFlipBook >
   );
 };
