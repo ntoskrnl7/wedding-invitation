@@ -6,24 +6,18 @@ import Image from 'next/image';
 
 import { useEffect, useState } from 'react';
 
-import ConstructionIcon from '@mui/icons-material/Construction';
 import { Box, Typography } from '@mui/material';
 
+import dynamic from 'next/dynamic';
+
+const CountdownTimer = dynamic(
+	() => import('./countdown-timer'),
+	{ ssr: false }
+);
+
+import ThemeDatePicker from './date-picker';
+
 export default function Page() {
-	useEffect(() => {
-		const setVH = () => {
-			const vh = window.innerHeight * 0.01;
-			document.documentElement.style.setProperty('--vh', `${vh}px`);
-		};
-
-		window.addEventListener('resize', setVH);
-		setVH();
-
-		return () => {
-			window.removeEventListener('resize', setVH);
-		};
-	}, []);
-
 	const isPortrait = () => (typeof window === "undefined") || window.screen.orientation.type === 'portrait-primary';
 
 	const [unit, setUnit] = useState(isPortrait() ? 'vh' : 'vw');
@@ -45,51 +39,51 @@ export default function Page() {
 	return (
 		<>
 			<style>{`
-@keyframes drawLine {
-  0% {
-    opacity: 0;
-    height: 0;
-  }
-  1% {
-    opacity: 1;
-    height: 1%;
-  }
-  100% {
-    opacity: 1;
-    height: 100%;
-  }
-}
-.vertical-line {
-  animation: drawLine 1.5s ease-in-out forwards 500ms;
-}
 
-@keyframes drawBody {
-  0% {
-    opacity: 0;
-    height: 0;
-  }
-  1% {
-    opacity: 1;
-    height: 0;
-  }
-  100% {
-    opacity: 1;
-    height: 80vh;
-  }
-}
-.body {
-  opacity: 0;
-  animation: drawBody 1s ease-in forwards;
-}
+				@keyframes drawLine {
+					0% {
+						opacity: 0;
+						height: 0;
+					}
+					1% {
+						opacity: 1;
+						height: 1%;
+					}
+					100% {
+						opacity: 1;
+						height: 100%;
+					}
+				}
+				.vertical-line {
+					opacity: 0;
+					animation: drawLine 1.5s ease-in-out forwards 500ms;
+				}
+
+				@keyframes drawMain {
+					0% {
+						opacity: 0;
+						height: 0;
+					}
+					1% {
+						opacity: 1;
+						height: 0;
+					}
+					100% {
+						opacity: 1;
+						height: 80vh;
+					}
+				}
+				.main {
+					opacity: 0;
+					animation: drawMain 1s ease-in forwards;
+				}
 			`}</style>
 			<Menu title={<></>} opacity={0} />
 			<Box style={{ backgroundColor: 'var(--primary-color-50)', }}>
 				<section style={{ position: 'relative' }}>
-
 					<div
 						className='vertical-line no-bounce'
 						style={{
-							opacity: 0,
 							zIndex: 0,
 							position: 'absolute',
 							top: 0,
@@ -98,12 +92,21 @@ export default function Page() {
 							width: '2px',
 							height: '100%',
 							backgroundColor: 'black'
-						}} />
+						}}
+					/>
 
 					<div
-						className='body no-bounce'
+						className='main no-bounce'
 						style={{
-							zIndex: 1, position: 'absolute', top: 0, left: 0, margin: '10vh', width: '80vw', height: '80vh', backgroundColor: 'var(--primary-color-50)',
+							zIndex: 1,
+							position: 'absolute',
+							top: 0,
+							left: 0,
+							marginTop: '10vh',
+							marginBottom: '10vh',
+							width: '80vw',
+							height: '80vh',
+							backgroundColor: 'var(--primary-color-50)',
 							animationDelay: '1.6s'
 						}}
 					/>
@@ -113,7 +116,7 @@ export default function Page() {
 							zIndex: 12,
 							position: 'absolute',
 							top: '0',
-							right: '5vw',
+							right: '7vw',
 							width: 'calc(35vh / 2.5)',
 							height: '35vh',
 							animationDelay: '2.5s'
@@ -125,25 +128,28 @@ export default function Page() {
 					/>
 
 					<Box style={{
-						zIndex: 10, position: 'absolute', top: '13vh', width: '100vw', color: 'black', textAlign: 'center',
+						zIndex: 12, position: 'absolute', top: '13vh', width: '100vw', color: 'black', textAlign: 'center',
 						animationDelay: '2s'
 					}}>
-						<Typography fontSize={'1' + unit} fontFamily={'Bodoni Moda'}>gracefully</Typography>
-						<Typography fontSize={'1.7' + unit} fontFamily={'Kayonest Free Trial'}>WEDDING DAY</Typography>
-						<Image style={{ width: '1.5' + unit, height: '1.8' + unit }} src={'/img/bar.svg'} width='12' height='12' alt='/' />
-						<Typography fontSize={'1' + unit} fontFamily={'Bodoni Moda'}>lee & park</Typography>
-						<Typography fontSize={'2' + unit} fontFamily={'Garamond'}> JUNG KWANG & HA EUN</Typography>
+						<Typography fontSize={'2' + unit} fontWeight={'bold'} fontFamily={'Kayonest Free Trial'}>WEDDING DAY</Typography>
+						<Typography fontSize={'1.2' + unit} fontFamily={'Diphylleia'}>of</Typography>
+						<Typography fontSize={'3.5' + unit} fontFamily={'Garamond'}> JUNG KWANG</Typography>
+						<Typography style={{ marginTop: -18 }} fontSize={'3.5' + unit} fontFamily={'Garamond'}> HA EUN</Typography>
 					</Box>
 
+					<Typography style={{
+						zIndex: 10, position: 'absolute', top: '11vh', left: '20vw', color: 'var(--primary-color-200)',
+						animationDelay: '2s'
+					}} fontSize={'14.5' + unit} fontFamily={'Brown Sugar'}>&</Typography>
 
 					<Image
 						style={{
 							zIndex: 10,
 							position: 'absolute',
-							top: '27vh',
-							right: 'calc(2vw + (682px / 4.5))',
-							width: '80px',
-							height: '80px',
+							top: '29vh',
+							right: 'calc(18vw + (682px / 4.5))',
+							width: '90px',
+							height: '90px',
 							animationDelay: '2.1s'
 						}}
 						src={'/img/moon.svg'}
@@ -156,10 +162,10 @@ export default function Page() {
 						style={{
 							zIndex: 11,
 							position: 'absolute',
-							top: '30vh',
+							top: '25vh',
 							right: '5vw',
-							width: 'calc(682px / 4)',
-							height: 'calc(1084px / 4)',
+							width: 'calc((682px / 3))',
+							height: 'calc(1084px / 3)',
 							animationDelay: '2.2s'
 						}}
 						src={'/img/main.svg'}
@@ -168,15 +174,14 @@ export default function Page() {
 						alt='main'
 					/>
 
-
 					<Image
 						style={{
 							zIndex: 11,
 							position: 'absolute',
-							top: '39vh',
-							right: 'calc(calc(682px / 4) - 20px)',
-							width: 'calc(682px / 4.5)',
-							height: 'calc(1084px / 4.5)',
+							top: '50vh',
+							right: 'calc(calc(682px / 4) + 11.5vw)',
+							width: 'calc(682px / 5)',
+							height: 'calc(1084px / 5)',
 							animationDelay: '2.3s'
 						}}
 						src={'/img/door.svg'}
@@ -202,22 +207,96 @@ export default function Page() {
 					/>
 
 					<Box style={{
-						zIndex: 10, position: 'absolute', bottom: '12vh', width: '100vw', color: 'black', textAlign: 'center',
+						zIndex: 20,
+						position: 'absolute',
+						bottom: '11vh',
+						width: '100vw',
+						color: 'black',
+						textAlign: 'center',
 						animationDelay: '2.4s'
 					}}>
-						<Typography fontSize={'1' + unit} fontFamily={'Bodoni Moda'}>when</Typography>
 						<Typography fontSize={'2.5' + unit} fontFamily={'Bodoni Moda'} marginBottom={0.5}>2024. 05. 12</Typography>
-						<Typography fontSize={'1' + unit} fontFamily={'Bodoni Moda'}>where</Typography>
 						<Typography fontSize={'1.7' + unit} fontFamily={'Noto Serif KR'}>명동 밀리오레 호텔</Typography>
 						<Typography fontSize={'2.5' + unit} fontFamily={'Noto Serif KR'}>18층 온즈드롬</Typography>
 					</Box>
 
 				</section>
 
-				<section>
-					<Box style={{ height: '100vh', display: 'grid', alignItems: 'center', justifyItems: 'center' }}>
-						<ConstructionIcon color='warning' style={{ fontSize: '100px' }} />
-						<Typography variant="body1" style={{ textAlign: 'center' }}>현재 페이지는 준비 중입니다.😭<br />24년 4월 22일에 완료 예정입니다.😁</Typography>
+				<section style={{ position: 'relative' }}>
+					<div
+						className='vertical-line no-bounce'
+						style={{
+							zIndex: 0,
+							position: 'absolute',
+							top: 0,
+							left: '50%',
+							transform: 'translateX(-50%)',
+							width: '2px',
+							height: '100%',
+							backgroundColor: 'black'
+						}}
+					/>
+
+					<div
+						className='main no-bounce'
+						style={{
+							zIndex: 1,
+							position: 'absolute',
+							top: 0,
+							left: 0,
+							marginTop: '10vh',
+							marginBottom: '10vh',
+							width: '80vw',
+							height: '80vh',
+							backgroundColor: 'var(--primary-color-50)',
+							animationDelay: '1.6s'
+						}}
+					/>
+
+					<Box style={{
+						position: 'relative',
+						display: 'grid',
+						alignItems: 'center',
+						justifyItems: 'center',
+						zIndex: 3,
+						animationDelay: '2s'
+					}}>
+						<Box style={{
+							position: 'relative',
+							zIndex: 3,
+							top: '20vh',
+							width: '100vw',
+							color: 'black',
+							textAlign: 'center',
+							animationDelay: '2s'
+						}}>
+							<Typography fontSize={'5' + unit} fontFamily={'Kayonest Free Trial'}>Save The Date</Typography>
+							<Typography fontSize={'2' + unit} fontFamily={'Diphylleia'}>2024년 5월 12일 일요일 낮 12시</Typography>
+						</Box>
+
+						<ThemeDatePicker
+							style={{
+								position: 'relative',
+								zIndex: 3,
+								top: '20vh',
+								height: '50vh',
+								width: '80vw',
+								animationDelay: '2s'
+							}} />
+
+						<CountdownTimer style={{
+							marginTop: '5vh',
+							zIndex: 3,
+							fontSize: '4vh',
+							animationDelay: '2s'
+						}} />
+
+
+						<Box style={{ marginTop: '2vh', textAlign: 'center' }}>
+							<Typography style={{ color: 'var(--primary-color-800)' }} fontSize={'1.7' + unit} fontFamily={'Noto Serif KR'}>다양한 이벤트들이 준비되어있습니다.</Typography>
+							<Typography style={{ color: 'var(--primary-color-800)' }} fontSize={'1.7' + unit} fontFamily={'Noto Serif KR'}>귀한 걸음 오셔서 축복해주시면</Typography>
+							<Typography style={{ color: 'var(--primary-color-800)' }} fontSize={'1.7' + unit} fontFamily={'Noto Serif KR'}>기쁜 마음으로 간직하겠습니다.</Typography>
+						</Box>
 					</Box>
 				</section>
 			</Box >

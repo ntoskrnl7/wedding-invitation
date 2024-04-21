@@ -19,7 +19,7 @@ import { AlertMessage, showAlert } from '../alert-message';
 
 export default function MenuBar() {
   const [isDrawerOpen, setDrawerOpen] = useState<boolean>(false);
-  const { menuState, setMenuState } = useMenuState();
+  const { menuState } = useMenuState();
 
   const handleDrawerOpen = () => {
     setDrawerOpen(true);
