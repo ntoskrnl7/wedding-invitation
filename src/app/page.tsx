@@ -132,7 +132,7 @@ export default function Page() {
 						animationDelay: '2s'
 					}}>
 						<Typography fontSize={'2' + unit} fontWeight={'bold'} fontFamily={'Kayonest Free Trial'}>WEDDING DAY</Typography>
-						<Typography fontSize={'1.2' + unit} fontFamily={'Diphylleia'}>of</Typography>
+						<Typography fontSize={'1.2' + unit} className='diphylleia-regular'>of</Typography>
 						<Typography fontSize={'3.5' + unit} fontFamily={'Garamond'}> JUNG KWANG</Typography>
 						<Typography style={{ marginTop: -18 }} fontSize={'3.5' + unit} fontFamily={'Garamond'}> HA EUN</Typography>
 					</Box>
@@ -215,9 +215,9 @@ export default function Page() {
 						textAlign: 'center',
 						animationDelay: '2.4s'
 					}}>
-						<Typography fontSize={'2.5' + unit} fontFamily={'Bodoni Moda'} marginBottom={0.5}>2024. 05. 12</Typography>
-						<Typography fontSize={'1.7' + unit} fontFamily={'Noto Serif KR'}>명동 밀리오레 호텔</Typography>
-						<Typography fontSize={'2.5' + unit} fontFamily={'Noto Serif KR'}>18층 온즈드롬</Typography>
+						<Typography fontSize={'2.5' + unit} className='bodoni-moda-regular' marginBottom={0.5}>2024. 05. 12</Typography>
+						<Typography fontSize={'1.7' + unit} className='noto-serif-kr-regular'>명동 밀리오레 호텔</Typography>
+						<Typography fontSize={'2.5' + unit} className='noto-serif-kr-regular'>18층 온즈드롬</Typography>
 					</Box>
 
 				</section>
@@ -271,7 +271,7 @@ export default function Page() {
 							animationDelay: '2s'
 						}}>
 							<Typography fontSize={'5' + unit} fontFamily={'Kayonest Free Trial'}>Save The Date</Typography>
-							<Typography fontSize={'2' + unit} fontFamily={'Diphylleia'}>2024년 5월 12일 일요일 낮 12시</Typography>
+							<Typography fontSize={'2' + unit} className='diphylleia-regular'>2024년 5월 12일 일요일 낮 12시</Typography>
 						</Box>
 
 						<ThemeDatePicker
@@ -293,9 +293,9 @@ export default function Page() {
 
 
 						<Box style={{ marginTop: '2vh', textAlign: 'center' }}>
-							<Typography style={{ color: 'var(--primary-color-800)' }} fontSize={'1.7' + unit} fontFamily={'Noto Serif KR'}>다양한 이벤트들이 준비되어있습니다.</Typography>
-							<Typography style={{ color: 'var(--primary-color-800)' }} fontSize={'1.7' + unit} fontFamily={'Noto Serif KR'}>귀한 걸음 오셔서 축복해주시면</Typography>
-							<Typography style={{ color: 'var(--primary-color-800)' }} fontSize={'1.7' + unit} fontFamily={'Noto Serif KR'}>기쁜 마음으로 간직하겠습니다.</Typography>
+							<Typography style={{ color: 'var(--primary-color-800)' }} fontSize={'1.7' + unit} className='noto-serif-kr-regular'>다양한 이벤트들이 준비되어있습니다.</Typography>
+							<Typography style={{ color: 'var(--primary-color-800)' }} fontSize={'1.7' + unit} className='noto-serif-kr-regular'>귀한 걸음 오셔서 축복해주시면</Typography>
+							<Typography style={{ color: 'var(--primary-color-800)' }} fontSize={'1.7' + unit} className='noto-serif-kr-regular'>기쁜 마음으로 간직하겠습니다.</Typography>
 						</Box>
 					</Box>
 				</section>
