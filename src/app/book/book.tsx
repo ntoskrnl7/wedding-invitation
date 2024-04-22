@@ -45,7 +45,7 @@ export default function Book(props: { className?: string, style?: CSSProperties 
   const [bookKey, setBookKey] = useState(0);
 
   useEffect(() => {
-    const onOrientationChange = () => ReactDOM.flushSync(() => setBookKey(prevKey => prevKey + 1));
+    const onOrientationChange = () => setTimeout(() => setBookKey(prevKey => prevKey + 1), 0);
 
     window.addEventListener('resize', onOrientationChange);
     window.addEventListener('orientationchange', onOrientationChange);
