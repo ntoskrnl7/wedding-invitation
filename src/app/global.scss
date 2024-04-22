@@ -1,29 +1,7 @@
+@import url("https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=Noto+Serif+KR&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=Noto+Serif+KR&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=Diphylleia&family=Noto+Serif+KR&display=swap");
 
-@font-face {
-  font-family: "Kayonest Free Trial";
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url('/fonts/Kayonest Free Trial.woff2') format("woff2");
-}
-
-@font-face {
-  font-family: "Garamond";
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url('/fonts/Garamond.woff2') format("woff2");
-}
-
-@font-face {
-  font-family: "Brown Sugar";
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url('/fonts/Brown Sugar.woff2') format("woff2");
-}
-
-@import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=Noto+Serif+KR&display=swap');
 .bodoni-moda-regular {
   font-family: "Bodoni Moda", serif;
   font-optical-sizing: auto;
@@ -31,18 +9,40 @@
   font-style: normal;
 }
 
-@import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=Noto+Serif+KR&display=swap');
 .noto-serif-kr-regular {
   font-family: "Noto Serif KR", serif;
   font-weight: 400;
   font-style: normal;
 }
 
-@import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=Diphylleia&family=Noto+Serif+KR&display=swap');
 .diphylleia-regular {
   font-family: "Diphylleia", serif;
   font-weight: 400;
   font-style: normal;
+}
+
+@font-face {
+  font-family: "Kayonest Free Trial";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/Kayonest Free Trial.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Garamond";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/Garamond.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Brown Sugar";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/Brown Sugar.woff2") format("woff2");
 }
 
 html {
