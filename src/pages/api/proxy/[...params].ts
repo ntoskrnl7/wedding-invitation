@@ -17,7 +17,7 @@ type CacheValue = { contentType: string, body: any; };
 const cache = new LRUCache<string, CacheValue>({
     max: 1000,
     fetchMethod: async (key: string): Promise<CacheValue> => {
-        const response = await fetch(`https://raw.githubusercontent.com/ntoskrnl7/wedding-invitation-data/static/${key}`);
+        const response = await fetch(`https://wedding-invitation-data.vercel.app/${key}`);
         if (!response.ok) {
             throw new Error(`API call failed with status: ${response.status}`);
         }
