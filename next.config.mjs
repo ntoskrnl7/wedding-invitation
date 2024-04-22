@@ -9,6 +9,7 @@ const __dirname = dirname(__filename);
  * @type {import('next').NextConfig}
  */
 const nextConfig = {
+    optimizeFonts: false,
     sassOptions: {
         includePaths: [join(__dirname, 'styles')],
     },

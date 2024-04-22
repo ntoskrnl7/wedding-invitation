@@ -7,7 +7,6 @@ import CssBaseline from '@mui/material/CssBaseline';
 import { ThemeProvider } from '@mui/material/styles';
 
 const inter = Inter({
-  variable: '--inter-font',
   subsets: ['latin']
 });
 
