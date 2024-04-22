@@ -14,7 +14,7 @@ export const config: PageConfig = {
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     const params = req.query.params as string[];
     try {
-        const response = await fetch(`https://wedding-invitation-data.vercel.app/${params.join('/')}`);
+        const response = await fetch(`https://wedding-invitation-data-nine.vercel.app/${params.join('/')}`);
         if (!response.ok) {
             throw new Error(`API call failed with status: ${response.status}`);
         }
