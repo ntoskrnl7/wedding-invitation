@@ -14,7 +14,7 @@ export const config: PageConfig = {
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     const params = req.query.params as string[];
     try {
-        const response = await fetch(`http://ntoskrnl7.dothome.co.kr/${params.join('/')}`);
+        const response = await fetch(`https://raw.githubusercontent.com/ntoskrnl7/wedding-invitation-data/main/${params.join('/')}`);
         if (!response.ok) {
             throw new Error(`API call failed with status: ${response.status}`);
         }
