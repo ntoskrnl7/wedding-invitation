@@ -6,7 +6,10 @@ import theme from './theme';
 import CssBaseline from '@mui/material/CssBaseline';
 import { ThemeProvider } from '@mui/material/styles';
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({
+  variable: '--inter-font',
+  subsets: ['latin']
+});
 
 export const metadata: Metadata = {
   title: "하은 ❤ 중광 웨딩",
