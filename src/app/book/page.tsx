@@ -72,27 +72,10 @@ export default function Page() {
     };
   }, []);
 
-  // 화면이 회전되거나 사이즈 조정될 때, 수행해야할 것들을 처리합니다.
-  const [opacity, setOpacity] = useState(isPortrait() ? 0.8 : 0);
-  useEffect(() => {
-    const onOrientationChange = () => {
-
-      // 세로 화면일때는 80% 불투명도로 보이게 하고, 가로 화면일때는 메뉴 바가 보이지 않도록 처리합니다.
-      setOpacity(isPortrait() ? 0.8 : 0);
-    };
-
-    window.addEventListener('orientationchange', onOrientationChange);
-    onOrientationChange();
-
-    return () => {
-      window.removeEventListener('orientationchange', onOrientationChange)
-    };
-  }, []);
-
   return (
     <Box style={{ height: '100vh' }}>
       <Menu
-        opacity={opacity}
+        opacity={0}
         title={<Typography
           variant='h6'
           sx={{

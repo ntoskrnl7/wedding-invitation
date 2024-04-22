@@ -103,7 +103,7 @@ export default function Book(props: { className?: string, style?: CSSProperties 
       startZIndex={0}
       autoSize={!isPortrait}
       clickEventForward={false}
-      useMouseEvents={false}
+      useMouseEvents={true}
       swipeDistance={5000}
       showPageCorners={true}
       disableFlipByClick={false}
