@@ -35,7 +35,7 @@ export default function Page() {
         alignItems: 'center',
         height: 'calc(100vh - 80px)',
       }}>
-        <Typography variant='subtitle1' textAlign={'center'}>참석이 어려우신 분들을 위해<br />계좌번호를 기재하였습니다.<br />너그러운 마음으로 양해 부탁드립니다.</Typography >
+        <Typography className='noto-serif-kr-regular' variant='subtitle1' textAlign={'center'}>참석이 어려우신 분들을 위해<br />계좌번호를 기재하였습니다.<br />너그러운 마음으로 양해 부탁드립니다.</Typography >
         <Container maxWidth="lg" style={{ marginTop: '8vh' }} sx={{
           display: 'flex',
           flexDirection: 'column', // 세로 배치
