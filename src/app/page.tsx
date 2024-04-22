@@ -286,7 +286,7 @@ export default function Page() {
 
 						<CountdownTimer style={{
 							zIndex: 3,
-							fontSize: '4vh',
+							fontSize: '3vh',
 							animationDelay: '2s'
 						}} />
 

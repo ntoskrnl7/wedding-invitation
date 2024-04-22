@@ -68,7 +68,7 @@ export default function MusicPlayer(props: MusicPlayerProps) {
 	return (
 		<>
 			<audio
-				src={'/api/proxy/streaming/bgm/' + musics[currentMusicIndex] + '.mp3'}
+				src={'https://wedding-invitation-data-nine.vercel.app/bgm/' + musics[currentMusicIndex] + '.mp3'}
 				ref={audioRef}
 				onLoadStart={
 					() => {
