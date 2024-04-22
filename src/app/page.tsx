@@ -15,7 +15,10 @@ const CountdownTimer = dynamic(
 	{ ssr: false }
 );
 
-import ThemeDatePicker from './date-picker';
+const ThemeDatePicker = dynamic(
+	() => import('./date-picker'),
+	{ ssr: false }
+);
 
 export default function Page() {
 	const isPortrait = () => (typeof window === "undefined") || window.screen.orientation.type === 'portrait-primary';
@@ -80,7 +83,7 @@ export default function Page() {
 			`}</style>
 			<Menu title={<></>} opacity={0} />
 			<Box style={{ backgroundColor: 'var(--primary-color-50)', }}>
-				<section style={{ position: 'relative' }}>
+				<section id='first' style={{ position: 'relative' }}>
 					<div
 						className='vertical-line no-bounce'
 						style={{
@@ -222,7 +225,7 @@ export default function Page() {
 
 				</section>
 
-				<section style={{ position: 'relative' }}>
+				<section id='second' style={{ position: 'relative' }}>
 					<div
 						className='vertical-line no-bounce'
 						style={{
@@ -255,6 +258,7 @@ export default function Page() {
 
 					<Box style={{
 						position: 'relative',
+						paddingTop: '20vh',
 						display: 'grid',
 						alignItems: 'center',
 						justifyItems: 'center',
@@ -262,7 +266,6 @@ export default function Page() {
 						animationDelay: '2s'
 					}}>
 						<Box style={{
-							position: 'relative',
 							zIndex: 3,
 							top: '20vh',
 							width: '100vw',
@@ -276,16 +279,12 @@ export default function Page() {
 
 						<ThemeDatePicker
 							style={{
-								position: 'relative',
 								zIndex: 3,
 								top: '20vh',
-								height: '50vh',
-								width: '80vw',
 								animationDelay: '2s'
 							}} />
 
 						<CountdownTimer style={{
-							marginTop: '5vh',
 							zIndex: 3,
 							fontSize: '4vh',
 							animationDelay: '2s'

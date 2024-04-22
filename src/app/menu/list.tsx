@@ -53,7 +53,7 @@ export default function MenuPage() {
           <ListItemText
             style={{ textAlign: 'center' }}
             onClick={() => {
-              router.push('/');
+              router.push('/#first');
             }}
           >
             <Home />
