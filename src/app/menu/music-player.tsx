@@ -6,6 +6,8 @@ import { ArrowBackIosNew, ArrowForwardIos, MusicNote, MusicOff } from '@mui/icon
 
 import musics, { Music } from '../musics';
 
+import { useSwipeable } from 'react-swipeable';
+
 interface MusicPlayerProps {
 	music?: Music;
 	onPlay?: (music: Music) => void;
@@ -39,6 +41,12 @@ export default function MusicPlayer(props: MusicPlayerProps) {
 		setCurrentMusicIndex(prevIndex => (prevIndex + 1) % musics.length);
 	};
 
+	const swipeHandlers = useSwipeable({
+		onSwipedLeft: playPreviousMusic,
+		onSwipedRight: playNextMusic,
+		trackMouse: true
+	});
+
 	useEffect(() => {
 		const audio = audioRef.current;
 		if (audio) {
@@ -56,21 +64,6 @@ export default function MusicPlayer(props: MusicPlayerProps) {
 			})
 		}
 	}, [isPlaying, props]);
-
-	const touchStartX = useRef(0);
-
-	const handleTouchStart = (event: React.TouchEvent<HTMLButtonElement>) => {
-		touchStartX.current = event.touches[0].clientX;
-	};
-
-	const handleTouchEnd = (event: React.TouchEvent<HTMLButtonElement>) => {
-		const touchEndX = event.changedTouches[0].clientX;
-		if (touchEndX > touchStartX.current + 50) {
-			playNextMusic();
-		} else if (touchStartX.current > touchEndX + 50) {
-			playPreviousMusic();
-		}
-	};
 
 	return (
 		<>
@@ -108,8 +101,7 @@ export default function MusicPlayer(props: MusicPlayerProps) {
 			<IconButton
 				style={{ padding: 0 }}
 				onClick={togglePlayPause}
-				onTouchStart={handleTouchStart}
-				onTouchEnd={handleTouchEnd}
+				{...swipeHandlers}
 			>
 				{isPlaying ? <MusicOff /> : <MusicNote />}
 			</IconButton>
