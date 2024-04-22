@@ -5,6 +5,7 @@ import './book.scss'
 
 import HTMLFlipBook from 'react-pageflip';
 import { Typography } from '@mui/material';
+import ReactDOM from 'react-dom';
 
 interface Props {
   children: React.ReactNode;
@@ -44,7 +45,7 @@ export default function Book(props: { className?: string, style?: CSSProperties 
   const [bookKey, setBookKey] = useState(0);
 
   useEffect(() => {
-    const onOrientationChange = () => setBookKey(prevKey => prevKey + 1);
+    const onOrientationChange = () => ReactDOM.flushSync(() => setBookKey(prevKey => prevKey + 1));
 
     window.addEventListener('resize', onOrientationChange);
     window.addEventListener('orientationchange', onOrientationChange);
@@ -102,7 +103,7 @@ export default function Book(props: { className?: string, style?: CSSProperties 
       startZIndex={0}
       autoSize={!isPortrait}
       clickEventForward={false}
-      useMouseEvents={true}
+      useMouseEvents={false}
       swipeDistance={5000}
       showPageCorners={true}
       disableFlipByClick={false}
@@ -136,6 +137,7 @@ export default function Book(props: { className?: string, style?: CSSProperties 
       <Page number='20' image='20'><span></span></Page>
       <Page number='21' image='21'><span></span></Page>
       <Page number='22' image='22'><span></span></Page>
+      <Page><span></span></Page>
     </HTMLFlipBook >
   );
 };
