@@ -5,7 +5,6 @@ import './book.scss'
 
 import HTMLFlipBook from 'react-pageflip';
 import { Typography } from '@mui/material';
-import ReactDOM from 'react-dom';
 
 interface Props {
   children: React.ReactNode;
@@ -22,7 +21,7 @@ const Page = React.forwardRef<HTMLDivElement, Props>((props, ref) => {
         {`
           .page-${props.number} {
             background-color: white;
-            ${props.image ? `background-image: url('https://wedding-invitation-data-nine.vercel.app//picture/${props.image}.jpg') !important;` : ''}
+            ${props.image ? `background-image: url('https://wedding-invitation-data-nine.vercel.app/picture/${props.image}.jpg') !important;` : ''}
             ${props.image ? `background-size: ${props.number === props.image ? 'cover' : '200%'};` : ''}
             ${props.image ? `background-position: ${props.number === props.image ? 'center' : props.number === props.image.split('-')[0] ? 'left center' : 'right center'};` : ''}
           }
