@@ -34,7 +34,7 @@ export default function MenuPage() {
 
   return (
     <Box style={{ display: 'grid', alignItems: 'center', justifyItems: 'center', color: 'white', textShadow: '1px 1px 2px rgba(40,40,40, 0.5)', backgroundColor: 'rgba(0,0,0,0.5)' }}>
-      <List ref={listRef} className="box">
+      <List style={{ overflowX: 'hidden' }} ref={listRef} className="box">
         <AppBar style={{ backgroundColor: 'transparent', boxShadow: 'none' }}>
           <Toolbar>
             <IconButton edge="start" color="inherit" aria-label="back" onClick={() => {
@@ -87,6 +87,7 @@ export default function MenuPage() {
             <Typography variant="subtitle2">오시는길</Typography>
           </ListItemText>
         </ListItemButton>
+
         <ListItemButton style={{ width: '100%' }}>
           <ListItemText
             style={{ textAlign: 'center' }}
@@ -99,6 +100,7 @@ export default function MenuPage() {
             <Typography variant="subtitle2">마음 전하기</Typography>
           </ListItemText>
         </ListItemButton>
+
         <ListItemButton style={{ width: '100%' }}>
           <ListItemText
             style={{ textAlign: 'center' }}
@@ -111,6 +113,7 @@ export default function MenuPage() {
             <Typography variant="subtitle2">참석 여부</Typography>
           </ListItemText>
         </ListItemButton>
+
         <ListItemButton style={{ width: '100%' }}>
           <ListItemText
             style={{ textAlign: 'center' }}
