@@ -4,7 +4,7 @@ import { Menu } from './menu';
 
 import Image from 'next/image';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 
 import { Box, Typography } from '@mui/material';
 
@@ -36,6 +36,51 @@ export default function Page() {
 		return () => {
 			window.removeEventListener('resize', onOrientationChange)
 			window.removeEventListener('orientationchange', onOrientationChange)
+		};
+	}, []);
+
+	const sectionsRef = useRef<HTMLElement>(null);
+
+	useEffect(() => {
+		const resetAnimation = (element: Element) => {
+			if (element instanceof HTMLElement) {
+				const delay = element.style.animationDelay;
+				element.style.animation = 'none';
+				element.offsetHeight; // reflow를 트리거하여 CSS 변경을 적용
+				element.style.animation = ''; // 기존 정의된 CSS 애니메이션을 재적용
+				element.style.animationDelay = delay; // 기존 딜레이 재적용
+			}
+		};
+		const resetAnimationForAll = (element: Element) => {
+			resetAnimation(element);
+			element.querySelectorAll('*').forEach(resetAnimation);
+		};
+		const observerCallback = (entries: IntersectionObserverEntry[]) => {
+			entries.forEach(entry => {
+				if (entry.isIntersecting) {
+					resetAnimationForAll(entry.target);
+				}
+			});
+		};
+
+		const observer = new IntersectionObserver(observerCallback, {
+			root: null,
+			threshold: 0.1
+		});
+
+		const sections = sectionsRef.current;
+		if (sections) {
+			Array.from(sections.children).forEach(section => {
+				observer.observe(section);
+			});
+		}
+
+		return () => {
+			if (sections) {
+				Array.from(sections.children).forEach(section => {
+					observer.unobserve(section);
+				});
+			}
 		};
 	}, []);
 
@@ -81,8 +126,10 @@ export default function Page() {
 					animation: drawMain 1s ease-in forwards;
 				}
 			`}</style>
+
 			<Menu title={<></>} opacity={0} />
-			<Box style={{ backgroundColor: 'var(--primary-color-50)', }}>
+
+			<Box ref={sectionsRef} style={{ backgroundColor: 'var(--primary-color-50)', }}>
 				<section id='first' style={{ position: 'relative' }}>
 					<div
 						className='vertical-line no-bounce'
