@@ -1,6 +1,6 @@
 'use client';
 
-import { CSSProperties, useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { Box, Typography, Backdrop } from '@mui/material';
 import { styled } from '@mui/system';
@@ -43,34 +43,13 @@ const HeartbeatsArrowIcon = styled(DoubleArrowIcon)({
 
 export default function Page() {
 
-  const isPortrait = () => (typeof window === "undefined") || window.screen.orientation.type === 'portrait-primary';
-
   // 가로 화면 권장 안내 화면 관련 기능.
-  const [open, setOpen] = useState(isPortrait());
+  const [open, setOpen] = useState((typeof window === "undefined") || window.screen.orientation.type.startsWith('portrait'));
 
   // 3초 뒤에 안내 화면을 닫도록합니다.
   useEffect(() => {
     setTimeout(() => setOpen(false), 3000);
   }, [])
-
-  // 스크롤이 책 상단 아래로 내려가려고 한다면, 책 상단에 스크롤이 오도록 처리합니다.
-  const stopPointRef = useRef<HTMLElement>(null);
-  useEffect(() => {
-
-    const handleScroll = () => {
-      const stopPoint = stopPointRef.current;
-      if (stopPoint) {
-        const stopPosition = stopPoint.getBoundingClientRect().top + window.scrollY;
-        if (window.scrollY > stopPosition) {
-          window.scrollTo({ top: stopPosition, behavior: 'instant' });
-        }
-      }
-    };
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, []);
 
   return (
     <Box style={{ height: '100vh' }}>
@@ -113,13 +92,11 @@ export default function Page() {
           </Typography>
         </section>
 
-        <Box ref={stopPointRef} />
-
-        <section style={{ display: 'grid', placeItems: 'center', height: '100vh', overflowX: 'hidden' }} >
+        <section id='book' style={{ display: 'grid', placeItems: 'center', height: '100vh', overflowX: 'hidden' }} >
           <Book className='no-bounce' />
         </section>
 
-        <section />
+        <section style={{ height: 1, scrollSnapAlign: 'none' }} />
       </Box>
     </Box >
   );

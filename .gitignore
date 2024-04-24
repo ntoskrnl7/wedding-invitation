@@ -34,3 +34,7 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# 리소스는 wedding-invitiation-data 저장소에 보관됩니다.
+/public/bgm
+/public/picture
