@@ -1,14 +1,9 @@
 import type { Metadata } from "next";
 import { ReactNode } from "react";
-import { Inter } from "next/font/google";
 
 import theme from './theme';
 import CssBaseline from '@mui/material/CssBaseline';
 import { ThemeProvider } from '@mui/material/styles';
-
-const inter = Inter({
-  subsets: ['latin']
-});
 
 export const metadata: Metadata = {
   title: "하은 ❤ 중광 웨딩",
@@ -35,7 +30,7 @@ export default function RootLayout({
       </head>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <body className={inter.className}>
+        <body>
           <MenuStateProvider>
             {children}
           </MenuStateProvider>
