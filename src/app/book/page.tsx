@@ -88,7 +88,7 @@ export default function Page() {
             <br />
             <Typography variant='body1' className='noto-serif-kr-regular' textAlign={'center'}>사진을 터치하시면 다음 사진으로 넘어갑니다.</Typography>
           </Box>
-          <Typography style={{ position: 'absolute', bottom: 0 }} className='no-bounce' sx={{ marginBottom: '10vh' }}>
+          <Typography style={{ marginTop: '10vh' }} className='no-bounce' sx={{ marginBottom: '10vh' }}>
             <HeartbeatsArrowIcon style={{ transform: 'rotate(90deg)' }} />
           </Typography>
         </section>
