@@ -78,16 +78,17 @@ export default function Page() {
         transitionDuration={{ exit: 1000 }}
         onClick={() => setOpen(false)}
       >
-        <Typography margin={1} textAlign={'center'}>가로 화면으로 돌려서 보시는것을 권장합니다.</Typography>
+        <Typography className='noto-serif-kr-regular' margin={1} textAlign={'center'}>가로 화면으로 돌려서 보시는것을 권장합니다.</Typography>
       </Backdrop>
       <Box className='no-bounce'>
-        <section style={{ marginTop: '10vh', display: 'grid', placeItems: 'center' }}>
+
+        <section style={{ marginTop: '10vh', display: 'grid', placeItems: 'center', alignItems: 'center' }}>
           <Box className='no-bounce'>
-            <Typography variant='h6' textAlign={'center'}>Our story</Typography>
+            <Typography variant='h6' className='typewriter noto-serif-kr-regular' textAlign={'center'}>앨범을 보시려면 화면을 내려주세요 😁</Typography>
             <br />
-            <Typography className='typewriter' textAlign={'center'}>앨범을 보시려면 화면을 내려주세요 😁</Typography>
+            <Typography variant='body1' className='noto-serif-kr-regular' textAlign={'center'}>사진을 터치하시면 다음 사진으로 넘어갑니다.</Typography>
           </Box>
-          <Typography className='no-bounce' sx={{ marginBottom: '10vh' }}>
+          <Typography style={{ position: 'absolute', bottom: 0 }} className='no-bounce' sx={{ marginBottom: '10vh' }}>
             <HeartbeatsArrowIcon style={{ transform: 'rotate(90deg)' }} />
           </Typography>
         </section>
