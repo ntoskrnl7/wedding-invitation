@@ -53,6 +53,10 @@ export default function MenuPage() {
           <ListItemText
             style={{ textAlign: 'center' }}
             onClick={() => {
+              if (typeof window !== "undefined" && window.localStorage.getItem('mode') === 'home') {
+                router.push('/home#first');
+                return;
+              }
               router.push('/#first');
             }}
           >
@@ -92,6 +96,10 @@ export default function MenuPage() {
           <ListItemText
             style={{ textAlign: 'center' }}
             onClick={() => {
+              if (typeof window !== "undefined" && window.localStorage.getItem('mode') === 'home') {
+                router.push('/account-home');
+                return;
+              }
               router.push('/account');
             }}
           >

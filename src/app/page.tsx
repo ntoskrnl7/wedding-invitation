@@ -25,6 +25,10 @@ export default function Page() {
 
 	const [unit, setUnit] = useState(isPortrait() ? 'vh' : 'vw');
 	useEffect(() => {
+		if (typeof window !== "undefined") {
+			window.localStorage.removeItem('mode');
+		}
+
 		const onOrientationChange = () => {
 			setUnit(isPortrait() ? 'vh' : 'vw');
 		};
