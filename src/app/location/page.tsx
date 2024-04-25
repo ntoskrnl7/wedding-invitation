@@ -95,7 +95,7 @@ export default function Page() {
           오시는길
         </Typography>}
       />
-      <Box id="map" style={{ width: '100%', height: '100%' }}></Box>
+      <Box id="map" style={{ touchAction: 'none', width: '100%', height: '100%' }}></Box>
       <Box
         id="utils"
         sx={{
