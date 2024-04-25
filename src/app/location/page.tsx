@@ -100,7 +100,7 @@ export default function Page() {
         id="utils"
         sx={{
           position: 'absolute',
-          top: 85,
+          top: 'calc(var(--menu-bar-height) + 20px)',
           left: 20,
           zIndex: 1000,
           display: 'flex',
