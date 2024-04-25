@@ -344,14 +344,14 @@ export default function Page() {
 
 						<Box style={{ marginTop: '5vh', textAlign: 'center', color: 'var(--primary-color-900)' }}>
 							<Box display='flex' alignItems='center'>
-								<Typography fontWeight={'bold'} fontSize={'2' + unit} fontFamily='Noto Serif KR'>이삼로 · 문근순</Typography>
+								<Typography fontWeight={'bold'} fontSize={'2' + unit} fontFamily='Noto Serif KR, serif'>이삼로 · 문근순</Typography>
 								<Typography marginLeft={1} fontSize={'1.7' + unit} className='noto-serif-kr-regular'>의 차남</Typography>
-								<Typography fontWeight={'900'} marginLeft={1} fontSize={'2' + unit} fontFamily='Noto Serif KR'>중광</Typography>
+								<Typography fontWeight={'900'} marginLeft={1} fontSize={'2' + unit} fontFamily='Noto Serif KR, serif'>중광</Typography>
 							</Box>
 							<Box display='flex' alignItems='center'>
-								<Typography fontWeight={'bold'} fontSize={'2' + unit} fontFamily='Noto Serif KR'>김영기 · 장영희</Typography>
+								<Typography fontWeight={'bold'} fontSize={'2' + unit} fontFamily='Noto Serif KR, serif'>김영기 · 장영희</Typography>
 								<Typography marginLeft={1} fontSize={'1.7' + unit} className='noto-serif-kr-regular'>의 장녀</Typography>
-								<Typography fontWeight={'900'} marginLeft={1} fontSize={'2' + unit} fontFamily='Noto Serif KR'>하은</Typography>
+								<Typography fontWeight={'900'} marginLeft={1} fontSize={'2' + unit} fontFamily='Noto Serif KR, serif'>하은</Typography>
 							</Box>
 						</Box>
 					</Box>

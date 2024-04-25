@@ -118,14 +118,14 @@ export default function Book(props: { className?: string, style?: CSSProperties 
       </Page>
       <Page number='1'>
         <Box style={{ padding: 10 }}>
-          <Box fontFamily='Diphylleia' display="flex" alignItems="center" height='18vh'>
-            <Typography fontFamily='Diphylleia' fontSize={'10' + unit}>Q</Typography>
-            <Typography fontFamily='Diphylleia' style={{ paddingTop: 40, paddingLeft: 10 }}>결혼을 앞둔 소감</Typography>
+          <Box fontFamily='Diphylleia, serif' display="flex" alignItems="center" height='18vh'>
+            <Typography fontFamily='Diphylleia, serif' fontSize={'10' + unit}>Q</Typography>
+            <Typography fontFamily='Diphylleia, serif' style={{ paddingTop: 40, paddingLeft: 10 }}>결혼을 앞둔 소감</Typography>
           </Box>
           <Box style={{ padding: 5 }}>
             <Box style={{ paddingTop: 10 }}>
               <Typography>🤵</Typography>
-              <Typography fontFamily='Noto Serif KR' fontSize={'1.2' + unit}>
+              <Typography fontFamily='Noto Serif KR, serif' fontSize={'1.2' + unit}>
                 당장 눈앞의 결혼식부터 떨려서<br />
                 결혼식장 무대에 오르는것도<br />
                 잘할 수 있을지 걱정이 되지만 😵<br />
@@ -135,7 +135,7 @@ export default function Book(props: { className?: string, style?: CSSProperties 
             </Box>
             <Box style={{ paddingTop: 30, textAlign: 'right' }}>
               <Typography>👰</Typography>
-              <Typography fontFamily='Noto Serif KR' fontSize={'1.2' + unit}>
+              <Typography fontFamily='Noto Serif KR, serif' fontSize={'1.2' + unit}>
                 음..! 솔직히 말하면<br />
                 엄청 막 떨리거나 흥분되지는 않아요 😅<br />
                 하지만 제 인생에 부모님과 함께 했던 시간보다<br />
@@ -157,16 +157,16 @@ export default function Book(props: { className?: string, style?: CSSProperties 
           <Box style={{ padding: 5 }}>
 
             <Box style={{ padding: 5 }}>
-              <Typography fontFamily='Noto Serif KR' fontSize={'1.5' + unit}>Q. 어떤 가정을 꾸리고 싶은지</Typography>
-              <Typography fontFamily='Noto Serif KR' fontSize={'1.2' + unit}>
+              <Typography fontFamily='Noto Serif KR, serif' fontSize={'1.5' + unit}>Q. 어떤 가정을 꾸리고 싶은지</Typography>
+              <Typography fontFamily='Noto Serif KR, serif' fontSize={'1.2' + unit}>
                 - 신부 닮은 딸 낳아서 화목한 3인 가정을<br />꾸리고 싶습니다.👨‍👩‍👧<br />
                 가족과 함께 행복한 추억 많이 만들어가면서<br />행복하게 살고 싶어요. 🥰<br />
               </Typography>
             </Box>
 
             <Box style={{ padding: 5 }}>
-              <Typography fontFamily='Noto Serif KR' fontSize={'1.5' + unit}>Q. 우리가 그리는 10년후 모습</Typography>
-              <Typography fontFamily='Noto Serif KR' fontSize={'1.2' + unit}>
+              <Typography fontFamily='Noto Serif KR, serif' fontSize={'1.5' + unit}>Q. 우리가 그리는 10년후 모습</Typography>
+              <Typography fontFamily='Noto Serif KR, serif' fontSize={'1.2' + unit}>
                 - 10년 후에도 지금처럼 변함없이<br />서로 아끼고 사랑하고 있을것같습니다.💑<br />
                 지금과 달라질게 있다면... 음🙄...<br />
                 노화 방지를 위해서 지금보다는 건강 관리에 더 신경쓰고있지 않을까 생각합니다. 💪🏻💇🏻‍♂️💇🏻‍♀️🩺🏥
@@ -174,15 +174,15 @@ export default function Book(props: { className?: string, style?: CSSProperties 
             </Box>
 
             <Box style={{ padding: 5 }}>
-              <Typography fontFamily='Noto Serif KR' fontSize={'1.5' + unit}>Q. 언젠가 하은이와 꼭 가보고 싶은 여행지</Typography>
-              <Typography fontFamily='Noto Serif KR' fontSize={'1.2' + unit}>
+              <Typography fontFamily='Noto Serif KR, serif' fontSize={'1.5' + unit}>Q. 언젠가 하은이와 꼭 가보고 싶은 여행지</Typography>
+              <Typography fontFamily='Noto Serif KR, serif' fontSize={'1.2' + unit}>
                 - 아이슬란드🇮🇸, 영국🇬🇧, 프랑스🇫🇷, 스위스🇨🇭, 이탈리아🇮🇹 등 서유럽 이곳 저곳을 다니면서<br />
                 맛있는것도 많이 먹고😋<br />
                 재미있는것도 많이 보고😎<br />
                 같이 가서 많은 추억 만들고 싶습니다. 🙏
                 <br />
               </Typography>
-              <Typography marginTop={1} textAlign='right' fontFamily='Noto Serif KR' fontSize={'1.2' + unit}>
+              <Typography marginTop={1} textAlign='right' fontFamily='Noto Serif KR, serif' fontSize={'1.2' + unit}>
                 👰&#39;s commentary : 우와! 기대되네요 😍
               </Typography>
             </Box>
@@ -197,8 +197,8 @@ export default function Book(props: { className?: string, style?: CSSProperties 
           <Box style={{ padding: 5 }}>
 
             <Box style={{ padding: 5 }}>
-              <Typography fontFamily='Noto Serif KR' fontSize={'1.5' + unit}>Q. 그의 첫인상 & 현재는</Typography>
-              <Typography fontFamily='Noto Serif KR' fontSize={'1.1' + unit} letterSpacing='-0.5px'>
+              <Typography fontFamily='Noto Serif KR, serif' fontSize={'1.5' + unit}>Q. 그의 첫인상 & 현재는</Typography>
+              <Typography fontFamily='Noto Serif KR, serif' fontSize={'1.1' + unit} letterSpacing='-0.5px'>
                 처음 중광 오빠의 인상은 되게 수줍고 소심해 보였어요.<br />
                 되게 쩔쩔 매는 모습이 다른 사람이었다면 싫었을텐데<br />
                 오빠는 귀여웠다면 콩깍지일까요? 😂<br />
@@ -208,8 +208,8 @@ export default function Book(props: { className?: string, style?: CSSProperties 
             </Box>
 
             <Box style={{ padding: 5 }}>
-              <Typography fontFamily='Noto Serif KR' fontSize={'1.5' + unit}>Q. 결혼 준비과정</Typography>
-              <Typography fontFamily='Noto Serif KR' fontSize={'1.1' + unit} letterSpacing='-0.5px'>
+              <Typography fontFamily='Noto Serif KR, serif' fontSize={'1.5' + unit}>Q. 결혼 준비과정</Typography>
+              <Typography fontFamily='Noto Serif KR, serif' fontSize={'1.1' + unit} letterSpacing='-0.5px'>
                 생각보다 쉽지 않았어요.🤯<br />
                 물론 오빠는 저를 많이 아끼고 사랑하기 때문에 무조건 제가 원하는<br />
                 대로 다 해주려고 해서 표면적인 결혼 준비에 있어서는 마찰은<br />
@@ -222,7 +222,7 @@ export default function Book(props: { className?: string, style?: CSSProperties 
                 오빠도 저를 만나면서 사랑하는 방법을<br />
                 배우고 있지 않나 싶어요.ㅎㅎ
               </Typography>
-              <Typography marginTop={1} textAlign='right' fontFamily='Noto Serif KR' fontSize={'1.2' + unit}>
+              <Typography marginTop={1} textAlign='right' fontFamily='Noto Serif KR, serif' fontSize={'1.2' + unit}>
                 🤵&#39;s commentary : 잘따라와줘서 고마워요🥰
               </Typography>
             </Box>
@@ -250,14 +250,14 @@ export default function Book(props: { className?: string, style?: CSSProperties 
       </Page>
       <Page number='26'>
         <Box style={{ padding: 10 }}>
-          <Box fontFamily='Diphylleia' display="flex" alignItems="center" height='18vh'>
-            <Typography fontFamily='Diphylleia' fontSize={'10' + unit}>Q</Typography>
-            <Typography fontFamily='Diphylleia' style={{ paddingTop: 40, paddingLeft: 10 }}>하객분들께 전하고 싶은 말</Typography>
+          <Box fontFamily='Diphylleia, serif' display="flex" alignItems="center" height='18vh'>
+            <Typography fontFamily='Diphylleia, serif' fontSize={'10' + unit}>Q</Typography>
+            <Typography fontFamily='Diphylleia, serif' style={{ paddingTop: 40, paddingLeft: 10 }}>하객분들께 전하고 싶은 말</Typography>
           </Box>
           <Box style={{ padding: 5 }}>
             <Box style={{ paddingTop: 10 }}>
               <Typography>🤵</Typography>
-              <Typography fontFamily='Noto Serif KR' fontSize={'1.2' + unit} letterSpacing='-0.5px' lineHeight={'1.6' + unit}>
+              <Typography fontFamily='Noto Serif KR, serif' fontSize={'1.2' + unit} letterSpacing='-0.5px' lineHeight={'1.6' + unit}>
                 내성적인 성격이기도하고 사람들과 교류한다거나<br />
                 만나는 것보단 집에서 코딩하기👨‍💻를 더 좋아하다보니<br />
                 인간 관계에 조금 소홀 할때가 종종 있었어서 😅<br />
@@ -268,7 +268,7 @@ export default function Book(props: { className?: string, style?: CSSProperties 
             </Box>
             <Box style={{ paddingTop: 10, textAlign: 'left' }}>
               <Typography>👰</Typography>
-              <Typography fontFamily='Noto Serif KR' fontSize={'1.2' + unit} letterSpacing='-0.5px' lineHeight={'1.6' + unit}>
+              <Typography fontFamily='Noto Serif KR, serif' fontSize={'1.2' + unit} letterSpacing='-0.5px' lineHeight={'1.6' + unit}>
                 청첩장 늦게 드려서 죄송하다는 말씀먼저 드려요 😅🙇‍♀️<br />
                 형식적이지 않은 결혼식을 하고 싶어서 욕심을 요상한데서 부렸습니다 🤣
                 다른 사람들도 하는 청첩장.. 너무 싫은거 있죠?!<br />
