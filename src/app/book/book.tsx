@@ -6,6 +6,7 @@ import './book.scss'
 
 import HTMLFlipBook from './react-pageflip';
 import { Box, Typography } from '@mui/material';
+import { SizeType } from './page-flip/Settings';
 
 interface Props {
   children?: React.ReactNode;
@@ -81,7 +82,7 @@ export default function Book(props: { className?: string, style?: CSSProperties 
     <HTMLFlipBook
       key={bookKey}
 
-      size={'fixed'}
+      size={SizeType.FIXED}
 
       width={isPortrait ? pageWidth : width}
       height={isPortrait ? pageHeight : height}

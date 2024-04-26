@@ -60,6 +60,19 @@ export abstract class UI {
 
     const k = this.app.getSettings().usePortrait ? 1 : 2;
 
+    if (setting.minWidth === undefined) {
+      throw new Error(`setting.minWidth is undefined ${setting}`);
+    }
+    if (setting.maxWidth === undefined) {
+      throw new Error(`setting.maxWidth is undefined ${setting}`);
+    }
+    if (setting.minHeight === undefined) {
+      throw new Error(`setting.minHeight is undefined ${setting}`);
+    }
+    if (setting.maxHeight === undefined) {
+      throw new Error(`setting.maxHeight is undefined ${setting}`);
+    }
+
     // Setting block sizes based on configuration
     inBlock.style.minWidth = setting.minWidth * k + "px";
     inBlock.style.minHeight = setting.minHeight + "px";
