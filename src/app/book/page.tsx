@@ -82,7 +82,7 @@ export default function Page() {
       </Backdrop>
       <Box className='no-bounce'>
 
-        <section style={{ marginTop: '10vh', display: 'grid', placeItems: 'center', alignItems: 'center' }}>
+        <section style={{ scrollSnapAlign: 'none', marginTop: '10vh', display: 'grid', placeItems: 'center', alignItems: 'center' }}>
           <Box className='no-bounce'>
             <Typography variant='h6' className='typewriter noto-serif-kr-regular' textAlign={'center'}>앨범을 보시려면 화면을 내려주세요 😁</Typography>
             <br />
@@ -93,8 +93,8 @@ export default function Page() {
           </Typography>
         </section>
 
-        <section id='book' style={{ display: 'grid', placeItems: 'center', height: '100vh', overflowX: 'hidden' }} >
-          <Book className='no-bounce' />
+        <section id='book' style={{ scrollSnapAlign: 'none', display: 'grid', placeItems: 'center', height: '100vh', overflowX: 'hidden' }} >
+          <Book />
         </section>
 
         <section style={{ height: 1, scrollSnapAlign: 'none' }} />

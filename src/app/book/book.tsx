@@ -4,7 +4,7 @@ import Paper from '@mui/material/Paper';
 import React, { CSSProperties, useEffect, useState } from 'react';
 import './book.scss'
 
-import HTMLFlipBook from 'react-pageflip';
+import HTMLFlipBook from './react-pageflip';
 import { Box, Typography } from '@mui/material';
 
 interface Props {
@@ -40,43 +40,42 @@ export default function Book(props: { className?: string, style?: CSSProperties 
   const [pageWidth, setPageWidth] = useState(width);
   const [pageHeight, setPageHeight] = useState(height);
   const [isPortrait, setIsPortrait] = useState(false);
-  const [usePortrait, setUsePortrait] = useState(true);
-
-  const [bookKey, setBookKey] = useState(0);
-
   const [unit, setUnit] = useState(((typeof window === "undefined") || window.screen.orientation.type === 'portrait-primary') ? 'vh' : 'vw');
 
   useEffect(() => {
-    const onOrientationChange = () => setTimeout(() => setBookKey(prevKey => prevKey + 1), 0);
+    const onOrientationChange = () => {
+      const isPortrait = window.screen.orientation.type === 'portrait-primary';
+      setIsPortrait(isPortrait);
+      setUnit(isPortrait ? 'vh' : 'vw');
+    };
 
-    window.addEventListener('resize', onOrientationChange);
     window.addEventListener('orientationchange', onOrientationChange);
 
-    const isPortrait = window.screen.orientation.type === 'portrait-primary';
-    setIsPortrait(isPortrait);
-    setUnit(isPortrait ? 'vh' : 'vw');
+    onOrientationChange();
 
-    let pageWidth = window.innerWidth < window.innerHeight ? window.innerWidth : width * (window.innerHeight / height);
-    let pageHeight = window.innerWidth < window.innerHeight ? height * (window.innerWidth / width) : window.innerHeight;
+    return () => window.removeEventListener('orientationchange', onOrientationChange);
+  }, [width, height]);
 
-    if (isPortrait) {
+
+  const [bookKey, setBookKey] = useState(0);
+
+  useEffect(() => {
+    setTimeout(() => {
+      let pageWidth = window.innerWidth < window.innerHeight ? window.innerWidth : width * (window.innerHeight / height);
+      let pageHeight = window.innerWidth < window.innerHeight ? height * (window.innerWidth / width) : window.innerHeight;
+
       if (window.innerWidth > window.innerHeight) {
         if (window.innerWidth / 2 < pageWidth) {
           pageWidth = window.innerWidth / 2;
           pageHeight = height * (window.innerWidth / 2 / width);
-          setUsePortrait(false);
         }
       }
-    }
 
-    setPageWidth(pageWidth);
-    setPageHeight(pageHeight);
-
-    return () => {
-      window.removeEventListener('resize', onOrientationChange);
-      window.removeEventListener('orientationchange', onOrientationChange);
-    };
-  }, [width, height, bookKey]);
+      setPageWidth(pageWidth);
+      setPageHeight(pageHeight);
+      setBookKey(prevKey => prevKey + 1);
+    }, 100);
+  }, [width, height, isPortrait]);
 
   return (
     <HTMLFlipBook
@@ -84,27 +83,22 @@ export default function Book(props: { className?: string, style?: CSSProperties 
 
       size={'fixed'}
 
-      width={pageWidth}
-      minWidth={pageWidth}
-      maxWidth={pageWidth}
-
-      height={pageHeight}
-      minHeight={pageHeight}
-      maxHeight={pageHeight}
+      width={isPortrait ? pageWidth : width}
+      height={isPortrait ? pageHeight : height}
 
       maxShadowOpacity={0.5}
       showCover={true}
       mobileScrollSupport={true}
 
       className={props.className ? props.className : ''}
-      style={props.style ? props.style : {}}
+      style={{ ...props.style, touchAction: 'auto' }}
 
       startPage={0}
       drawShadow={true}
       flippingTime={1000}
-      usePortrait={usePortrait}
+      usePortrait={true}
       startZIndex={0}
-      autoSize={!isPortrait}
+      autoSize={true}
       clickEventForward={false}
       useMouseEvents={true}
       swipeDistance={5000}
@@ -119,7 +113,7 @@ export default function Book(props: { className?: string, style?: CSSProperties 
       </Page>
       <Page number='1'>
         <Box style={{ padding: 10 }}>
-          <Box fontFamily='Diphylleia, serif' display="flex" alignItems="center" height='18vh'>
+          <Box fontFamily='Diphylleia, serif' display="flex" alignItems="center" height={'10' + unit}>
             <Typography fontFamily='Diphylleia, serif' fontSize={'10' + unit}>Q</Typography>
             <Typography fontFamily='Diphylleia, serif' style={{ paddingTop: 40, paddingLeft: 10 }}>결혼을 앞둔 소감</Typography>
           </Box>
