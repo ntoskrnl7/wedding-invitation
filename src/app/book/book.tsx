@@ -137,14 +137,14 @@ export default function Book(props: { className?: string, style?: CSSProperties 
             <Box style={{ paddingTop: 30, textAlign: 'right' }}>
               <Typography>👰</Typography>
               <Typography fontFamily='Noto Serif KR, serif' fontSize={'1.2' + unit}>
-                음..! 솔직히 말하면<br />
-                엄청 막 떨리거나 흥분되지는 않아요 😅<br />
+                음..! 솔직히 말하면 실감이 안 나는 것인지<br />
+                아직은 생각만큼 엄청 많이 떨리지는 않아요 😅<br />
                 하지만 제 인생에 부모님과 함께 했던 시간보다<br />
                 더 오래 함께할 사람을 만났다는 것이 참 신기해요.<br />
                 저에게 와주어 너무나 감사한 사람입니다.<br />
                 오빠는 죽지 않고 인터넷 세상에<br />
                 자기를 업로드 해서 살겠다는데 🤣<br />
-                그럴 날이 올때까지 서로가 서로를 아껴주며 살고 싶어요.
+                그럴 날이 올 때까지 서로를 아껴주며 살고 싶어요.
               </Typography>
             </Box>
           </Box>
@@ -217,7 +217,7 @@ export default function Book(props: { className?: string, style?: CSSProperties 
                 없었어요. 하지만 연애기간이 짧은지라 결혼 준비와 동시에<br />
                 서로를 더 알아가는 과정에 있었기에<br />
                 안맞는 부분이 있을 때마다 많이 힘들었어요.<br />
-                그럴때마다 오빠가 항상 흔들리지 않고 사랑을 알려주었고<br />
+                그럴 때마다 오빠가 항상 흔들리지 않고 사랑을 지켜주었고<br />
                 덕분에 저도 오빠를 만나면서 사람과의 새로운 사랑 방식을 배워요.<br />
                 결국은 오빠와 제가 바라보는 방향이 다르지 않음을<br />알게되었구요.<br />
                 오빠도 저를 만나면서 사랑하는 방법을<br />
@@ -271,8 +271,8 @@ export default function Book(props: { className?: string, style?: CSSProperties 
               <Typography>👰</Typography>
               <Typography fontFamily='Noto Serif KR, serif' fontSize={'1.2' + unit} letterSpacing='-0.5px' lineHeight={'1.6' + unit}>
                 청첩장 늦게 드려서 죄송하다는 말씀먼저 드려요 😅🙇‍♀️<br />
-                형식적이지 않은 결혼식을 하고 싶어서 욕심을 요상한데서 부렸습니다 🤣
-                다른 사람들도 하는 청첩장.. 너무 싫은거 있죠?!<br />
+                형식적이지 않은 결혼식을 하고 싶어서 욕심을 요상한 데서 부렸습니다 🤣
+                다른 사람들도 하는 청첩장을 색다르게 하고 싶은 거 있죠?!<br />
                 종이 청첩장(?)을 받으신 분들이 다들 신기해하시고 선물같다고<br />
                 좋아하셔서 뿌듯해요. 모바일 청첩장도 오빠랑 함께 비어있는<br />
                 웹부터 만들었어요. 시간만 더 있었으면 디자인이랑 레이아웃을<br />
