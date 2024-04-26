@@ -1,5 +1,7 @@
 'use client';
 
+import { resourceBaseUrl } from '../config'
+
 import { useState, useRef, useEffect } from 'react';
 import IconButton from '@mui/material/IconButton';
 import { ArrowBackIosNew, ArrowForwardIos, MusicNote, MusicOff } from '@mui/icons-material';
@@ -68,7 +70,7 @@ export default function MusicPlayer(props: MusicPlayerProps) {
 	return (
 		<>
 			<audio
-				src={'https://wedding-invitation-data-nine.vercel.app/bgm/' + musics[currentMusicIndex] + '.mp3'}
+				src={`${resourceBaseUrl}/bgm/${musics[currentMusicIndex]}.mp3`}
 				ref={audioRef}
 				onLoadStart={
 					() => {

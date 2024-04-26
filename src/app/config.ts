@@ -7,9 +7,12 @@ export const location = {
     address: '서울특별시 중구 퇴계로 115 명동 밀리오레 호텔 PH층',
 }
 
+export const resourceBaseUrl = 'https://wedding-invitation-data-nine.vercel.app';
+
 const info = {
     weddingDay,
-    location
+    location,
+    resourceBaseUrl
 };
 
 export default info;
