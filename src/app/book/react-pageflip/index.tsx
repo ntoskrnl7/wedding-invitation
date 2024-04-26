@@ -25,10 +25,6 @@ const HTMLFlipBookForward = React.forwardRef(
 
         const [pages, setPages] = useState<ReactElement[]>([]);
 
-        useImperativeHandle(ref, () => ({
-            pageFlip: () => pageFlip.current,
-        }));
-
         const refreshOnPageDelete = useCallback(() => {
             if (pageFlip.current) {
                 pageFlip.current.clear();
@@ -53,7 +49,7 @@ const HTMLFlipBookForward = React.forwardRef(
             if (props.children) {
                 const childList = React.Children.map(props.children, (child) => {
                     return React.cloneElement(child as ReactElement, {
-                        ref: (dom) => {
+                        ref: (dom: HTMLElement) => {
                             if (dom) {
                                 childRef.current.push(dom);
                             }
@@ -61,12 +57,14 @@ const HTMLFlipBookForward = React.forwardRef(
                     });
                 });
 
-                if (!props.renderOnlyPageLengthChange || pages.length !== childList.length) {
-                    if (childList.length < pages.length) {
-                        refreshOnPageDelete();
-                    }
+                if (childList) {
+                    if (!props.renderOnlyPageLengthChange || pages.length !== childList.length) {
+                        if (childList.length < pages.length) {
+                            refreshOnPageDelete();
+                        }
 
-                    setPages(childList);
+                        setPages(childList);
+                    }
                 }
             }
             // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -78,23 +76,23 @@ const HTMLFlipBookForward = React.forwardRef(
 
                 if (flip) {
                     if (props.onFlip) {
-                        flip.on('flip', (e: unknown) => props.onFlip(e));
+                        flip.on('flip', (e: any) => { if (props.onFlip) props.onFlip(e) });
                     }
 
                     if (props.onChangeOrientation) {
-                        flip.on('changeOrientation', (e: unknown) => props.onChangeOrientation(e));
+                        flip.on('changeOrientation', (e: any) => { if (props.onChangeOrientation) props.onChangeOrientation(e) });
                     }
 
                     if (props.onChangeState) {
-                        flip.on('changeState', (e: unknown) => props.onChangeState(e));
+                        flip.on('changeState', (e: any) => { if (props.onChangeState) props.onChangeState(e) });
                     }
 
                     if (props.onInit) {
-                        flip.on('init', (e: unknown) => props.onInit(e));
+                        flip.on('init', (e: any) => { if (props.onInit) props.onInit(e) });
                     }
 
                     if (props.onUpdate) {
-                        flip.on('update', (e: unknown) => props.onUpdate(e));
+                        flip.on('update', (e: any) => { if (props.onUpdate) props.onUpdate(e) });
                     }
                 }
             };
@@ -106,10 +104,10 @@ const HTMLFlipBookForward = React.forwardRef(
                     pageFlip.current = new PageFlip(htmlElementRef.current, props);
                 }
 
-                if (!pageFlip.current.getFlipController()) {
-                    pageFlip.current.loadFromHTML(childRef.current);
+                if (!pageFlip.current?.getFlipController()) {
+                    pageFlip.current?.loadFromHTML(childRef.current);
                 } else {
-                    pageFlip.current.updateFromHtml(childRef.current);
+                    pageFlip.current?.updateFromHtml(childRef.current);
                 }
 
                 setHandlers();

@@ -153,7 +153,7 @@ export abstract class PageCollection {
      *
      * @param {FlipDirection} direction
      */
-    public getFlippingPage(direction: FlipDirection): Page {
+    public getFlippingPage(direction: FlipDirection): Page | null {
         const current = this.currentSpreadIndex;
 
         if (this.render.getOrientation() === Orientation.PORTRAIT) {

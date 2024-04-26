@@ -201,7 +201,7 @@ export abstract class UI {
   }
 
   private onMouseDown = (e: MouseEvent): void => {
-    if (this.checkTarget(e.target)) {
+    if (e.target && this.checkTarget(e.target)) {
       const pos = this.getMousePos(e.clientX, e.clientY);
       this.app.startUserTouch(pos);
       e.preventDefault();
@@ -213,7 +213,7 @@ export abstract class UI {
       this.pinchZoom = true;
       return;
     }
-    if (this.checkTarget(e.target)) {
+    if (e.target && this.checkTarget(e.target)) {
       if (e.changedTouches.length > 0) {
         const t = e.changedTouches[0];
         const pos = this.getMousePos(t.clientX, t.clientY);

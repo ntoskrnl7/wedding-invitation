@@ -142,9 +142,14 @@ export class Flip {
     if (!this.checkDirection(direction)) return false;
 
     try {
-      this.flippingPage = this.app
+      const flippingPage = this.app
         .getPageCollection()
         .getFlippingPage(direction);
+
+      if (!flippingPage) {
+        throw new Error(`flippingPage is undefined ${this}`);
+      }
+      this.flippingPage = flippingPage;
       this.bottomPage = this.app.getPageCollection().getBottomPage(direction);
 
       // In landscape mode, needed to set the density  of the next page to the same as that of the flipped

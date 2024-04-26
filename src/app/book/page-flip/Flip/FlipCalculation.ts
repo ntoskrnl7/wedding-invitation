@@ -375,7 +375,7 @@ export class FlipCalculation {
     };
 
     if (this.corner === FlipCorner.TOP) {
-      this.topIntersectPoint = Helper.GetIntersectBetweenTwoSegment(
+      const topIntersectPoint = Helper.GetIntersectBetweenTwoSegment(
         boundRect,
         [pos, this.rect.topRight],
         [
@@ -383,8 +383,11 @@ export class FlipCalculation {
           { x: this.pageWidth, y: 0 },
         ]
       );
+      this.topIntersectPoint = topIntersectPoint
+        ? topIntersectPoint
+        : undefined;
 
-      this.sideIntersectPoint = Helper.GetIntersectBetweenTwoSegment(
+      const sideIntersectPoint = Helper.GetIntersectBetweenTwoSegment(
         boundRect,
         [pos, this.rect.bottomLeft],
         [
@@ -392,8 +395,11 @@ export class FlipCalculation {
           { x: this.pageWidth, y: this.pageHeight },
         ]
       );
+      this.sideIntersectPoint = sideIntersectPoint
+        ? sideIntersectPoint
+        : undefined;
 
-      this.bottomIntersectPoint = Helper.GetIntersectBetweenTwoSegment(
+      const bottomIntersectPoint = Helper.GetIntersectBetweenTwoSegment(
         boundRect,
         [this.rect.bottomLeft, this.rect.bottomRight],
         [
@@ -401,8 +407,11 @@ export class FlipCalculation {
           { x: this.pageWidth, y: this.pageHeight },
         ]
       );
+      this.bottomIntersectPoint = bottomIntersectPoint
+        ? bottomIntersectPoint
+        : undefined;
     } else {
-      this.topIntersectPoint = Helper.GetIntersectBetweenTwoSegment(
+      const topIntersectPoint = Helper.GetIntersectBetweenTwoSegment(
         boundRect,
         [this.rect.topLeft, this.rect.topRight],
         [
@@ -410,8 +419,11 @@ export class FlipCalculation {
           { x: this.pageWidth, y: 0 },
         ]
       );
+      this.topIntersectPoint = topIntersectPoint
+        ? topIntersectPoint
+        : undefined;
 
-      this.sideIntersectPoint = Helper.GetIntersectBetweenTwoSegment(
+      const sideIntersectPoint = Helper.GetIntersectBetweenTwoSegment(
         boundRect,
         [pos, this.rect.topLeft],
         [
@@ -419,8 +431,11 @@ export class FlipCalculation {
           { x: this.pageWidth, y: this.pageHeight },
         ]
       );
+      this.sideIntersectPoint = sideIntersectPoint
+        ? sideIntersectPoint
+        : undefined;
 
-      this.bottomIntersectPoint = Helper.GetIntersectBetweenTwoSegment(
+      const bottomIntersectPoint = Helper.GetIntersectBetweenTwoSegment(
         boundRect,
         [this.rect.bottomLeft, this.rect.bottomRight],
         [
@@ -428,6 +443,9 @@ export class FlipCalculation {
           { x: this.pageWidth, y: this.pageHeight },
         ]
       );
+      this.bottomIntersectPoint = bottomIntersectPoint
+        ? bottomIntersectPoint
+        : undefined;
     }
   }
 
