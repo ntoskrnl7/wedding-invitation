@@ -217,6 +217,10 @@ export abstract class Render {
 
     let left = middlePoint.x - pageWidth;
 
+    if (this.setting.minWidth === undefined) {
+      throw new Error(`setting.minWidth is undefined ${this}`);
+    }
+
     if (this.setting.size === SizeType.STRETCH) {
       if (
         blockWidth < this.setting.minWidth * 2 &&
@@ -228,6 +232,10 @@ export abstract class Render {
         orientation === Orientation.PORTRAIT
           ? this.getBlockWidth()
           : this.getBlockWidth() / 2;
+
+      if (this.setting.maxWidth === undefined) {
+        throw new Error(`setting.maxWidth is undefined ${this}`);
+      }
 
       if (pageWidth > this.setting.maxWidth) pageWidth = this.setting.maxWidth;
 
