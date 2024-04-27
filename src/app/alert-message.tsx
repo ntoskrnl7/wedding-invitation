@@ -8,7 +8,9 @@ interface Message {
 	message?: React.JSX.Element | undefined;
 };
 
-export let showAlert: Dispatch<SetStateAction<Message>> = () => { throw new Error('show function cannot be called before the AlertMessage component is mounted.'); };
+export let showAlert: Dispatch<SetStateAction<Message>> = (message) => {
+	console.warn(`showAlert function cannot be called before the AlertMessage component is mounted. ${message}`);
+};
 
 export const AlertMessage = () => {
 
@@ -35,3 +37,5 @@ export const AlertMessage = () => {
 		</Snackbar>
 	);
 }
+
+export default AlertMessage;

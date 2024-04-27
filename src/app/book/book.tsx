@@ -1,3 +1,5 @@
+'use client';
+
 import { resourceBaseUrl } from '../config'
 
 import Paper from '@mui/material/Paper';
