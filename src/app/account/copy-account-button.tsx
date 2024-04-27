@@ -3,18 +3,22 @@
 import IconButton from '@mui/material/IconButton';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 
-import { showAlert } from '../alert-message';
+import { AlertMessage, Message } from '../alert-message';
+import { useState } from 'react';
 
 export default function CopyAccountButton(props: { account: string }) {
+    const [message, setMessage] = useState<Message | null>(null);
+
     return (
         <IconButton onClick={async () => {
             try {
                 await navigator.clipboard.writeText(props.account);
-                showAlert({ severity: 'success', message: <>계좌 번호가 복사되었습니다.</> });
+                setMessage({ severity: 'success', message: <>계좌 번호가 복사되었습니다.</> });
             } catch (error) {
-                showAlert({ severity: 'error', message: <>계좌 번호 복사가 실패하였습니다.</> });
+                setMessage({ severity: 'error', message: <>계좌 번호 복사가 실패하였습니다.</> });
             }
         }}>
+            <AlertMessage message={message}></AlertMessage>
             <ContentCopyIcon />
         </IconButton>
     );

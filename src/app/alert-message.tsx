@@ -1,38 +1,34 @@
 'use client';
 
 import { Alert, AlertColor, Snackbar } from "@mui/material";
-import { useEffect, useState, Dispatch, SetStateAction } from "react";
+import { useEffect, useState } from "react";
 
-interface Message {
+export interface Message {
 	severity: AlertColor;
 	message?: React.JSX.Element | undefined;
 };
 
-export let showAlert: Dispatch<SetStateAction<Message>> = (message) => {
-	console.warn(`showAlert function cannot be called before the AlertMessage component is mounted. ${message}`);
-};
-
-export const AlertMessage = () => {
-
-	const [message, showMessage] = useState<Message>({ severity: 'success' });
-	showAlert = showMessage;
+export const AlertMessage = (props: { message: Message | null }) => {
 
 	const [open, setOpen] = useState(false);
 
 	useEffect(() => {
 		setOpen(false);
 		setTimeout(() => setOpen(true), 50);
-	}, [message]);
+	}, [props.message]);
 
+	if (!props.message) {
+		return (<></>);
+	}
 	return (
 		<Snackbar style={{ opacity: 0.5 }} open={open} autoHideDuration={3000} onClose={() => setOpen(false)}>
 			<Alert
 				onClose={() => setOpen(false)}
-				severity={message.severity}
+				severity={props.message.severity}
 				variant="filled"
 				sx={{ width: '100%' }}
 			>
-				{message.message}
+				{props.message.message}
 			</Alert>
 		</Snackbar>
 	);

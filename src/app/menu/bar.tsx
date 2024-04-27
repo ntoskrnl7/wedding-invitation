@@ -15,7 +15,7 @@ import { useMenuState } from './state';
 import MusicPlayer from './music-player';
 
 import theme from '../theme';
-import { AlertMessage, showAlert } from '../alert-message';
+import { AlertMessage, Message } from '../alert-message';
 
 export default function MenuBar() {
   const [isDrawerOpen, setDrawerOpen] = useState<boolean>(false);
@@ -50,31 +50,31 @@ export default function MenuBar() {
     };
   }, []);
 
+  const [message, setMessage] = useState<Message | null>(null);
+
   return (
     <>
-      <AlertMessage />
+      <AlertMessage message={message} />
 
       <AppBar ref={menuBarRef} className='MenuBar' style={{ pointerEvents: 'none', backgroundColor: alpha(theme.palette.primary.main, menuState.opacity), boxShadow: 'none' }}>
         <Toolbar>
-          <Typography variant='h6' style={{ textShadow: '1px 1px 20x black' }}>
-            {menuState.title}
-          </Typography>
+          {menuState.title}
 
           <Box flexGrow={1} />
 
           <Box sx={{ pointerEvents: 'all' }}>
             <MusicPlayer
               onLoadStart={(music) => {
-                showAlert({ severity: 'info', message: <>{music}</> });
+                setMessage({ severity: 'info', message: <>{music}</> });
               }}
               onPlay={(music) => {
-                showAlert({ severity: 'success', message: <>{music} 재생 중</> });
+                setMessage({ severity: 'success', message: <>{music} 재생 중</> });
               }}
               onPaused={(music) => {
-                showAlert({ severity: 'info', message: <Typography variant='body2'><MusicNoteIcon />를 눌러서 {music}을 재생할 수 있습니다.</Typography> });
+                setMessage({ severity: 'info', message: <Typography variant='body2'><MusicNoteIcon />를 눌러서 {music}을 재생할 수 있습니다.</Typography> });
               }}
               onError={() => {
-                showAlert({ severity: 'info', message: <Typography variant='body2'><MusicNoteIcon />를 눌러서 재생하시기 바랍니다.</Typography> });
+                setMessage({ severity: 'info', message: <Typography variant='body2'><MusicNoteIcon />를 눌러서 재생하시기 바랍니다.</Typography> });
               }}
             />
             <IconButton
