@@ -164,7 +164,7 @@ export default function Book(props: { className?: string, style?: CSSProperties 
             <Box style={{ padding: 5 }}>
               <Typography fontFamily='Noto Serif KR, serif' fontSize={'1.5' + unit}>Q. 우리가 그리는 10년후 모습</Typography>
               <Typography fontFamily='Noto Serif KR, serif' fontSize={'1.2' + unit}>
-                - 10년 후에도 지금처럼 변함없이<br />서로 아끼고 사랑하고 있을것같습니다.💑<br />
+                - 10년 후에도 지금처럼 변함없이<br />서로 아끼고 사랑하고 있을 것 같습니다.💑<br />
                 지금과 달라질게 있다면... 음🙄...<br />
                 노화 방지를 위해서 지금보다는 건강 관리에 더 신경쓰고있지 않을까 생각합니다. 💪🏻💇🏻‍♂️💇🏻‍♀️🩺🏥
               </Typography>
