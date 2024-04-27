@@ -221,9 +221,23 @@ export abstract class UI {
     }
   };
 
+  private initialDistance?: number;
+  private zoomFactor = 1;
+
+  private getDistance = (touches: TouchList): number => {
+    const touch1 = touches[0];
+    const touch2 = touches[1];
+    const dx = touch1.pageX - touch2.pageX;
+    const dy = touch1.pageY - touch2.pageY;
+    return Math.sqrt(dx * dx + dy * dy);
+  };
+
   private onTouchStart = (e: TouchEvent): void => {
     if (e.touches.length > 1) {
+      if (this.pinchZoom) return;
+      this.initialDistance = this.getDistance(e.touches);
       this.pinchZoom = true;
+      this.app.onZoomStart();
       return;
     }
     if (e.target && this.checkTarget(e.target)) {
@@ -266,6 +280,13 @@ export abstract class UI {
 
   private onTouchMove = (e: TouchEvent): void => {
     if (this.pinchZoom) {
+      if (e.touches.length > 1) {
+        const currentDistance = this.getDistance(e.touches);
+        if (this.initialDistance) {
+          this.zoomFactor = currentDistance / this.initialDistance;
+          this.app.onZoom(this.zoomFactor);
+        }
+      }
       return;
     }
     if (e.changedTouches.length > 0) {
@@ -294,6 +315,8 @@ export abstract class UI {
   private onTouchEnd = (e: TouchEvent): void => {
     if (this.pinchZoom) {
       setTimeout(() => {
+        this.initialDistance = undefined;
+
         const viewportWidth =
           window.innerWidth ||
           document.documentElement.clientWidth ||
@@ -306,16 +329,21 @@ export abstract class UI {
         if (window.screen.orientation.type === "portrait-primary") {
           if (viewportWidth === window.screen.width) {
             this.pinchZoom = false;
+            this.app.onZoom(this.zoomFactor);
+            this.app.onZoomEnd();
           }
         } else {
           if (viewportHeight === window.screen.width) {
             this.pinchZoom = false;
+            this.app.onZoom(this.zoomFactor);
+            this.app.onZoomEnd();
           }
         }
       }, 100);
 
       return;
     }
+
     if (e.changedTouches.length > 0) {
       const t = e.changedTouches[0];
       const pos = this.getMousePos(t.clientX, t.clientY);

@@ -262,6 +262,18 @@ export class PageFlip extends EventObject {
     this.trigger("changeState", this, newState);
   }
 
+  public onZoomStart() {
+    this.trigger("zoom", this, "start");
+  }
+
+  public onZoom(factor: number) {
+    this.trigger("zoom", this, factor);
+  }
+
+  public onZoomEnd() {
+    this.trigger("zoom", this, "end");
+  }
+
   /**
    * Call a page number change event trigger
    *

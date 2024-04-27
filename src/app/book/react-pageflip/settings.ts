@@ -1,3 +1,4 @@
+import { WidgetEvent } from "../page-flip/Event/EventObject";
 import { FlipSetting } from "../page-flip/Settings";
 
 export type PageState = "user_fold" | "fold_corner" | "flipping" | "read";
@@ -10,10 +11,13 @@ export interface IBookState {
   mode: PageOrientation;
 }
 
+export type ZoomEvent = "start" | "end" | number;
+
 export interface IEventProps {
-  onFlip?: (flipEvent: unknown) => void;
-  onChangeOrientation?: (flipEvent: unknown) => void;
-  onChangeState?: (flipEvent: unknown) => void;
-  onInit?: (flipEvent: unknown) => void;
-  onUpdate?: (flipEvent: unknown) => void;
+  onFlip?: (flipEvent: WidgetEvent) => void;
+  onChangeOrientation?: (flipEvent: WidgetEvent) => void;
+  onChangeState?: (flipEvent: WidgetEvent) => void;
+  onInit?: (flipEvent: WidgetEvent) => void;
+  onUpdate?: (flipEvent: WidgetEvent) => void;
+  onZoom?: (flipEvent: WidgetEvent) => void;
 }

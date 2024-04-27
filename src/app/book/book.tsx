@@ -51,31 +51,32 @@ export default function Book(props: { className?: string, style?: CSSProperties 
     };
 
     window.addEventListener('orientationchange', onOrientationChange);
-
+    window.addEventListener('resize', onOrientationChange);
     onOrientationChange();
 
-    return () => window.removeEventListener('orientationchange', onOrientationChange);
+    return () => {
+      window.removeEventListener('resize', onOrientationChange);
+      window.removeEventListener('orientationchange', onOrientationChange);
+    };
   }, [width, height]);
 
 
   const [bookKey, setBookKey] = useState(0);
 
   useEffect(() => {
-    setTimeout(() => {
-      let pageWidth = window.innerWidth < window.innerHeight ? window.innerWidth : width * (window.innerHeight / height);
-      let pageHeight = window.innerWidth < window.innerHeight ? height * (window.innerWidth / width) : window.innerHeight;
+    let pageWidth = window.innerWidth < window.innerHeight ? window.innerWidth : width * (window.innerHeight / height);
+    let pageHeight = window.innerWidth < window.innerHeight ? height * (window.innerWidth / width) : window.innerHeight;
 
-      if (window.innerWidth > window.innerHeight) {
-        if (window.innerWidth / 2 < pageWidth) {
-          pageWidth = window.innerWidth / 2;
-          pageHeight = height * (window.innerWidth / 2 / width);
-        }
+    if (window.innerWidth > window.innerHeight) {
+      if (window.innerWidth / 2 < pageWidth) {
+        pageWidth = window.innerWidth / 2;
+        pageHeight = height * (window.innerWidth / 2 / width);
       }
+    }
 
-      setPageWidth(pageWidth);
-      setPageHeight(pageHeight);
-      setBookKey(prevKey => prevKey + 1);
-    }, 100);
+    setPageWidth(pageWidth);
+    setPageHeight(pageHeight);
+    setTimeout(() => setBookKey(prevKey => prevKey + 1), 100);
   }, [width, height, isPortrait]);
 
   return (
@@ -105,7 +106,7 @@ export default function Book(props: { className?: string, style?: CSSProperties 
       swipeDistance={5000}
       showPageCorners={true}
       disableFlipByClick={false}
-      onInit={(flipEvent: any) => {
+      onInit={(flipEvent) => {
         window.document.querySelectorAll(".page-total").forEach((el) => { el.innerHTML = (flipEvent.object.getPageCount() - 1).toString(); });
       }}
     >
