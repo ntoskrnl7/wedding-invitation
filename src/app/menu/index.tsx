@@ -20,3 +20,5 @@ export function Menu(props: MenuState) {
 }
 
 export { MenuStateProvider };
+
+export default MenuStateProvider;

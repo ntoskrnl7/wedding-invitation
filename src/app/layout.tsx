@@ -13,7 +13,8 @@ export const metadata: Metadata = {
 import './palette.global.scss';
 import './global.scss';
 
-import { MenuStateProvider } from './menu';
+import dynamic from 'next/dynamic';
+const MenuStateProvider = dynamic(() => import('./menu'), { ssr: false });
 
 export default function RootLayout({
   children,
