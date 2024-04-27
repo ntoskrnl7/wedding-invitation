@@ -140,7 +140,7 @@ export default function Book(props: { className?: string, style?: CSSProperties 
                 저에게 와주어 너무나 감사한 사람입니다.<br />
                 오빠는 죽지 않고 인터넷 세상에<br />
                 자기를 업로드 해서 살겠다는데 🤣<br />
-                그럴 날이 올 때까지 서로를 아껴주며 살고 싶어요.
+                그럴 날이 올 때까지 서로를 아껴주며 살겠습니다.
               </Typography>
             </Box>
           </Box>
@@ -213,7 +213,7 @@ export default function Book(props: { className?: string, style?: CSSProperties 
                 없었어요. 하지만 연애기간이 짧은지라 결혼 준비와 동시에<br />
                 서로를 더 알아가는 과정에 있었기에<br />
                 안맞는 부분이 있을 때마다 많이 힘들었어요.<br />
-                그럴 때마다 오빠가 항상 흔들리지 않고 사랑을 지켜주었고<br />
+                그럴 때마다 오빠가 항상 흔들리지 않고 지켜주었고<br />
                 덕분에 저도 오빠를 만나면서 사람과의 새로운 사랑 방식을 배워요.<br />
                 결국은 오빠와 제가 바라보는 방향이 다르지 않음을<br />알게되었구요.<br />
                 오빠도 저를 만나면서 사랑하는 방법을<br />
