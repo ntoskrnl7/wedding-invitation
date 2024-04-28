@@ -96,7 +96,9 @@ export abstract class Render {
 
     // detect safari
     const regex = new RegExp("Version\\/[\\d\\.]+.*Safari/");
-    this.safari = regex.exec(window.navigator.userAgent) !== null;
+    this.safari =
+      typeof window !== "undefined" &&
+      regex.exec(window.navigator.userAgent) !== null;
   }
 
   /**

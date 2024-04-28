@@ -40,7 +40,7 @@ const handleTMapAppOpen = () => {
 
 const AppleMapsButton = () => {
     if ((typeof window === "undefined") || ! /Mac|iPod|iPhone|iPad/.test(window.navigator.userAgent)) {
-        return null;
+        return <></>;
     }
     return (
         <IconButton onClick={

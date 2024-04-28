@@ -326,7 +326,7 @@ export abstract class UI {
           document.documentElement.clientHeight ||
           document.body.clientHeight;
 
-        if (window.screen.orientation.type === "portrait-primary") {
+        if ((typeof window === "undefined") || window.screen.orientation.type === "portrait-primary") {
           if (viewportWidth === window.screen.width) {
             this.pinchZoom = false;
             this.app.onZoom(this.zoomFactor);

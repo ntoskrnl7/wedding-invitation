@@ -47,7 +47,7 @@ export default function Book(props: { className?: string, style?: CSSProperties 
 
   useEffect(() => {
     const onOrientationChange = () => {
-      const isPortrait = window.screen.orientation.type === 'portrait-primary';
+      const isPortrait = (typeof window === "undefined") || window.screen.orientation.type === 'portrait-primary';
       setIsPortrait(isPortrait);
       setUnit(isPortrait ? 'vh' : 'vw');
     };
