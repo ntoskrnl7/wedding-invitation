@@ -44,7 +44,7 @@ const HeartbeatsArrowIcon = styled(DoubleArrowIcon)({
 export default function Page() {
 
   // 가로 화면 권장 안내 화면 관련 기능.
-  const [open, setOpen] = useState((typeof window === "undefined") || window.screen.orientation.type.startsWith('portrait'));
+  const [open, setOpen] = useState(window?.screen?.orientation?.type.startsWith('portrait'));
 
   // 3초 뒤에 안내 화면을 닫도록합니다.
   useEffect(() => {

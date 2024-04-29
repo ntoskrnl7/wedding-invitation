@@ -43,11 +43,11 @@ export default function Book(props: { className?: string, style?: CSSProperties 
   const [pageWidth, setPageWidth] = useState(width);
   const [pageHeight, setPageHeight] = useState(height);
   const [isPortrait, setIsPortrait] = useState(false);
-  const [unit, setUnit] = useState(((typeof window === "undefined") || window.screen.orientation.type === 'portrait-primary') ? 'vh' : 'vw');
+  const [unit, setUnit] = useState(window?.screen?.orientation?.type.startsWith('portrait') ? 'vh' : 'vw');
 
   useEffect(() => {
     const onOrientationChange = () => {
-      const isPortrait = (typeof window === "undefined") || window.screen.orientation.type === 'portrait-primary';
+      const isPortrait = window?.screen?.orientation?.type.startsWith('portrait');
       setIsPortrait(isPortrait);
       setUnit(isPortrait ? 'vh' : 'vw');
     };
@@ -61,7 +61,6 @@ export default function Book(props: { className?: string, style?: CSSProperties 
       window.removeEventListener('orientationchange', onOrientationChange);
     };
   }, [width, height]);
-
 
   const [bookKey, setBookKey] = useState(0);
 

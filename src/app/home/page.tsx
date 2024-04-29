@@ -21,7 +21,7 @@ const ThemeDatePicker = dynamic(
 );
 
 export default function Page() {
-	const isPortrait = () => (typeof window === "undefined") || window.screen.orientation.type === 'portrait-primary';
+	const isPortrait = () => window?.screen?.orientation?.type.startsWith('portrait');
 
 	const [unit, setUnit] = useState(isPortrait() ? 'vh' : 'vw');
 	useEffect(() => {
