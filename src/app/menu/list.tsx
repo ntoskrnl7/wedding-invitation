@@ -115,19 +115,6 @@ export default function MenuPage() {
           <ListItemText
             style={{ textAlign: 'center' }}
             onClick={() => {
-              router.push('/rsvp');
-            }}
-          >
-            <HowToReg />
-            <Typography variant="h5">- RSVP -</Typography>
-            <Typography variant="subtitle2">참석 여부</Typography>
-          </ListItemText>
-        </ListItemButton>
-
-        <ListItemButton style={{ width: '100%' }}>
-          <ListItemText
-            style={{ textAlign: 'center' }}
-            onClick={() => {
               router.push('/guest');
             }}
           >
